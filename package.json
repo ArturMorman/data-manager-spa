@@ -1,0 +1,47 @@
+{
+  "name": "ww-base-app",
+  "private": true,
+  "description": "Front App for EfficientWeb Projects Base, works with wordpress as CMS and DB.",
+  "version": "0.1.0",
+  "author": "Artur Morman <artur.morman@gmail.com>",
+  "dependencies": {
+    "add": "^2.0.6",
+    "gatsby": "^5.10.0",
+    "gatsby-image": "^3.11.0",
+    "gatsby-plugin-image": "^3.10.0",
+    "gatsby-plugin-manifest": "^5.10.0",
+    "gatsby-plugin-offline": "^6.10.0",
+    "gatsby-plugin-sass": "^6.10.0",
+    "gatsby-plugin-sharp": "^5.9.0",
+    "gatsby-source-filesystem": "^5.10.0",
+    "gatsby-transformer-sharp": "^5.9.0",
+    "html-react-parser": "^3.0.16",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-world-flags": "^1.6.0",
+    "sass": "^1.62.1",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "gatsby-plugin-postcss": "^6.11.0",
+    "postcss": "^8.4.24",
+    "prettier": "^2.8.7",
+    "tailwindcss": "^3.3.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  }
+}
