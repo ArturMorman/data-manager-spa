@@ -1,0 +1,22 @@
+<ifModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+</ifModule>
+
+<ifModule mod_headers.c> 
+
+    <filesMatch ".(flv|gif|ico|jpg|jpeg|mp4|mpeg|png|svg|swf|webp)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </filesMatch>
+
+    <filesMatch ".(js|pdf)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </filesMatch>
+
+    <filesMatch ".(css)$">
+        Header set Cache-Control "max-age=604800, public"
+    </filesMatch>
+
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+
+</ifModule>
