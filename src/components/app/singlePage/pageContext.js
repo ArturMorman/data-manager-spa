@@ -10,7 +10,6 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
   const [currentPage, setCurrentPage] = useState(null)
 
   const [errorStatus, setErrorStatus] = useState(null)
-  // const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
 
 
@@ -31,9 +30,8 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
         (result) => {
           if (result.code !== "rest_no_route") {
 
-            // setResponse(result)
-
             return fetch(
+
               `${api}${singlePostCustomEndpoint}/${currentPageID}`,
               {
                 method: 'GET',
@@ -41,6 +39,7 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
                   'Content-Type': 'application/json',
                 },
               }
+
             )
               .then(res => res.json())
               .then(
@@ -80,15 +79,12 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
 
   useEffect(() => {
 
-
     fetchPost()
-
 
     // const startTimeout = setTimeout(() => {
     //   fetchPost()
     // }, 1333)
     // return () => clearTimeout(startTimeout)
-
 
   }, [currentPageID])
 
@@ -116,11 +112,7 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
         {currentPage &&
           <PageView post={currentPage} icons={icons} iconsMap={iconsMap} categories={categories} />
         }
-        {!loading &&
-          <div className={`pageLoading`} >
-            <LoadingPlaceholder view={'pageView'} text={'loading single project...'} />
-          </div>
-        }
+        {loading && <LoadingPlaceholder view={'pageView'} text={'loading single project...'} />}
       </div>}
     </>
   )

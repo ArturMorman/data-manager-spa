@@ -426,6 +426,13 @@ body {
   }
 }
 
+.panel {
+  .loadingPlaceholder {
+    min-height: 80px;
+    flex-direction: row;
+  }
+}
+
 
 button,
 .cta2 {
@@ -543,6 +550,7 @@ button {
   }
 
   .filters {
+    position: relative;
 
     .choiceType {
       color: rgb(24, 24, 24);
@@ -552,7 +560,76 @@ button {
       text-transform: uppercase;
     }
 
+
+    .mobileShowHide {
+      width: 100%;
+
+      button {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 18px;
+        line-height: 26px;
+        background: transparent;
+
+        svg {
+          margin: 0 5px 5px auto;
+          transition: all 288ms ease;
+        }
+      }
+
+      @media(min-width: 771px) {
+        display: none;
+      }
+    }
+
+    @media(max-width: 770px) {
+
+      &.hide {
+        min-height: 50px;
+        margin-bottom: 20px;
+
+        .defaultShow {
+          position: absolute;
+          top: 8px;
+        }
+
+        .mobileShowHide {
+          top: 0px
+        }
+
+        .defaultHide {
+          height: 0;
+          max-height: 0;
+          padding-top: 0;
+          padding-bottom: 0;
+          margin-bottom: 0;
+          overflow: hidden;
+        }
+      }
+
+      &.show {
+        .defaultHide {
+          height: auto;
+          max-height: 1500px;
+        }
+
+        .mobileShowHide {
+          position: absolute;
+          z-index: 100;
+          top: 24px;
+
+          svg {
+            color: $glowDark;
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+    }
+
+
     ul.categoriesList {
+      transition: max-height 444ms ease;
       display: flex;
       flex-direction: column;
       padding: 8px 0;

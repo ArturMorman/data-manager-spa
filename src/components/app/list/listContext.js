@@ -40,7 +40,6 @@ const ListContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
-
   const [panel, setPanel] = usePersistState('showPanel', true)
   const [panelChanged, setPanelChanged] = useState(false)
   const [page, setPage] = useState(1)
@@ -58,37 +57,6 @@ const ListContext = () => {
   const [apiPage, setApiPage] = useState(1)
   const pageCtrl = '?page='
 
-
-  // const fetchPosts = () => {  //   setLoading(true)
-
-  //   fetch(
-  //     // `${apiUrl}/${pageCtrl}${apiPage}&per_page=${perPage}`,
-  //     `${apiUrl}/${pageCtrl}${apiPage}&per_page=100`,
-  //     {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     }
-  //   )
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         if (result.code !== "rest_no_route") {
-  //           setResponse(result)
-  //           setLoading(false)
-  //         }
-  //         else {
-  //           setErrorStatus(result.code)
-  //           setLoading(false)
-  //         }
-  //       },
-  //       (errorStatus) => {
-  //         setErrorStatus(errorStatus)
-  //         setLoading(false)
-  //       }
-  //     )
-  // }
 
   const fetchPosts = useCallback(() => {
     setLoading(true);
@@ -116,46 +84,22 @@ const ListContext = () => {
 
   useEffect(() => {
 
-
     fetchPosts()
-
 
     // const startTimeout = setTimeout(() => {
     //   fetchPosts()
     // }, 1333)
     // return () => clearTimeout(startTimeout)
 
-
   }, [])
 
 
   useEffect(() => {
-
-
-    console.log('^^^ response: ', response)
-
-
-    // setPosts(response)
-    // let temp = []
-    // let temp2 = []
-    // if (response && response.length > 0) {
-    //   temp2 = response.map(post => {
-    //     const temp2 = [...post.clients, ...post.productTypes, ...post.languages, ...post.technologies]
-    //     return temp2
-    //   })
-    //   temp2.forEach(el => {
-    //     temp.push(...el)
-    //   })
-    // }
-
-
     if (!response) return
     const temp = response.flatMap(post =>
       [...post.clients, ...post.productTypes, ...post.languages, ...post.technologies]
     )
     setPosts(response)
-
-
     setExistingTaxIds([...new Set(temp)])
   }, [response])
 
@@ -189,7 +133,6 @@ const ListContext = () => {
           <ListUI
             panel={panel}
             setPanel={setPanel}
-            loading={loading}
             panelChanged={panelChanged}
           />
           <ListView

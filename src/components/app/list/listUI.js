@@ -3,7 +3,7 @@ import ListFilters from './listFilters'
 import LoadingPlaceholder from '../../loadingPlaceholder'
 import SvgDisplay from '../../digitProcessor/svgDisplay'
 
-const ListUI = ({ panel, setPanel, loading, loadingTaxonomies, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltred, listState, somethingSelected, panelChanged }) => {
+const ListUI = ({ panel, setPanel, loadingTaxonomies, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
 
   return (
     <>
@@ -33,16 +33,16 @@ const ListUI = ({ panel, setPanel, loading, loadingTaxonomies, categories, activ
           </button>
 
           {(listState.count || listState.count === 0) ?
-            <div className={`count ${listState.postsFiltredOut === 0 ? 'infinity' : ''}`}>
+            <div className={`count ${listState.postsFilteredOut === 0 ? 'infinity' : ''}`}>
               <SvgDisplay value={listState.count} />
               {listState.count === 1 ?
                 <span>Project matches criteria</span> :
-                listState.postsFiltredOut === 0 ?
+                listState.postsFilteredOut === 0 ?
                   <span>Projects total</span> :
                   <span>Projects matches criteria</span>
               }
 
-              {listState.postsFiltredOut === 0 ?
+              {listState.postsFilteredOut === 0 ?
                 (<span className={`desc`}>Start selecting categories, to find, what you're looking for</span>)
                 :
                 (<span><button
@@ -58,7 +58,6 @@ const ListUI = ({ panel, setPanel, loading, loadingTaxonomies, categories, activ
               Counting...
             </div>
           }
-
 
 
           {/*     ACTIVE CATEGORIES NAME/TAG LIST     */}
@@ -77,34 +76,16 @@ const ListUI = ({ panel, setPanel, loading, loadingTaxonomies, categories, activ
           } */}
 
 
-
           <ListFilters
             categories={categories}
             activeTaxonomy={activeTaxonomy}
             setActiveTaxonomy={setActiveTaxonomy}
             activeCategories={activeCategories}
             setActiveCategories={setActiveCategories}
-            taxIdsFiltred={taxIdsFiltred}
+            taxIdsFiltered={taxIdsFiltered}
           />
 
-
-          <div className={`terminal`}>
-
-            <div className={`loadingIndicatorWrap`} >
-
-              {loading &&
-                <LoadingPlaceholder view={'listView listUi'} text={'loading projects list...'} />
-              }
-
-              {(loadingTaxonomies || loading) && <br></br>}
-
-              {loadingTaxonomies &&
-                <LoadingPlaceholder view={'listView listUi'} text={'Loading categories...'} />
-              }
-
-            </div>
-
-          </div>
+          {loadingTaxonomies && <LoadingPlaceholder view={'listView listUi'} text={'Loading categories...'} />}
 
         </div>
       }

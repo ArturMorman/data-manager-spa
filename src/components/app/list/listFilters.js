@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { IoIosArrowDropdownCircle } from 'react-icons/io';
 
-const ListFilters = ({ categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltred }) => {
+const ListFilters = ({ categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered }) => {
+
+  const [sectionStatus, setSectionStatus] = useState({})
+
+  useEffect(() => {
+    if (categories && Array.isArray(categories)) {
+      const temp = categories.reduce((acc, { name }) => {
+        acc[name] = false
+        return acc
+      }, {})
+      setSectionStatus(temp)
+    }
+  }, [categories])
+
+  const showHideHandle = (name) => {
+    if (name?.length > 0) {
+      setSectionStatus((prevCategories) => ({
+        ...prevCategories,
+        [name]: !prevCategories[name]
+      }))
+    }
+  }
 
   //// HANDLE CATEGORY LIST ITEM CLICK
   const categoryHandle = (id, parent, choice) => {
@@ -38,30 +60,36 @@ const ListFilters = ({ categories, activeCategories, setActiveCategories, active
       {
         categories && categories.length > 0 && categories.map((tax, i) => {
           return (
-
             <div
               key={i}
-              className={`filters ${tax.options.choice === 'singleChoice' ? 'singleChoice' : 'multiChoice'}`}
+              className={`filters ${tax.options.choice === 'singleChoice' ? 'singleChoice' : 'multiChoice'} ${sectionStatus[tax.name] ? 'show' : 'hide'}`}
               style={{ order: `${tax.options.order}` }}
             >
 
-              <span className={`choiceType`}>
+              <div className={`choiceType defaultHide`}>
                 {tax.options.choice === 'singleChoice' && 'Choose one'}
                 {tax.options.choice === 'multiChoice' && 'Choose one or more'}
-              </span>
+              </div>
 
-              <br></br>
-
-              <strong className={`taxonomyName`}>
+              <strong className={`taxonomyName defaultShow`}>
                 {tax.name && tax.name}:
               </strong>
 
-              <ul className={`categoriesList tax-${tax.name} ${activeTaxonomy.includes(tax.name) ? 'active' : ''} ${activeTaxonomy.includes(tax.name) && tax.options.choice === 'singleChoice' ? 'sealed' : ''}`}>
+              <div className={`mobileShowHide defaultShow `}>
+                <button
+                  className={`showHideButton`}
+                  onClick={() => showHideHandle(tax.name)}
+                >
+                  <IoIosArrowDropdownCircle size="1.55em" />
+                </button>
+              </div>
+
+              <ul className={`categoriesList defaultHide tax-${tax.name} ${activeTaxonomy.includes(tax.name) ? 'active' : ''} ${activeTaxonomy.includes(tax.name) && tax.options.choice === 'singleChoice' ? 'sealed' : ''}`}>
 
                 {(tax.response && tax.response.length > 0) && tax.response.map((cat, i2) => {
                   const parent = tax.name
                   const choice = tax.options.choice
-                  const pass = taxIdsFiltred.includes(cat.id)
+                  const pass = taxIdsFiltered.includes(cat.id)
                   return (
                     <li
                       key={i2}

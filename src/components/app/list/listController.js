@@ -5,88 +5,98 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
   const [errorStatus, setErrorStatus] = useState(null)
   const [response, setResponse] = useState(null)
-  const [loading, setLoading] = useState(false)
+  // const [loadingTaxonomies, setloadingTaxonomies] = useState(false)
+  const [loadingTaxonomies, setloadingTaxonomies] = useState(true)
 
   const [categories, setCategories] = useState([])
   const [activeTaxonomy, setActiveTaxonomy] = useState([])
   const [activeCategories, setActiveCategories] = useState([])
-  const [postsFiltred, setPostsFiltred] = useState([])
-  const [existingTaxIdsFiltred, setExistingTaxIdsFiltred] = useState([])
+  const [postsFiltered, setPostsFiltered] = useState([])
+  const [existingTaxIdsFiltered, setExistingTaxIdsFiltered] = useState([])
   const [listPagePostsPortion, setListPagePostsPortion] = useState([])
   const [somethingSelected, setSomethingSelected] = useState(false)
 
+  const [fetchWatcher, setfetchWatcher] = useState(0)
 
-  const fetchCategories = (taxonomy, options = {}) => {
-    fetch(
-      `${api}${taxonomy}?page=1&per_page=100`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result.code !== "rest_no_route") {
-            setResponse({
-              name: taxonomy,
-              response: result,
-              options: options
-            })
-            setLoading(false)
-          }
-          else {
-
-            console.log("**** rest_no_route SITUATION ****")
-
-            setErrorStatus(result.code)
-            setLoading(false)
-          }
-        },
-        (errorStatus) => {
-
-          console.log(`**** ERROR FETCHING ${taxonomy} ****`, errorStatus)
-
-          setErrorStatus(errorStatus)
-          setLoading(false)
-        }
-      )
-  }
 
   useEffect(() => {
     if (taxonomies) {
-      setLoading(true)
-      Object.keys(taxonomies).forEach(arr => {
-        taxonomies[arr].forEach(taxonomy => {
-          fetchCategories(taxonomy, {
-            choice: arr,
-            ////  BEAUTIFUL HARDCODE  !!!
-            order: taxonomy === 'clients' ? 1 : taxonomy === 'productTypes' ? 2 : taxonomy === 'technologies' ? 3 : 4
-          })
-        })
-      });
+
+
+      // setloadingTaxonomies(true)
+
+
+      const fetchAllCategories = async () => {
+        try {
+          const results = await Promise.allSettled(
+            Object.entries(taxonomies).flatMap(([choice, taxArray]) =>
+              taxArray.map(taxonomy =>
+                fetchCategories(taxonomy, { choice, order: getOrder(taxonomy) })
+              )
+            )
+          )
+        } catch (error) {
+          setErrorStatus(error)
+        } finally {
+
+
+          // setloadingTaxonomies(false)
+          console.log('')
+
+
+        }
+      }
+      fetchAllCategories()
     }
   }, [])
+
+  const fetchCategories = (taxonomy, options) => {
+    return fetch(`${api}${taxonomy}?page=1&per_page=100`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.code !== "rest_no_route") {
+          setResponse({
+            name: taxonomy,
+            response: result,
+            options: options
+          })
+        } else {
+          throw new Error(result.code)
+        }
+      })
+  }
+
+  const getOrder = (taxonomy) => {
+    switch (taxonomy) {
+      case 'clients': return 1;
+      case 'productTypes': return 2;
+      case 'technologies': return 3;
+      default: return 4;
+    }
+  }
 
 
   ////  FUNCTION TO FILTER OUT CATEGORIES NOT ATTACHED TO ANY PROJECT
   const filterOutCategories = (categories) => {
 
-    console.log('|| filterOutCategories:  ', categories)
 
-    let categoriesFiltred = []
-    if (categories && typeof categories.response !== 'undefined' && categories.response.length > 0) {
-      categoriesFiltred = categories.response.filter(el => {
+    // console.log('|| filterOutCategories:  ', categories)
+
+
+    let categoriesFiltered = []
+    if (categories?.response?.length > 0) {
+      categoriesFiltered = categories.response.filter(el => {
         return existingTaxIds.includes(el.id)
       })
     }
 
-    return categoriesFiltred.length > 0 ? {
+    return categoriesFiltered.length > 0 ? {
       name: categories.name,
       options: categories.options,
-      response: categoriesFiltred
+      response: categoriesFiltered
     } : categories
   }
 
@@ -97,7 +107,9 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
       if (categories.length > 0) {
         const existing = categories.map(el => el.name)
 
-        console.log('| existing: ', existing)
+
+        // console.log('| existing: ', existing)
+
 
         if (!existing.includes(response.name)) {
           setCategories(prev => [...prev, filterOutCategories(response)])
@@ -113,23 +125,58 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
       }
     }
   }, [response])
-  // }, [response, categories])
+
+
+
+  // console.log('###: ', categories)
+  // console.log('###: ', Object.entries(taxonomies))
+
+
+
+  useEffect(() => {
+    setfetchWatcher(prev => prev + 1)
+  }, [categories])
+
+
+  useEffect(() => {
+
+
+    if (Object.entries(taxonomies).flat().length + 1 === fetchWatcher) {
+      setloadingTaxonomies(false)
+    }
+
+
+  }, [fetchWatcher])
+
+
+  useEffect(() => {
+    if (!loadingTaxonomies) {
+      console.log('_  loadingTaxonomies CATEGORIES DONE CORRECT  _')
+    }
+  }, [loadingTaxonomies])
+
+
+  // console.log('###: ', fetchWatcher)
+  // console.log('!!!: ', loadingTaxonomies)
+
+
+
 
 
   //  FILTER POSTS LIST
   useEffect(() => {
     if (activeCategories.length > 0) {
-      if (posts && posts.length > 0) {
+      if (posts?.length > 0) {
         const temp = posts.filter(post => {
           const pass = activeCategories.filter(cat => [...post.clients, ...post.productTypes, ...post.languages, ...post.technologies].includes(cat))
           return pass.length === activeCategories.length
         })
-        setPostsFiltred(temp)
+        setPostsFiltered(temp)
         setAllPages(Math.ceil(temp.length / perPage))
       }
     }
     else {
-      setPostsFiltred(posts)
+      setPostsFiltered(posts)
       posts && setAllPages(Math.ceil(posts.length / perPage))
       setActiveTaxonomy([])
     }
@@ -138,29 +185,21 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
   // CURRENT POSTS LIST PAGE POSTS PORTION
   useEffect(() => {
-    if (postsFiltred?.length > 0 && page && perPage) {
-      const firstIndex = 0 + page * perPage - perPage
-      const lastIndex = 0 + page * perPage
-      setListPagePostsPortion([...postsFiltred.slice(firstIndex, lastIndex)])
+    if (postsFiltered?.length > 0 && page && perPage) {
+      const firstIndex = (page - 1) * perPage
+      const lastIndex = page * perPage
+      setListPagePostsPortion([...postsFiltered.slice(firstIndex, lastIndex)])
     }
-  }, [postsFiltred, page, perPage])
+  }, [postsFiltered, page, perPage])
 
 
   // CREAT ARRAY WITH EXISTING TAXONOMY/CATEGORY IDs, AFTER CURRENT FILTERING
   useEffect(() => {
-    let temp = []
-    let temp2 = []
-    if (postsFiltred && postsFiltred.length > 0) {
-      temp2 = postsFiltred.map(post => {
-        const temp2 = [...post.clients, ...post.productTypes, ...post.languages, ...post.technologies]
-        return temp2
-      })
-      temp2.forEach(el => {
-        temp.push(...el)
-      })
-    }
-    setExistingTaxIdsFiltred([...new Set(temp)])
-  }, [postsFiltred])
+    const taxonomyIds = postsFiltered.flatMap(post =>
+      [...post.clients, ...post.productTypes, ...post.languages, ...post.technologies]
+    )
+    setExistingTaxIdsFiltered([...new Set(taxonomyIds)])
+  }, [postsFiltered])
 
 
   useEffect(() => {
@@ -173,11 +212,10 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
 
 
-  // console.log('-- posts filtred:   ', postsFiltred)
+  // console.log('__ RESPONSE:                 ', response)
 
-  console.log('__ RESPONSE:                 ', response)
   // console.log('__ categories:               ', categories)
-  // console.log('__ existing tax ids filtred: ', existingTaxIdsFiltred)
+  // console.log('__ existing tax ids filtered: ', existingTaxIdsFiltered)
 
   // console.log('__ active categories:        ', activeCategories)
   // console.log('__ active taxonomies:        ', activeTaxonomy)
@@ -186,17 +224,17 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
   const childrenWithProps = React.Children.map(children, child =>
     React.cloneElement(child, {
-      loadingTaxonomies: loading,
-      categories: categories,
-      activeTaxonomy: activeTaxonomy,
-      setActiveTaxonomy: setActiveTaxonomy,
-      activeCategories: activeCategories,
-      setActiveCategories: setActiveCategories,
+      loadingTaxonomies,
+      categories,
+      activeTaxonomy,
+      setActiveTaxonomy,
+      activeCategories,
+      setActiveCategories,
       posts: listPagePostsPortion,
-      taxIdsFiltred: existingTaxIdsFiltred,
+      taxIdsFiltered: existingTaxIdsFiltered,
       listState: {
-        count: postsFiltred ? postsFiltred.length : null,
-        postsFiltredOut: (postsFiltred && posts) ? posts.length - postsFiltred.length : 0
+        count: postsFiltered ? postsFiltered.length : null,
+        postsFilteredOut: (postsFiltered && posts) ? posts.length - postsFiltered.length : 0
       },
       somethingSelected: somethingSelected
     }),
