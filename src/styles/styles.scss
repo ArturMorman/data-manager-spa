@@ -1014,14 +1014,14 @@ button {
 
 
       ////      !! REVERSE LIST VIEW COLORS !!
-      background-image: linear-gradient(to bottom right, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 8%), rgba($glow, 28%));
+      background-image: linear-gradient(to bottom right, rgba($glow, 0%), rgba($glow, 3%), rgba($dominantDark, 6%), rgba($glow, 23%));
 
 
       @media(max-width: 500px) {
         // background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 4%), rgba($dominant, 44%));
 
         ////      !! REVERSE LIST VIEW COLORS !!
-        background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 2%), rgba($dominantDark, 9%), rgba($glow, 44%));
+        background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 3%), rgba($dominantDark, 9%), rgba($glow, 44%));
 
 
         box-shadow: 113px 188px 88px 13px rgba(white, 100%) inset,
@@ -1042,7 +1042,11 @@ button {
 
       ////      !! REVERSE LIST VIEW COLORS !!
       &.listView {
-        background-color: rgba($dominant, 55%);
+        background-color: rgba($dominant, 13%);
+
+        @media(max-width: 500px) {
+          background-color: rgba($dominant, 34%);
+        }
       }
     }
   }

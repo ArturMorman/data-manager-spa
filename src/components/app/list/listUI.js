@@ -76,6 +76,8 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, categories, activeCategori
           } */}
 
 
+          {loadingTaxonomies && <LoadingPlaceholder view={'listView listUi'} text={'Loading categories...'} />}
+
           <ListFilters
             categories={categories}
             activeTaxonomy={activeTaxonomy}
@@ -84,8 +86,6 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, categories, activeCategori
             setActiveCategories={setActiveCategories}
             taxIdsFiltered={taxIdsFiltered}
           />
-
-          {loadingTaxonomies && <LoadingPlaceholder view={'listView listUi'} text={'Loading categories...'} />}
 
         </div>
       }

@@ -16,39 +16,43 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
   const [listPagePostsPortion, setListPagePostsPortion] = useState([])
   const [somethingSelected, setSomethingSelected] = useState(false)
 
-  const [fetchWatcher, setfetchWatcher] = useState(0)
-
 
   useEffect(() => {
     if (taxonomies) {
-
-
-      // setloadingTaxonomies(true)
-
-
       const fetchAllCategories = async () => {
         try {
-          const results = await Promise.allSettled(
-            Object.entries(taxonomies).flatMap(([choice, taxArray]) =>
-              taxArray.map(taxonomy =>
+          let delayIncrement = 666
+
+          Object.entries(taxonomies).flatMap(([choice, taxArray], index) =>
+            taxArray.forEach((taxonomy, i) => {
+              const delay = delayIncrement * (index * taxArray.length + i)
+
+              setTimeout(() => {
                 fetchCategories(taxonomy, { choice, order: getOrder(taxonomy) })
-              )
-            )
+                  .catch(error => {
+                    console.error(`Error fetching ${taxonomy}:`, error)
+                    setErrorStatus(error)
+                  })
+              }, delay)
+            })
           )
         } catch (error) {
+          console.error('Error in fetchAllCategories:', error)
           setErrorStatus(error)
         } finally {
+          console.log('_ fetchAllCategories execution done _')
 
-
-          // setloadingTaxonomies(false)
-          console.log('')
-
+          // setLoading(false)
 
         }
       }
+
+      // setLoading(true)
+
       fetchAllCategories()
     }
-  }, [])
+  }, [taxonomies])
+
 
   const fetchCategories = (taxonomy, options) => {
     return fetch(`${api}${taxonomy}?page=1&per_page=100`, {
@@ -69,30 +73,23 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
       })
   }
 
+
   const getOrder = (taxonomy) => {
     switch (taxonomy) {
-      case 'clients': return 1;
-      case 'productTypes': return 2;
-      case 'technologies': return 3;
-      default: return 4;
+      case 'clients': return 1
+      case 'productTypes': return 2
+      case 'technologies': return 3
+      default: return 4
     }
   }
 
 
   ////  FUNCTION TO FILTER OUT CATEGORIES NOT ATTACHED TO ANY PROJECT
   const filterOutCategories = (categories) => {
-
-
-    // console.log('|| filterOutCategories:  ', categories)
-
-
     let categoriesFiltered = []
     if (categories?.response?.length > 0) {
-      categoriesFiltered = categories.response.filter(el => {
-        return existingTaxIds.includes(el.id)
-      })
+      categoriesFiltered = categories.response.filter(el => existingTaxIds.includes(el.id))
     }
-
     return categoriesFiltered.length > 0 ? {
       name: categories.name,
       options: categories.options,
@@ -106,11 +103,6 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
     if (response && response.name && response.response) {
       if (categories.length > 0) {
         const existing = categories.map(el => el.name)
-
-
-        // console.log('| existing: ', existing)
-
-
         if (!existing.includes(response.name)) {
           setCategories(prev => [...prev, filterOutCategories(response)])
         }
@@ -127,26 +119,11 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
   }, [response])
 
 
-
-  // console.log('###: ', categories)
-  // console.log('###: ', Object.entries(taxonomies))
-
-
-
   useEffect(() => {
-    setfetchWatcher(prev => prev + 1)
-  }, [categories])
-
-
-  useEffect(() => {
-
-
-    if (Object.entries(taxonomies).flat().length + 1 === fetchWatcher) {
+    if (Object.values(taxonomies).flat().length === categories.length) {
       setloadingTaxonomies(false)
     }
-
-
-  }, [fetchWatcher])
+  }, [categories])
 
 
   useEffect(() => {
@@ -154,13 +131,6 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
       console.log('_  loadingTaxonomies CATEGORIES DONE CORRECT  _')
     }
   }, [loadingTaxonomies])
-
-
-  // console.log('###: ', fetchWatcher)
-  // console.log('!!!: ', loadingTaxonomies)
-
-
-
 
 
   //  FILTER POSTS LIST
@@ -209,17 +179,6 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
     }, 999)
     return () => clearTimeout(timeout)
   }, [activeCategories])
-
-
-
-  // console.log('__ RESPONSE:                 ', response)
-
-  // console.log('__ categories:               ', categories)
-  // console.log('__ existing tax ids filtered: ', existingTaxIdsFiltered)
-
-  // console.log('__ active categories:        ', activeCategories)
-  // console.log('__ active taxonomies:        ', activeTaxonomy)
-
 
 
   const childrenWithProps = React.Children.map(children, child =>
