@@ -15,7 +15,7 @@ const ListContext = () => {
       query {
         site {          
           siteMetadata {
-            siteUrl
+            wpSiteUrl
             wpRestApi {
               pathBase
               singlePostCustomEndpoint
@@ -32,11 +32,11 @@ const ListContext = () => {
       }
     `
   )
-  const siteUrl = site.siteMetadata.siteUrl
+  const wpSiteUrl = site.siteMetadata.wpSiteUrl
   const pathBase = site.siteMetadata.wpRestApi.pathBase
   const singlePostCustomEndpoint = site.siteMetadata.wpRestApi.singlePostCustomEndpoint
   const route = site.siteMetadata.wpContentTypes.postType
-  const api = `${siteUrl}${pathBase}`
+  const api = `${wpSiteUrl}${pathBase}`
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 

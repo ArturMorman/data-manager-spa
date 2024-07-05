@@ -5,14 +5,16 @@
 module.exports = {
 
   ////  PATH PREFIX
-  pathPrefix: `/remote-app`,
+  pathPrefix: `/data-manager-spa`,
 
   siteMetadata: {
     title: `Digital VooDoo`,
     description: `Front App for headless Wordpress, works with Wordpress as CMS and DB, pure JS Fetch and custom WP REST Api endpoints.`,
     author: `Artur Morman DigitalVooDoo`,
-    // siteUrl: `https://ww-baza-wiedzy.wydajnyteam-vps.site`,
-    siteUrl: `http://web-projects-manager.local`,
+    siteUrl: `http://artur.morman.com.pl/data-manager-spa`,
+
+    wpSiteUrl: `http://morman.com.pl/data-manager-wp`,
+    // wpSiteUrl: `http://web-projects-manager.local`,
 
     ////  WP REST API CONFIG
     wpRestApi: {
