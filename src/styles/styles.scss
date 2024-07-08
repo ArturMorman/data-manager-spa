@@ -363,13 +363,13 @@ body {
       box-shadow: 0 0 23px 1px rgba($dominant, 22%);
     }
 
-    .dvText {
-      // fill: rgba($dominant, 66%);
-    }
+    // .dvText {
+    //   fill: rgba($dominant, 66%);
+    // }
 
-    .dvDoll {
-      // fill: rgb(213, 213, 213);
-    }
+    // .dvDoll {
+    //   fill: rgb(213, 213, 213);
+    // }
 
     .dvStick {
       opacity: .7;
@@ -430,6 +430,11 @@ body {
   .loadingPlaceholder {
     min-height: 80px;
     flex-direction: row;
+    overflow: hidden;
+
+    &.loadingDone {
+      animation: hidePlaceholder 5555ms linear forwards;
+    }
   }
 }
 
@@ -487,10 +492,12 @@ button {
       border: 2px solid $glow;
       border-radius: 9px 9px 0 0;
 
-      &:hover {
-        color: $dominantDark;
-        border: 2px solid $dominant;
-        box-shadow: 0 1px 11px 1px rgba($dominant, 12%) inset;
+      @media (hover: hover) {
+        &:hover {
+          color: $dominantDark;
+          border: 2px solid $dominant;
+          box-shadow: 0 1px 11px 1px rgba($dominant, 12%) inset;
+        }
       }
     }
   }
@@ -500,10 +507,12 @@ button {
       border: 2px solid $dominantDark;
       border-radius: 0 0 9px 9px;
 
-      &:hover {
-        color: $glowDark;
-        border: 2px solid $glow;
-        box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
+      @media (hover: hover) {
+        &:hover {
+          color: $glowDark;
+          border: 2px solid $glow;
+          box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
+        }
       }
     }
   }
@@ -572,7 +581,7 @@ button {
         background: transparent;
 
         svg {
-          margin: 0 5px 5px auto;
+          margin: 0 8px 5px auto;
           transition: all 288ms ease;
         }
       }
@@ -678,21 +687,21 @@ button {
           box-shadow: 0 1px 5px 1px rgba($dominantAccent, 44%);
         }
 
-        &:hover {
-          // color: $fontDominant;
-          color: $glowDark;
-          box-shadow: -1px -3px 5px 1px rgba($shadow, 33%) inset;
+        @media (hover: hover) {
+          &:hover {
+            color: $glowDark;
+            box-shadow: -1px -3px 5px 1px rgba($shadow, 33%) inset;
 
-          &::before {
-            background-color: rgba($shadow, 0%);
-            box-shadow: 0 1px 5px 1px rgba($shadow, 0%);
+            &::before {
+              background-color: rgba($shadow, 0%);
+              box-shadow: 0 1px 5px 1px rgba($shadow, 0%);
+            }
           }
         }
 
         &.active {
           z-index: 10;
           padding: 3px 5px 5px 20px;
-          // background-color: rgba($dominant, 3%);
           background-color: rgba($glow, 3%);
           box-shadow: -1px -3px 8px 1px rgba($glow, 33%) inset;
 
@@ -701,12 +710,28 @@ button {
             box-shadow: 0 1px 5px 1px rgba(136, 255, 0, 0);
           }
 
-          &:hover {
-            // color: $fontDominant !important;
-            color: $glowDark !important;
-            box-shadow: -1px -3px 8px 1px rgba($shadow, 66%) inset;
+          @media (hover: hover) {
+            &:hover {
+              color: $glowDark !important;
+              box-shadow: -1px -3px 8px 1px rgba($shadow, 66%) inset;
+            }
           }
         }
+
+
+
+
+        &.inactiveMulti {
+          display: none;
+        }
+
+        @media (hover: hover) {
+          &.inactiveMulti {
+            display: flex !important;
+          }
+        }
+
+
 
 
         &.inactive {
@@ -756,16 +781,15 @@ button {
           }
 
           &.active {
-            // color: $fontDominant;
             color: black;
-
             position: absolute;
             width: 98%;
             animation: activateFilter 300ms linear forwards;
 
-            &:hover {
-              // color: $fontDominant;
-              color: $glowDark;
+            @media (hover: hover) {
+              &:hover {
+                color: $glowDark;
+              }
             }
 
             &::before {
@@ -774,14 +798,16 @@ button {
             }
           }
 
-          &:not(.active):hover {
-            box-shadow: none;
-            color: $inactive;
-            cursor: default;
+          @media (hover: hover) {
+            &:not(.active):hover {
+              box-shadow: none;
+              color: $inactive;
+              cursor: default;
 
-            &::before {
-              background-color: $dominantAccent;
-              box-shadow: 0 1px 5px 1px rgba($dominantAccent, 55%);
+              &::before {
+                background-color: $dominantAccent;
+                box-shadow: 0 1px 5px 1px rgba($dominantAccent, 55%);
+              }
             }
           }
 
@@ -841,9 +867,11 @@ button {
         transition: all 177ms ease;
       }
 
-      &:hover {
-        svg {
-          fill: rgba($glow, 100%);
+      @media (hover: hover) {
+        &:hover {
+          svg {
+            fill: rgba($glow, 100%);
+          }
         }
       }
     }
@@ -863,8 +891,10 @@ button {
           border-bottom: 2px solid $glow;
         }
 
-        &:hover {
-          color: $glow;
+        @media (hover: hover) {
+          &:hover {
+            color: $glow;
+          }
         }
       }
 
@@ -957,9 +987,11 @@ button {
       transition: all 144ms ease-out;
       filter: grayscale(1);
 
-      &:hover {
-        box-shadow: 0 1px 23px 1px rgba($glow, 22%), -1px -1px 2px 1px rgba($glow, 34%)inset;
-        filter: grayscale(0);
+      @media (hover: hover) {
+        &:hover {
+          box-shadow: 0 1px 23px 1px rgba($glow, 22%), -1px -1px 2px 1px rgba($glow, 34%)inset;
+          filter: grayscale(0);
+        }
       }
     }
 
@@ -983,22 +1015,6 @@ button {
 
   .animatedBackground {
     background-image: linear-gradient(to bottom right, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 8%), rgba($dominant, 28%));
-
-
-    // position: relative;
-
-    // &::before {
-    //   content: '';
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 100%;
-    //   background-image: linear-gradient(to bottom right, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 8%), rgba($glow, 23%));
-    //   opacity: 0;
-    //   transition: all 555ms ease-in-out;
-    // }
-
 
     @media(max-width:500px) {
       background-image: linear-gradient(to bottom right, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 4%), rgba($dominant, 23%));
@@ -1034,11 +1050,6 @@ button {
 
     &.backgroundChange {
       background-color: rgba($glow, 55%);
-
-      // &::before {
-      //   opacity: 1;
-      // }
-
 
       ////      !! REVERSE LIST VIEW COLORS !!
       &.listView {
@@ -1144,10 +1155,12 @@ button {
           opacity: 0;
         }
 
-        &:hover {
-          background-color: $dominant;
-          color: $fontContra;
-          box-shadow: 0 1px 11px 1px rgba($glow, 34%);
+        @media (hover: hover) {
+          &:hover {
+            background-color: $dominant;
+            color: $fontContra;
+            box-shadow: 0 1px 11px 1px rgba($glow, 34%);
+          }
         }
 
         &.active {
@@ -1193,7 +1206,6 @@ button {
     .customData {
       display: flex;
       flex-direction: column;
-      // padding-right: 6px;
 
       &.customDataWrap {
         border-bottom: $dominant 1px solid;
@@ -1273,10 +1285,6 @@ button {
 
 }
 
-
-// footer {
-//   padding-bottom: 60px;
-// }
 
 
 
@@ -1363,5 +1371,26 @@ button {
   100% {
     opacity: 0;
     transform: translate(0px, 0px);
+  }
+}
+
+@keyframes hidePlaceholder {
+  0% {
+    color: rgba(black, 100%);
+  }
+
+  55% {
+    color: rgba($glowDark, 100%);
+  }
+
+  77% {
+    color: rgba($glowDark, 23%);
+    min-height: 80px;
+  }
+
+  100% {
+    color: rgba($glowDark, 0%);
+    min-height: 0;
+    height: 0;
   }
 }

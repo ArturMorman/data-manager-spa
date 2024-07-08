@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
-
 const PageFieldList = ({ field }) => {
   return (
     <>

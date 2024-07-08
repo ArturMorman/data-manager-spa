@@ -21,7 +21,7 @@ import Img123 from '../../../images/taxoomyImages/123.png'
 
 const ListView = ({ children, posts, loading, panel, setPanel, categories, page, perPage, setPage, setPerPage, allPages, perPageOptions }) => {
 
-  const [selectedObj, setSelectedObj] = useState((posts && posts.length > 0) ? posts[0] : null)
+  const [selectedObj, setSelectedObj] = useState(posts?.length > 0 ? posts[0] : null)
 
   const [iconsMap, setIconsMaps] = useState(null)
 
@@ -57,6 +57,15 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
       setPage(allPages)
     }
   }, [page, allPages])
+
+
+  ////  TEST, IF THIS NOT MAKING PROBLEMS:
+  useEffect(() => {
+    if (selectedObj === null && posts?.length > 0) {
+      setSelectedObj(posts[0])
+    }
+  }, [posts, selectedObj])
+  ////
 
 
   const childrenWithProps = React.Children.map(children, child =>

@@ -3,7 +3,7 @@ import ListFilters from './listFilters'
 import LoadingPlaceholder from '../../loadingPlaceholder'
 import SvgDisplay from '../../digitProcessor/svgDisplay'
 
-const ListUI = ({ panel, setPanel, loadingTaxonomies, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
+const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
 
   return (
     <>
@@ -76,7 +76,17 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, categories, activeCategori
           } */}
 
 
-          {loadingTaxonomies && <LoadingPlaceholder view={'listView listUi'} text={'Loading categories...'} />}
+          {(loadingTaxonomies || loadingTaxonomiesDone) &&
+            <LoadingPlaceholder
+              view={`listView listUi ${loadingTaxonomiesDone ? 'loadingDone' : ''}`}
+              text={
+                loadingTaxonomies ?
+                  'loading categories...'
+                  :
+                  'categories loaded, have fun'
+              }
+            />
+          }
 
           <ListFilters
             categories={categories}

@@ -11,9 +11,9 @@ module.exports = {
     title: `Digital VooDoo`,
     description: `Front App for headless Wordpress, works with Wordpress as CMS and DB, pure JS Fetch and custom WP REST Api endpoints.`,
     author: `Artur Morman DigitalVooDoo`,
-    siteUrl: `http://artur.morman.com.pl/data-manager-spa`,
+    siteUrl: `https://artur.morman.com.pl/data-manager-spa`,
 
-    wpSiteUrl: `http://morman.com.pl/data-manager-wp`,
+    wpSiteUrl: `https://morman.com.pl/data-manager-wp`,
     // wpSiteUrl: `http://web-projects-manager.local`,
 
     ////  WP REST API CONFIG

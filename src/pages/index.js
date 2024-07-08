@@ -1,12 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
-// import Header from '../components/header'
-import Seo from "../components/seo"
-
 import ListContext from '../components/app/list/listContext'
-
+import Seo from "../components/seo"
+// import Header from '../components/header'
 
 const IndexPage = () => {
+
 
   ////  PUSH NOTIFICATIONS (NEED SERVICE WORKER)
   // const EnableNotifications = async () => {
@@ -29,12 +28,12 @@ const IndexPage = () => {
   // }
 
 
-
   return (
     <Layout>
       <div className={`frame`}>
 
         {/* <Header /> */}
+
 
         {/* <section className={`container`}>
 
@@ -45,6 +44,7 @@ const IndexPage = () => {
           </button>
 
         </section> */}
+
 
         <ListContext />
 

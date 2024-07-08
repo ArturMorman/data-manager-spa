@@ -13,6 +13,9 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
   const [loading, setLoading] = useState(false)
 
 
+  console.log(post)
+  console.log(currentPageID)
+
   const fetchPost = () => {
     setLoading(true)
 
@@ -78,31 +81,14 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
   }, [currentPage])
 
   useEffect(() => {
-
     fetchPost()
-
-    // const startTimeout = setTimeout(() => {
-    //   fetchPost()
-    // }, 1333)
-    // return () => clearTimeout(startTimeout)
-
   }, [currentPageID])
 
 
 
-
   // useEffect(() => {
-  //   response && setCurrentPage(response)
-  // }, [response])
-
-
-  useEffect(() => {
-    console.log('loading...')
-  }, [currentPage])
-
-
-
-  // console.log(currentPage)
+  //   console.log('loading...')
+  // }, [currentPage])
 
 
 

@@ -2,7 +2,6 @@ import React from 'react'
 import parse from 'html-react-parser'
 
 const PageTab = ({ activeTab, data, tabChange, PageFieldList }) => {
-
   return (
     <div className={`customData customDataWrap ${data.content ? 'content' : ''} ${tabChange ? 'changable' : ''}`}>
       <h4>{activeTab}:</h4>

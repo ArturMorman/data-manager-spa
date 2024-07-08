@@ -42,12 +42,11 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
   const getFilteredProps = (customData) => {
     const { common, ...otherProps } = customData.groups
     otherProps.other = {}
-    otherProps.other.content = post.content.rendered  ////    ??????????
-    otherProps.other.group_title = 'other'            ////    ??????????
+    otherProps.other.content = post.content.rendered
+    otherProps.other.group_title = 'other'
     return otherProps
   }
 
-  // const filteredProps = post.customData ? getFilteredProps(post.customData) : {}
   const filteredProps = useMemo(() => post.customData ? getFilteredProps(post.customData) : {}, [post.customData])
   const tabKeys = useMemo(() => [...Object.keys(filteredProps)], [filteredProps])
 

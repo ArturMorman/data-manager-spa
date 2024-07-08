@@ -7,6 +7,7 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
   const [response, setResponse] = useState(null)
   // const [loadingTaxonomies, setloadingTaxonomies] = useState(false)
   const [loadingTaxonomies, setloadingTaxonomies] = useState(true)
+  const [loadingTaxonomiesDone, setLoadingTaxonomiesDone] = useState(false)
 
   const [categories, setCategories] = useState([])
   const [activeTaxonomy, setActiveTaxonomy] = useState([])
@@ -128,7 +129,11 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
   useEffect(() => {
     if (!loadingTaxonomies) {
-      console.log('_  loadingTaxonomies CATEGORIES DONE CORRECT  _')
+      setLoadingTaxonomiesDone(true)
+      const timeoutx = setTimeout(() => {
+        setLoadingTaxonomiesDone(false)
+      }, 6666)
+      return () => clearTimeout(timeoutx)
     }
   }, [loadingTaxonomies])
 
@@ -184,6 +189,7 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
   const childrenWithProps = React.Children.map(children, child =>
     React.cloneElement(child, {
       loadingTaxonomies,
+      loadingTaxonomiesDone,
       categories,
       activeTaxonomy,
       setActiveTaxonomy,

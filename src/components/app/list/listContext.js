@@ -83,14 +83,7 @@ const ListContext = () => {
 
 
   useEffect(() => {
-
     fetchPosts()
-
-    // const startTimeout = setTimeout(() => {
-    //   fetchPosts()
-    // }, 1333)
-    // return () => clearTimeout(startTimeout)
-
   }, [])
 
 

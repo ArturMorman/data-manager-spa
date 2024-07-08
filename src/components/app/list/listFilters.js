@@ -93,14 +93,14 @@ const ListFilters = ({ categories, activeCategories, setActiveCategories, active
                   return (
                     <li
                       key={i2}
-                      className={`category tax-${tax.name} cat-${cat.name} ${activeCategories.includes(cat.id) ? 'active' : ''} ${!pass ? 'inactive' : ''}`}
+                      className={`category tax-${tax.name} cat-${cat.name} ${activeCategories.includes(cat.id) ? 'active' : ''} ${!pass ? 'inactive' : ''} ${(!pass && tax.options.choice === 'multiChoice') ? 'inactiveMulti' : ''}`}
                       onClick={pass ? () => categoryHandle(cat.id, parent, choice) : () => { }}
                       onKeyDown={pass ? (e) => e.key === 'Enter' && categoryHandle(cat.id, parent, choice) : () => { }}
                       tabIndex='0'
                     >
                       {cat.name && parse(cat.name)}
-                      {activeCategories.includes(cat.id) && <FaCheckCircle size="1.1em" />}
-                      {!pass && <FaTimesCircle className="xtimes" size="1.1em" />}
+                      {activeCategories.includes(cat.id) && <FaCheckCircle size="1.2em" />}
+                      {!pass && <FaTimesCircle className="xtimes" size="1.15em" />}
                     </li>
                   )
                 })}
