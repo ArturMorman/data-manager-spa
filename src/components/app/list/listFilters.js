@@ -99,6 +99,7 @@ const ListFilters = ({ categories, activeCategories, setActiveCategories, active
                       tabIndex='0'
                     >
                       {cat.name && parse(cat.name)}
+                      {/* {cat.count || ''} */}
                       {activeCategories.includes(cat.id) && <FaCheckCircle size="1.2em" />}
                       {!pass && <FaTimesCircle className="xtimes" size="1.15em" />}
                     </li>

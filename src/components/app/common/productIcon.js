@@ -6,14 +6,14 @@ const ProductIcon = ({ product }) => {
   const getIcon = (product) => {
     switch (product) {
       case 'Website':
-        return <FaGlobe className={`productType`} size="1.5em" />
+        return <FaGlobe title={`Project type: ${product}`} className={`productType`} size="1.5em" />
       // return <MdWeb className={`productType`}  size="1.5em" />
       case 'E-commerce':
-        return <FaShoppingCart className={`productType`} size="1.5em" />
+        return <FaShoppingCart title={`Project type: ${product}`} className={`productType`} size="1.5em" />
       case 'E-learning':
-        return <FaGraduationCap className={`productType`} size="1.5em" />
+        return <FaGraduationCap title={`Project type: ${product}`} className={`productType`} size="1.5em" />
       case 'Landing page':
-        return <FaHome className={`productType`} size="1.5em" />
+        return <FaHome title={`Project type: ${product}`} className={`productType`} size="1.5em" />
       default:
         return null
     }

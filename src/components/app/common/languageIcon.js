@@ -22,7 +22,7 @@ const LanguageFlag = ({ language }) => {
   return (
     <>
       {getFlagCode(language) && (
-        <Flag className={`language`} code={getFlagCode(language)} height="16" />
+        <Flag title={`${language} language project`} className={`language`} code={getFlagCode(language)} height="16" />
       )}
     </>
   )

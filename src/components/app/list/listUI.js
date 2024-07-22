@@ -1,9 +1,12 @@
 import React from 'react'
+import categoriesTagsFunction from '../../../functions/categoriesTags'
 import ListFilters from './listFilters'
 import LoadingPlaceholder from '../../loadingPlaceholder'
 import SvgDisplay from '../../digitProcessor/svgDisplay'
 
 const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
+
+  const categoriesTags = categoriesTagsFunction(categories)
 
   return (
     <>
@@ -17,7 +20,7 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, cat
             onKeyDown={(e) => e.key === 'Enter' && setPanel(true)}
             tabIndex='0'
           >
-            Open list view
+            Projects list view
           </button>
         </div>
         :
@@ -29,7 +32,7 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, cat
             onKeyDown={(e) => e.key === 'Enter' && setPanel(false)}
             tabIndex='0'
           >
-            Close list view
+            Single Project view
           </button>
 
           {(listState.count || listState.count === 0) ?
@@ -45,11 +48,24 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, cat
               {listState.postsFilteredOut === 0 ?
                 (<span className={`desc`}>Start selecting categories, to find, what you're looking for</span>)
                 :
-                (<span><button
+                (<span className={`clearAllwrapp`}><button
                   onClick={() => setActiveCategories([])}
                 >
                   Clear All
                 </button></span>)
+              }
+
+              {activeCategories && activeCategories.length > 0 &&
+                <>
+                  {activeCategories.map((cat, i) => {
+                    return (
+                      <span key={i} className={`selectedCatName`}>
+                        {/* {i !== 0 && ', '} */}
+                        {categoriesTags.catNameById(cat)}
+                      </span>
+                    )
+                  })}
+                </>
               }
 
             </div>
@@ -58,23 +74,6 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, cat
               Counting...
             </div>
           }
-
-
-          {/*     ACTIVE CATEGORIES NAME/TAG LIST     */}
-
-          {/* {activeCategories && activeCategories.length > 0 &&
-            <>
-              {activeCategories.map((cat, i) => {
-                return (
-                  <span key={i}>
-                    {i !== 0 && ', '}
-                    {cat}
-                  </span>
-                )
-              })}
-            </>
-          } */}
-
 
           {(loadingTaxonomies || loadingTaxonomiesDone) &&
             <LoadingPlaceholder

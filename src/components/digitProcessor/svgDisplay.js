@@ -1,6 +1,5 @@
 import React from 'react'
 import DigitProcessor from './digitProcessor'
-import './digitProcessor.css'
 
 const SvgDisplay = ({ value, symbNum }) => {
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import categoriesTagsFunction from '../../../functions/categoriesTags'
 import parse from 'html-react-parser'
 import PageTab from './pageTab'
 import PageFieldList from './pageFieldListEl'
@@ -10,25 +11,7 @@ import TechnologyIcon from '../common/technologyIcon'
 
 const PageView = ({ post, icons, iconsMap, categories }) => {
 
-  let clientsTags = []
-  let technologiesTags = []
-  let productTypesTags = []
-  let languagesTags = []
-
-  categories.forEach(cat => {
-    let temp = []
-    temp = cat.response.filter(obj => post.clients.includes(obj.id))
-    clientsTags = [...clientsTags, ...temp]
-    temp = []
-    temp = cat.response.filter(obj => post.technologies.includes(obj.id))
-    technologiesTags = [...technologiesTags, ...temp]
-    temp = []
-    temp = cat.response.filter(obj => post.productTypes.includes(obj.id))
-    productTypesTags = [...productTypesTags, ...temp]
-    temp = []
-    temp = cat.response.filter(obj => post.languages.includes(obj.id))
-    languagesTags = [...languagesTags, ...temp]
-  })
+  const categoriesTags = categoriesTagsFunction(categories)
 
   const date = post.date.slice(0, post.date.indexOf('T'))
   const year = date.slice(0, post.date.indexOf('-'))
@@ -41,14 +24,14 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
   const getFilteredProps = (customData) => {
     const { common, ...otherProps } = customData.groups
-    otherProps.other = {}
-    otherProps.other.content = post.content.rendered
-    otherProps.other.group_title = 'other'
+    otherProps.description = {}
+    otherProps.description.content = post.content.rendered
+    otherProps.description.group_title = 'description'
     return otherProps
   }
 
   const filteredProps = useMemo(() => post.customData ? getFilteredProps(post.customData) : {}, [post.customData])
-  const tabKeys = useMemo(() => [...Object.keys(filteredProps)], [filteredProps])
+  const tabKeys = useMemo(() => [...Object.keys(filteredProps)].reverse(), [filteredProps])
 
   useEffect(() => {
     if (tabKeys.length > 0 && !activeTab) {
@@ -78,16 +61,38 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
           <section>
             <div className={`icons`}>
-              <div>
-                <img className={`client`} alt="" src={icons[post.clients[0]]} />
-                <LanguageIcon language={iconsMap[post.languages[0]]} />
-                <ProductIcon product={iconsMap[post.productTypes[0]]} />
-              </div>
-              <div className={`technologies`}>
-                {post.technologies.length > 0 && post.technologies.map(tech => {
-                  return <TechnologyIcon key={tech} technology={iconsMap[tech]} />
-                })}
-              </div>
+
+              {categoriesTags.clientsTags(post).length > 0 &&
+                <div>
+                  <h6>Client: {categoriesTags.clientsTags(post)[0].name}</h6>
+                  <img title={`Client: ${post.clients[0]}`} className={`client`} alt="" src={icons[post.clients[0]]} />
+                </div>
+              }
+
+              {categoriesTags.languagesTags(post).length > 0 &&
+                <div>
+                  <h6>Project language: {categoriesTags.languagesTags(post)[0].name}</h6>
+                  <LanguageIcon language={iconsMap[post.languages[0]]} />
+                </div>
+              }
+
+              {categoriesTags.productTypesTags(post).length > 0 &&
+                <div>
+                  <h6>Project type: {categoriesTags.productTypesTags(post)[0].name}</h6>
+                  <ProductIcon product={iconsMap[post.productTypes[0]]} />
+                </div>
+              }
+
+              {categoriesTags.technologiesTags(post).length > 0 &&
+                <>
+                  <h6>Technologies used:</h6>
+                  <div className={`technologies`}>
+                    {post.technologies.map(tech => {
+                      return <TechnologyIcon key={tech} technology={iconsMap[tech]} />
+                    })}
+                  </div>
+                </>
+              }
             </div>
           </section>
 
@@ -121,12 +126,12 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
           <section>
             <div className={`tags clients`}>
-              {clientsTags.map(tag => (<span key={tag.name} >{tag.name}</span>))}
-              {languagesTags.map(tag => (<span key={tag.name} >{tag.name}</span>))}
-              {productTypesTags.map(tag => (<span key={tag.name} >{tag.name}</span>))}
+              {categoriesTags.clientsTags(post).map(tag => (<span key={tag.name} >{tag.name}</span>))}
+              {categoriesTags.languagesTags(post).map(tag => (<span key={tag.name} >{tag.name}</span>))}
+              {categoriesTags.productTypesTags(post).map(tag => (<span key={tag.name} >{tag.name}</span>))}
             </div>
             <div className={`tags technologies`}>
-              {technologiesTags.map(tag => (<span key={tag.name} >{tag.name}</span>))}
+              {categoriesTags.technologiesTags(post).map(tag => (<span key={tag.name} >{tag.name}</span>))}
             </div>
           </section>
 

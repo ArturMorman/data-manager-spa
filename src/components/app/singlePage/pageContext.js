@@ -13,9 +13,6 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
   const [loading, setLoading] = useState(false)
 
 
-  console.log(post)
-  console.log(currentPageID)
-
   const fetchPost = () => {
     setLoading(true)
 

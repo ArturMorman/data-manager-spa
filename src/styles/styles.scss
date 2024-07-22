@@ -1,3 +1,29 @@
+// ////////////
+// //// COLORS
+// $font: black;
+// $fontContra: white;
+// $heading: black;
+
+// $shadow: #999999;
+
+// $button: white;
+// $buttonBorder: fuchsia;
+
+// $fontDominant: fuchsia;
+
+// $dominant: fuchsia;
+// $dominantDark: rgb(209, 10, 209);
+// $dominantUltra: #540D6E;
+
+// $dominantAccent: #3BCEAC;
+
+// $glow: #3BCEAC;
+
+// $glowUltra: #00d1cd;
+// $glowDark: #0c775c;
+
+// $inactive: grey;
+
 ////////////
 //// COLORS
 $font: black;
@@ -7,23 +33,21 @@ $heading: black;
 $shadow: #999999;
 
 $button: white;
-$buttonBorder: fuchsia;
+$buttonBorder: #0EAD69;
 
-$fontDominant: fuchsia;
+$fontDominant: #0EAD69;
 
-$dominant: fuchsia;
-$dominantDark: rgb(209, 10, 209);
-$dominantUltra: #540D6E;
+$dominant: #0EAD69;
+$dominantDark: #067746;
+$dominantUltra: #005932;
 
-// $dominantAccent: #FFD23F;
-// $dominantAccent: #00d1cd;
+$dominantRebel: fuchsia;
+
 $dominantAccent: #3BCEAC;
 
 $glow: #3BCEAC;
-// $glow: #00d1cd;
 
 $glowUltra: #00d1cd;
-// $glowUltra: #3BCEAC;
 $glowDark: #0c775c;
 
 $inactive: grey;
@@ -1024,24 +1048,18 @@ button {
     188px 111px 166px 1px rgba(white, 66%) inset;
 
 
+    ////      !! REVERSE LIST VIEW COLORS !!
     &.listView {
       box-shadow: 188px 166px 99px 33px rgba(white, 100%) inset,
         488px 366px 166px 3px rgba(white, 77%) inset;
 
-
-      ////      !! REVERSE LIST VIEW COLORS !!
       background-image: linear-gradient(to bottom right, rgba($glow, 0%), rgba($glow, 3%), rgba($dominantDark, 6%), rgba($glow, 23%));
 
-
       @media(max-width: 500px) {
-        // background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 4%), rgba($dominant, 44%));
-
-        ////      !! REVERSE LIST VIEW COLORS !!
-        background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 3%), rgba($dominantDark, 9%), rgba($glow, 44%));
-
-
         box-shadow: 113px 188px 88px 13px rgba(white, 100%) inset,
           333px 288px 166px 1px rgba(white, 77%) inset;
+
+        background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 3%), rgba($dominantDark, 9%), rgba($glow, 44%));
       }
     }
 
@@ -1049,14 +1067,14 @@ button {
     transition: background-color 4333ms ease-out;
 
     &.backgroundChange {
-      background-color: rgba($glow, 55%);
+      background-color: rgba($dominantRebel, 23%);
 
       ////      !! REVERSE LIST VIEW COLORS !!
       &.listView {
-        background-color: rgba($dominant, 13%);
+        background-color: rgba($dominantRebel, 22%);
 
         @media(max-width: 500px) {
-          background-color: rgba($dominant, 34%);
+          background-color: rgba($dominantRebel, 34%);
         }
       }
     }
@@ -1066,6 +1084,7 @@ button {
     animation: changable 366ms ease-out;
   }
 
+  // SINGLE PROJECT VIEW:
   .pageContext {
     min-height: 400px;
     max-width: 660px;
@@ -1092,23 +1111,40 @@ button {
       margin: 20px 0;
     }
 
+    h6 {
+      line-height: 1;
+    }
+
     .icons {
+      display: flex;
+      flex-direction: column;
+
       >div {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
+        padding-bottom: 20px;
         margin-bottom: 20px;
+        // border-bottom: 1px solid rgba($shadow, 33%);
+
+        @media (max-width: 500px) {
+          justify-content: space-between;
+        }
+      }
+
+      .technologies {
+        padding-top: 20px;
       }
 
       img,
       svg {
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
         max-width: 120px;
         max-height: 40px;
         border-radius: 0;
 
         &.language {
           max-width: 32px;
-          margin-top: 6px;
         }
 
         &.client {
@@ -1231,7 +1267,7 @@ button {
         }
 
         .bool {
-          color: $glow;
+          color: $dominantRebel;
 
           &.true {
             color: $dominant;
@@ -1393,4 +1429,121 @@ button {
     min-height: 0;
     height: 0;
   }
+}
+
+
+
+
+//////////////////////////////////
+//////////////////////////////////
+//////////////////////////////////
+/// DIGITAL DIGIT DISPLAY
+
+.count {
+  display: flex;
+  align-items: flex-start;
+  font-size: 33px;
+  background-color: $glow;
+  color: $fontContra;
+  font-weight: bold;
+  border-radius: 0 9px 0 9px;
+  padding: 9px 6px;
+  position: sticky;
+  z-index: 100;
+  top: 44px;
+  /* top: 144px; */
+  margin-bottom: 20px;
+  min-height: 120px;
+  flex-wrap: wrap;
+
+  span.clearAllwrapp,
+  span.desc {
+    width: 100%;
+    font-size: 24px;
+    line-height: 38px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    button {
+      max-width: 240px;
+      color: $font;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      padding: 5px 20px;
+      line-height: 1.25;
+      transition: color 155ms linear;
+
+      &:hover {
+        color: $glow;
+      }
+    }
+  }
+
+  .selectedCatName {
+    font-size: 18px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 5px;
+    border-radius: 15px;
+    border: 1px solid rgba($fontContra, 66%);
+  }
+
+  @media(max-width:480px) {
+    font-size: 21px;
+  }
+
+  @media(max-width:350px) {
+    font-size: 17px;
+  }
+}
+
+.svgDisplay {
+  width: min-content;
+  padding: 5px;
+  margin-right: 5px;
+  border: 1px solid rgb($fontContra, 0.34);
+  border-radius: 9px;
+  background-color: $glowUltra;
+}
+
+.pageContext section .count {
+  background-color: $dominant;
+}
+
+.pageContext section .svgDisplay {
+  background-color: $dominantDark;
+}
+
+.xDigits {
+  display: flex;
+  justify-content: flex-end;
+  width: min-content;
+  min-width: 45px;
+
+  @media(max-width:480px) {
+    min-width: 36px;
+  }
+
+  @media(max-width:350px) {
+    min-width: 36px;
+  }
+}
+
+.digit {
+  width: 17px;
+
+  @media(max-width:480px) {
+    width: 12px;
+  }
+
+  @media(max-width:350px) {
+    width: 12px;
+  }
+}
+
+.digitSvg g {
+  fill: $fontContra;
+  transition: opacity 288ms ease-out, fill 344ms ease;
 }
