@@ -1,5 +1,6 @@
 import React from 'react'
 import categoriesTagsFunction from '../../../functions/categoriesTags'
+import categoryHandle from '../../../functions/categoryHandle'
 import ListFilters from './listFilters'
 import LoadingPlaceholder from '../../loadingPlaceholder'
 import SvgDisplay from '../../digitProcessor/svgDisplay'
@@ -58,11 +59,17 @@ const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, cat
               {activeCategories && activeCategories.length > 0 &&
                 <>
                   {activeCategories.map((cat, i) => {
+                    const catObj = categoriesTags.catNameById(cat)
                     return (
-                      <span key={i} className={`selectedCatName`}>
-                        {/* {i !== 0 && ', '} */}
-                        {categoriesTags.catNameById(cat)}
-                      </span>
+                      <button
+                        key={i}
+                        className={`selectedCatName ${i === 0 ? 'firstChild' : ''}`}
+                        onClick={() => categoryHandle(cat, catObj['parent'], catObj['choice'], activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy)}
+                        onKeyDown={(e) => e.key === 'Enter' && categoryHandle(cat, catObj['parent'], catObj['choice'], activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy)}
+                      >
+                        {catObj['name']}
+                        <span className={`remove`}>x</span>
+                      </button>
                     )
                   })}
                 </>

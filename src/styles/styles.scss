@@ -380,11 +380,13 @@ body {
 
   &.panelChanged.listView {
     fill: rgb(213, 213, 213);
-    box-shadow: 0 0 50px 1px rgba($glow, 34%);
+    // box-shadow: 0 0 50px 1px rgba($glow, 34%);
+    box-shadow: 0 0 50px 1px rgba($dominantRebel, 34%);
     border-radius: 50%;
 
     &:before {
-      box-shadow: 0 0 23px 1px rgba($dominant, 22%);
+      // box-shadow: 0 0 23px 1px rgba($dominant, 22%);
+      box-shadow: 0 0 23px 1px rgba($dominantRebel, 22%);
     }
 
     // .dvText {
@@ -401,7 +403,8 @@ body {
   }
 
   &.panelChanged.postView {
-    box-shadow: 0 0 50px 1px rgba($dominant, 33%);
+    // box-shadow: 0 0 50px 1px rgba($dominant, 33%);
+    box-shadow: 0 0 50px 1px rgba($dominantRebel, 33%);
     border-radius: 50%;
 
     &:before {
@@ -1113,6 +1116,10 @@ button {
 
     h6 {
       line-height: 1;
+
+      span {
+        text-decoration: underline rgba($dominant, 55%);
+      }
     }
 
     .icons {
@@ -1133,15 +1140,24 @@ button {
 
       .technologies {
         padding-top: 20px;
+        margin-bottom: 0;
       }
 
       img,
       svg {
         margin-right: 10px;
-        margin-left: 10px;
+        margin-left: auto;
         max-width: 120px;
         max-height: 40px;
         border-radius: 0;
+
+        &.technology {
+          margin-left: 15px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
 
         &.language {
           max-width: 32px;
@@ -1484,10 +1500,34 @@ button {
   .selectedCatName {
     font-size: 18px;
     line-height: 30px;
-    padding: 0 10px;
+    padding: 0 13px;
     margin: 5px;
     border-radius: 15px;
     border: 1px solid rgba($fontContra, 66%);
+    background-color: transparent;
+    transition: all 123ms ease;
+
+    &.firstChild {
+      margin-left: 0px;
+    }
+
+    @media(hover:hover) {
+      &:hover {
+        background-color: white;
+        color: $glow;
+
+        .remove {
+          color: rgba($font, 55%);
+        }
+      }
+    }
+
+    .remove {
+      color: rgba($fontContra, 66%);
+      font-weight: 300;
+      margin-left: 7px;
+      margin-bottom: 5px;
+    }
   }
 
   @media(max-width:480px) {

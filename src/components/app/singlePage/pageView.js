@@ -64,21 +64,21 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
               {categoriesTags.clientsTags(post).length > 0 &&
                 <div>
-                  <h6>Client: {categoriesTags.clientsTags(post)[0].name}</h6>
+                  <h6>Client: <span>{categoriesTags.clientsTags(post)[0].name}</span></h6>
                   <img title={`Client: ${post.clients[0]}`} className={`client`} alt="" src={icons[post.clients[0]]} />
                 </div>
               }
 
               {categoriesTags.languagesTags(post).length > 0 &&
                 <div>
-                  <h6>Project language: {categoriesTags.languagesTags(post)[0].name}</h6>
+                  <h6>Project language: <span>{categoriesTags.languagesTags(post)[0].name}</span></h6>
                   <LanguageIcon language={iconsMap[post.languages[0]]} />
                 </div>
               }
 
               {categoriesTags.productTypesTags(post).length > 0 &&
                 <div>
-                  <h6>Project type: {categoriesTags.productTypesTags(post)[0].name}</h6>
+                  <h6>Project type: <span>{categoriesTags.productTypesTags(post)[0].name}</span></h6>
                   <ProductIcon product={iconsMap[post.productTypes[0]]} />
                 </div>
               }

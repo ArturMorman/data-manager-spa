@@ -1,4 +1,4 @@
-function categoriesTags(categories) {
+const categoriesTags = (categories) => {
   return {
     clientsTags: (post) => {
       let clientsTags = []
@@ -45,16 +45,25 @@ function categoriesTags(categories) {
       return languagesTags
     },
     catNameById: (catId) => {
-      let catName = ''
-      if (catId) {
-        let temp = []
-        categories.forEach(cat => {
-          let temp2 = cat.response.filter(obj => catId === obj.id)
-          temp = [...temp, ...temp2]
-        })
-        catName = temp[0]?.name || ''
+      let catObj = {
+        name: '',
+        choice: '',
+        parent: ''
       }
-      return catName
+      if (catId) {
+        categories.forEach(cat => {
+          let temp = cat.response.filter(obj => catId === obj.id)
+          if (temp?.length > 0) {
+            catObj = {
+              name: temp[0]?.name || '',
+              choice: cat.options?.choice || '',
+              parent: cat.name || ''
+            }
+            return
+          }
+        })
+      }
+      return catObj
     }
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
+import categoryHandle from '../../../functions/categoryHandle';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { IoIosArrowDropdownCircle } from 'react-icons/io';
 
@@ -23,35 +24,6 @@ const ListFilters = ({ categories, activeCategories, setActiveCategories, active
         ...prevCategories,
         [name]: !prevCategories[name]
       }))
-    }
-  }
-
-  //// HANDLE CATEGORY LIST ITEM CLICK
-  const categoryHandle = (id, parent, choice) => {
-    if (!activeCategories.includes(id)) {
-      if (choice === 'singleChoice') {
-        if (!activeTaxonomy.includes(parent)) {
-          setActiveCategories(prev => [...prev, id])
-          setActiveTaxonomy(prev => [...prev, parent])
-        }
-        else {
-          console.log(`_system: ${parent} already set!`)
-        }
-      }
-      else {
-        setActiveCategories(prev => [...prev, id])
-      }
-    }
-    else if (activeCategories.includes(id)) {
-      setActiveCategories(prev => [...prev.filter(el => el !== id)])
-      if (choice === 'singleChoice') {
-        if (activeTaxonomy.includes(parent)) {
-          setActiveTaxonomy(prev => [...prev.filter(el => el !== parent)])
-        }
-      }
-    }
-    else {
-      console.log('SECRET ERROR')
     }
   }
 
@@ -94,8 +66,8 @@ const ListFilters = ({ categories, activeCategories, setActiveCategories, active
                     <li
                       key={i2}
                       className={`category tax-${tax.name} cat-${cat.name} ${activeCategories.includes(cat.id) ? 'active' : ''} ${!pass ? 'inactive' : ''} ${(!pass && tax.options.choice === 'multiChoice') ? 'inactiveMulti' : ''}`}
-                      onClick={pass ? () => categoryHandle(cat.id, parent, choice) : () => { }}
-                      onKeyDown={pass ? (e) => e.key === 'Enter' && categoryHandle(cat.id, parent, choice) : () => { }}
+                      onClick={pass ? () => categoryHandle(cat.id, parent, choice, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy) : () => { }}
+                      onKeyDown={pass ? (e) => e.key === 'Enter' && categoryHandle(cat.id, parent, choice, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy) : () => { }}
                       tabIndex='0'
                     >
                       {cat.name && parse(cat.name)}
