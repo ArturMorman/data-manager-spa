@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PageView from './pageView'
-import LoadingPlaceholder from '../../loadingPlaceholder'
+import LoadingPlaceholder from '../loadingPlaceholder'
 import { usePersistState } from '../../../hooks/usePersistState'
 
 

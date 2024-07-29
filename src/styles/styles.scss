@@ -33,13 +33,14 @@ $heading: black;
 $shadow: #999999;
 
 $button: white;
-$buttonBorder: #0EAD69;
+$buttonBorder: #06D6A0;
 
-$fontDominant: #0EAD69;
+$fontDominant: #06D6A0;
 
-$dominant: #0EAD69;
-$dominantDark: #067746;
-$dominantUltra: #005932;
+// $dominant: #0EAD69;
+$dominant: #06D6A0;
+$dominantDark: #04966f;
+$dominantUltra: #01533d;
 
 $dominantRebel: fuchsia;
 
@@ -47,7 +48,8 @@ $dominantAccent: #3BCEAC;
 
 $glow: #3BCEAC;
 
-$glowUltra: #00d1cd;
+// $glowUltra: #00d1cd;
+$glowUltra: #06D6A0;
 $glowDark: #0c775c;
 
 $inactive: grey;
@@ -480,27 +482,28 @@ button {
 }
 
 .panel {
-  .listViewSwitch {
-    width: fit-content;
-    max-width: 100%;
-    transition: all 222ms ease-out;
-    background-color: $button;
-    font-size: 18px;
-    text-transform: uppercase;
-    line-height: 36px;
-    text-align: center;
-    padding: 3px 6px 4px;
-    min-width: 280px;
-    position: sticky;
-    margin-bottom: -2px;
-    z-index: 100;
-    top: 0;
-    // top: 40px;
+  // .listViewSwitch {
+  //   // width: fit-content;
+  //   max-width: 100%;
+  //   transition: all 222ms ease-out;
+  //   background-color: $button;
+  //   font-size: 18px;
+  //   text-transform: uppercase;
+  //   line-height: 36px;
+  //   text-align: center;
+  //   padding: 3px 6px 4px;
+  //   min-width: 280px;
+  //   // position: sticky;
+  //   position: relative;
+  //   margin-bottom: -2px;
+  //   z-index: 100;
+  //   top: 0;
+  //   // top: 40px;
 
-    @media(max-width: 420px) {
-      min-width: 100%;
-    }
-  }
+  //   @media(max-width: 420px) {
+  //     min-width: 100%;
+  //   }
+  // }
 
 
   &.panelChanged {
@@ -850,6 +853,36 @@ button {
 ////  PROJECTS LIST
 .listWrap {
 
+  position: relative;
+
+  .uiSwitch {
+
+    .listViewSwitch {
+      width: 280px;
+      max-width: 100%;
+      transition: all 222ms ease-out;
+      background-color: $button;
+      font-size: 18px;
+      text-transform: uppercase;
+      line-height: 36px;
+      text-align: center;
+      padding: 3px 6px 4px;
+      min-width: 280px;
+      // position: sticky;
+      position: absolute;
+      // margin-bottom: -2px; 
+      z-index: 100;
+      top: 257px;
+      left: -84px;
+      // transform: rotate(270deg) translate(-280px, -80px);
+      transform: rotate(270deg);
+
+      @media(max-width: 420px) {
+        min-width: 100%;
+      }
+    }
+  }
+
   .pagination {
 
     display: flex;
@@ -1116,9 +1149,13 @@ button {
 
     h6 {
       line-height: 1;
+      font-weight: 300;
 
       span {
-        text-decoration: underline rgba($dominant, 55%);
+        font-weight: 700;
+        text-decoration: underline rgba($dominant, 33%);
+        margin-left: 3px;
+        letter-spacing: 1px;
       }
     }
 

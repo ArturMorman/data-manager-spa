@@ -2,40 +2,17 @@ import React from 'react'
 import categoriesTagsFunction from '../../../functions/categoriesTags'
 import categoryHandle from '../../../functions/categoryHandle'
 import ListFilters from './listFilters'
-import LoadingPlaceholder from '../../loadingPlaceholder'
+import LoadingPlaceholder from '../loadingPlaceholder'
 import SvgDisplay from '../../digitProcessor/svgDisplay'
 
-const ListUI = ({ panel, setPanel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
+const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
 
   const categoriesTags = categoriesTagsFunction(categories)
 
   return (
     <>
-      {!panel ?
-        <div
-          className={`panel headTop ${panel ? 'listView' : 'postView'} ${panelChanged ? 'panelChanged' : ''}`}
-        >
-          <button
-            className={`cta2 listViewSwitch`}
-            onClick={() => setPanel(true)}
-            onKeyDown={(e) => e.key === 'Enter' && setPanel(true)}
-            tabIndex='0'
-          >
-            Projects list view
-          </button>
-        </div>
-        :
-        <div className={`panel animatedBackground headTop ${somethingSelected ? 'backgroundChange' : ''} ${panel ? 'listView' : 'postView'} ${panelChanged ? 'panelChanged' : ''}`} >
-
-          <button
-            className={`cta2 listViewSwitch`}
-            onClick={() => setPanel(false)}
-            onKeyDown={(e) => e.key === 'Enter' && setPanel(false)}
-            tabIndex='0'
-          >
-            Single Project view
-          </button>
-
+      {panel &&
+        <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''}`} >
           {(listState.count || listState.count === 0) ?
             <div className={`count ${listState.postsFilteredOut === 0 ? 'infinity' : ''}`}>
               <SvgDisplay value={listState.count} />

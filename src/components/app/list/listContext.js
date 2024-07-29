@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import ListController from './listController'
+import UiSwitch from '../uiSwitch'
 import ListUI from './listUI'
 import ListView from './listView'
 import PageContext from '../singlePage/pageContext'
 import Logo from '../../../images/dv-logo'
-import LoadingPlaceholder from '../../loadingPlaceholder'
+import LoadingPlaceholder from '../loadingPlaceholder'
 import { usePersistState } from '../../../hooks/usePersistState'
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -123,6 +124,11 @@ const ListContext = () => {
           perPage={perPage}
           setAllPages={setAllPages}
         >
+          <UiSwitch
+            panel={panel}
+            setPanel={setPanel}
+            panelChanged={panelChanged}
+          />
           <ListUI
             panel={panel}
             setPanel={setPanel}
