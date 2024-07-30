@@ -64,28 +64,28 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
               {categoriesTags.clientsTags(post).length > 0 &&
                 <div>
-                  <h6>Client: <span>{categoriesTags.clientsTags(post)[0].name}</span></h6>
+                  <h5>Client: <span>{categoriesTags.clientsTags(post)[0].name}</span></h5>
                   <img title={`Client: ${post.clients[0]}`} className={`client`} alt="" src={icons[post.clients[0]]} />
                 </div>
               }
 
               {categoriesTags.languagesTags(post).length > 0 &&
                 <div>
-                  <h6>Project language: <span>{categoriesTags.languagesTags(post)[0].name}</span></h6>
+                  <h5>Project language: <span>{categoriesTags.languagesTags(post)[0].name}</span></h5>
                   <LanguageIcon language={iconsMap[post.languages[0]]} />
                 </div>
               }
 
               {categoriesTags.productTypesTags(post).length > 0 &&
                 <div>
-                  <h6>Project type: <span>{categoriesTags.productTypesTags(post)[0].name}</span></h6>
+                  <h5>Project type: <span>{categoriesTags.productTypesTags(post)[0].name}</span></h5>
                   <ProductIcon product={iconsMap[post.productTypes[0]]} />
                 </div>
               }
 
               {categoriesTags.technologiesTags(post).length > 0 &&
                 <>
-                  <h6>Technologies used:</h6>
+                  <h5>Technologies used:</h5>
                   <div className={`technologies`}>
                     {post.technologies.map(tech => {
                       return <TechnologyIcon key={tech} technology={iconsMap[tech]} />
