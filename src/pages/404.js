@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -10,6 +10,6 @@ const NotFoundPage = () => (
   </Layout>
 )
 
-export const Head = () => <Seo title="404: Not Found" />
+export const Head = () => <Seo title="404: Not Found" description="It is SPA, but you somehow missed URL" />
 
 export default NotFoundPage

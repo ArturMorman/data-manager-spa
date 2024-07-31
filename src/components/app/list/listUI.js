@@ -3,7 +3,7 @@ import categoriesTagsFunction from '../../../functions/categoriesTags'
 import categoryHandle from '../../../functions/categoryHandle'
 import ListFilters from './listFilters'
 import LoadingPlaceholder from '../loadingPlaceholder'
-import SvgDisplay from '../../digitProcessor/svgDisplay'
+import SvgDisplayWrapper from '../../digitProcessor/svgDisplayWrapper'
 
 const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
 
@@ -15,7 +15,7 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
         <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''}`} >
           {(listState.count || listState.count === 0) ?
             <div className={`count ${listState.postsFilteredOut === 0 ? 'infinity' : ''}`}>
-              <SvgDisplay value={listState.count} />
+              <SvgDisplayWrapper value={listState.count} />
               {listState.count === 1 ?
                 <span>Project matches criteria</span> :
                 listState.postsFilteredOut === 0 ?

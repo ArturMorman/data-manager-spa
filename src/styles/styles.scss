@@ -307,10 +307,6 @@ body {
     border-radius: 9px;
   }
 
-  footer img {
-    border-radius: 9px;
-  }
-
   iframe {
     border-radius: 9px;
   }
@@ -370,6 +366,7 @@ body {
   width: 200px;
   max-width: 200px;
   min-width: 200px;
+  height: 100px;
   line-height: 0;
   position: relative;
 
@@ -800,6 +797,11 @@ button {
   position: relative;
   padding-top: 128px;
 
+  &.postView {
+    display: flex;
+    justify-content: center;
+  }
+
   .uiFixed {
     position: fixed;
     top: 0;
@@ -823,8 +825,6 @@ button {
       }
 
     }
-
-
 
 
     display: flex;
@@ -855,7 +855,6 @@ button {
     }
 
     &.listView {
-
       .listViewSwitch {
         border: 2px solid $glow;
         border-radius: 9px 9px 0 0;
@@ -871,6 +870,24 @@ button {
     }
 
     &.postView {
+      max-width: 660px;
+
+      @media(max-width: 840px) {
+        max-width: calc(100vw - 197px);
+      }
+
+      @media(max-width: 768px) {
+        max-width: 660px;
+      }
+
+      @media(max-width: 708px) {
+        max-width: calc(100vw - 32px);
+
+        @media (hover: hover) {
+          max-width: calc(100vw - 49px);
+        }
+      }
+
       .listViewSwitch {
         border: 2px solid $dominantDark;
         border-radius: 0 0 9px 9px;
@@ -1144,8 +1161,9 @@ button {
 
   // SINGLE PROJECT VIEW:
   .pageContext {
-    min-height: 400px;
+    width: 100%;
     max-width: 660px;
+    min-height: 400px;
 
     section {
       margin-bottom: 30px;
@@ -1252,6 +1270,10 @@ button {
         border-top: $dominant 3px solid;
         transition: all 233ms ease-out;
         position: relative;
+
+        &:first-child {
+          margin-left: 3px;
+        }
 
         &::before {
           content: '';
@@ -1425,8 +1447,32 @@ button {
 
 }
 
+footer {
+  &.postView {
+    .container {
+      width: 100%;
+      max-width: 660px;
+      padding: 0;
+      margin: 0 auto;
 
+      @media(max-width: 840px) {
+        max-width: calc(100vw - 197px);
+      }
 
+      @media(max-width: 768px) {
+        max-width: 660px;
+      }
+
+      @media(max-width: 708px) {
+        max-width: calc(100vw - 32px);
+
+        @media (hover: hover) {
+          max-width: calc(100vw - 49px);
+        }
+      }
+    }
+  }
+}
 
 @keyframes activateFilter {
   0% {
@@ -1556,7 +1602,7 @@ button {
   position: relative;
   z-index: 100;
   margin-bottom: 20px;
-  min-height: 120px;
+  min-height: 158px;
   flex-wrap: wrap;
 
   span.clearAllwrapp,

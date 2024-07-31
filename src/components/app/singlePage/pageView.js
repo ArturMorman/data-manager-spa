@@ -3,7 +3,7 @@ import categoriesTagsFunction from '../../../functions/categoriesTags'
 import parse from 'html-react-parser'
 import PageTab from './pageTab'
 import PageFieldList from './pageFieldListEl'
-import SvgDisplay from '../../digitProcessor/svgDisplay'
+import SvgDisplayWrapper from '../../digitProcessor/svgDisplayWrapper'
 import ProductIcon from '../common/productIcon'
 import LanguageIcon from '../common/languageIcon'
 import TechnologyIcon from '../common/technologyIcon'
@@ -137,7 +137,7 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
 
           <section>
             <div className={'date'} style={{ fontSize: '13px' }}>
-              Record created: <SvgDisplay value={year} /><SvgDisplay value={month} symbNum={2} /><SvgDisplay value={day} symbNum={2} />
+              Record created: <SvgDisplayWrapper value={year} /><SvgDisplayWrapper value={month} symbNum={2} /><SvgDisplayWrapper value={day} symbNum={2} />
             </div>
           </section>
 

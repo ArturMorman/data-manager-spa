@@ -9,6 +9,15 @@ module.exports = {
 
   siteMetadata: {
     title: `Digital VooDoo`,
+    titleOptions: [
+      `d i g i t a l`,
+      `V o o D o o`,
+      `Hello World!`,
+      `Welcome to My Site`,
+      `Explore More...`,
+    ],
+    interval: 3333,
+    initialInterval: 9999,
     description: `Front App for headless Wordpress, works with Wordpress as CMS and DB, pure JS Fetch and custom WP REST Api endpoints.`,
     author: `Artur Morman DigitalVooDoo`,
     siteUrl: `https://artur.morman.com.pl/data-manager-spa`,

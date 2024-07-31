@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import ListContext from '../components/app/list/listContext'
 import Seo from "../components/seo"
-// import Header from '../components/header'
 
 const IndexPage = () => {
 
@@ -30,35 +29,23 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <div className={`frame`}>
 
-        {/* <Header /> */}
+      {/* <section className={`container`}>
 
+        <button
+          onClick={EnableNotifications}
+        >
+          Enable Notifications
+        </button>
 
-        {/* <section className={`container`}>
+      </section> */}
 
-          <button
-            onClick={EnableNotifications}
-          >
-            Enable Notifications
-          </button>
+      <ListContext />
 
-        </section> */}
-
-
-        <ListContext />
-
-        <footer>
-          <div className={`container`}>
-            <h5>Digital VooDoo</h5>
-          </div>
-        </footer>
-
-      </div>
     </Layout>
   )
 }
 
-export const Head = () => <Seo title="Digital VooDoo" />
+export const Head = () => <Seo title="Digital VooDoo" description="React JS SPA with Wordpress as CMS" />
 
 export default IndexPage
