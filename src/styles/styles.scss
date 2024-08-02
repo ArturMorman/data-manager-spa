@@ -481,18 +481,6 @@ button {
   padding: 10px;
 }
 
-.panel {
-  border-radius: 0 0 9px 0;
-
-  &.panelChanged {
-    .listViewSwitch {
-      color: rgb(100, 100, 100) !important;
-      border: 2px solid rgb(111, 111, 111) !important;
-      box-shadow: 0 1px 4px 1px rgb(232, 232, 232) inset !important;
-    }
-  }
-}
-
 
 ////  CATEGORY LIST
 .filtersWrapper {
@@ -636,7 +624,6 @@ button {
         margin-bottom: 6px;
         border-radius: 15px;
         transition: color 222ms ease-out, box-shadow 88ms ease-out, transform 400ms ease-in-out, opacity 100ms ease-in, background-color 1666ms linear;
-        transition-delay: 2ms;
         cursor: pointer;
 
         &:first-child {
@@ -663,8 +650,8 @@ button {
           border-radius: 50%;
           transition: background-color 188ms ease-out, box-shadow 288ms ease-out, top 200ms, left 200ms;
           transition-delay: 33ms;
-          background-color: $dominantAccent;
-          box-shadow: 0 1px 5px 1px rgba($dominantAccent, 44%);
+          background-color: rgba($dominant, 66%);
+          box-shadow: 0 0px 4px 1px rgba($dominant, 33%);
         }
 
         @media (hover: hover) {
@@ -673,27 +660,37 @@ button {
             box-shadow: -1px -3px 5px 1px rgba($shadow, 33%) inset;
 
             &::before {
-              background-color: rgba($shadow, 0%);
-              box-shadow: 0 1px 5px 1px rgba($shadow, 0%);
+              background-color: rgba($glow, 100%);
+              box-shadow: 0 1px 3px 1px rgba($glow, 0%);
             }
           }
         }
 
         &.active {
           z-index: 10;
-          padding: 3px 5px 5px 20px;
+          // padding: 3px 5px 5px 20px;           ///// ?!?!?!?!?
+          text-decoration: underline;
+          text-decoration-color: rgba($glow, 66%);
+          text-decoration-thickness: 2px;
           background-color: rgba($glow, 3%);
           box-shadow: -1px -3px 8px 1px rgba($glow, 33%) inset;
 
           &::before {
-            background-color: rgba(255, 255, 255, 0);
-            box-shadow: 0 1px 5px 1px rgba(136, 255, 0, 0);
+            // background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0); ///// ?!?!?!?!?
+            // box-shadow: 0 1px 5px 1px rgba(136, 255, 0, 0.9);
+            box-shadow: 0 1px 5px 1px rgba(136, 255, 0, 0); ///// ?!?!?!?!?
           }
 
           @media (hover: hover) {
             &:hover {
               color: $glowDark !important;
+              text-decoration-color: rgba($glow, 77%);
               box-shadow: -1px -3px 8px 1px rgba($shadow, 66%) inset;
+
+              &::before {
+                background-color: rgba($shadow, 33%);
+              }
             }
           }
         }
@@ -715,7 +712,7 @@ button {
         &.inactive {
           background-color: $inactive;
           color: $fontContra;
-          pointer-events: none;
+          // pointer-events: none;
           cursor: not-allowed;
 
           &::before {
@@ -843,22 +840,86 @@ button {
 
       margin-left: 120px;
 
+      display: flex;
+      align-items: flex-start;
+
       // width: 100%;
 
       .listViewSwitch {
-        width: 280px;
-        max-width: 100%;
+        // width: 280px;
+        // min-width: 280px;
+        // max-width: 100%;
         transition: all 222ms ease-out;
         background-color: $button;
-        font-size: 18px;
+        font-size: 15px;
         text-transform: uppercase;
         line-height: 36px;
         text-align: center;
-        padding: 3px 6px 4px;
-        min-width: 280px;
+        padding: 3px 12px 4px;
+        margin-right: 20px;
 
-        @media(max-width: 420px) {
-          min-width: 100%;
+        // @media(max-width: 420px) {
+        //   min-width: 100%;
+        // }
+
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span.symbol {
+
+          color: rgba($font, 55%);
+
+          &.active {
+            color: $dominantDark;
+          }
+        }
+
+        span.switchIcon {
+
+          display: flex;
+          align-items: center;
+          width: 60px;
+          height: 22px;
+          border-radius: 11px;
+
+          border: 2px solid $dominant;
+          margin: auto 10px;
+
+          .ball {
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            background-color: $dominant;
+            margin: 2px;
+            transition: all 188ms ease-out;
+          }
+
+          &.list {
+            // justify-content: flex-start;
+          }
+
+          &.post {
+            // justify-content: flex-end !important;
+
+            .ball {
+              margin-left: 35px;
+            }
+          }
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            color: $fontContra;
+            background-color: rgba($glow, 77%);
+            border: 1px solid rgba($shadow, 55%);
+
+            // box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
+            span.active {
+              color: $fontContra;
+            }
+          }
         }
       }
 
@@ -875,16 +936,16 @@ button {
 
     &.listView {
       .listViewSwitch {
-        border: 2px solid $glow;
-        border-radius: 9px 9px 0 0;
+        border: 1px solid rgba($glow, 66%);
+        // border-radius: 9px 9px 0 0;
 
-        @media (hover: hover) {
-          &:hover {
-            color: $dominantDark;
-            border: 2px solid $dominant;
-            box-shadow: 0 1px 11px 1px rgba($dominant, 12%) inset;
-          }
-        }
+        // @media (hover: hover) {
+        //   &:hover {
+        //     color: $dominantDark;
+        //     border: 2px solid $dominant;
+        //     // box-shadow: 0 1px 11px 1px rgba($dominant, 12%) inset;
+        //   }
+        // }
       }
     }
 
@@ -908,18 +969,26 @@ button {
       }
 
       .listViewSwitch {
-        border: 2px solid $dominantDark;
-        border-radius: 0 0 9px 9px;
+        border: 1px solid rgba($dominant, 66%);
+        // border-radius: 0 0 9px 9px;
 
-        @media (hover: hover) {
-          &:hover {
-            color: $glowDark;
-            border: 2px solid $glow;
-            box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
-          }
-        }
+        // @media (hover: hover) {
+        //   &:hover {
+        //     color: $glowDark;
+        //     border: 2px solid $glow;
+        //     // box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
+        //   }
+        // }
       }
     }
+
+    // &.panelChanged {
+    //   .listViewSwitch {
+    //     color: rgb(100, 100, 100) !important;
+    //     border: 2px solid rgba($font, 100%) !important;
+    //     // box-shadow: 0 1px 4px 1px rgb(232, 232, 232) inset !important;
+    //   }
+    // }
 
   }
 

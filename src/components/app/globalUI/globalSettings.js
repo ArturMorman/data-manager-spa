@@ -8,7 +8,9 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
   return (
     <>
       <button
+        title='Global Settings Menu'
         onClick={() => setShowSettings(!showSettings)}
+        onKeyDown={(e) => e.key === 'Enter' && setShowSettings(!showSettings)}
       >
         <GrUserSettings size="1.2em" />
       </button>
@@ -23,6 +25,7 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
               key={layout}
               className={`layoutSwitch ${customLayout === layout ? 'active' : ''}`}
               onClick={() => setCustomLayout(customLayout !== layout ? layout : null)}
+              onKeyDown={(e) => e.key === 'Enter' && setCustomLayout(customLayout !== layout ? layout : null)}
             >
               {layout} mode
             </button>
