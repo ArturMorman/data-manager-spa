@@ -3,7 +3,7 @@ import categoriesTagsFunction from '../../../functions/categoriesTags'
 import categoryHandle from '../../../functions/categoryHandle'
 import ListFilters from './listFilters'
 import LoadingPlaceholder from '../loadingPlaceholder'
-import SvgDisplayWrapper from '../../digitProcessor/svgDisplayWrapper'
+import SvgDisplayWrapper from '../digitProcessor/svgDisplayWrapper'
 
 const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
 

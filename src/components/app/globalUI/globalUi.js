@@ -1,7 +1,8 @@
 import React from 'react'
-import Logo from '../../images/dv-logo'
+import Logo from '../../../images/dv-logo'
+import GlobalMenu from './globalSettings'
 
-const UiFixed = ({ panel, setPanel, panelChanged }) => {
+const UiFixed = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel, panelChanged }) => {
   return (
     <header
       className={`uiFixed ${panel ? 'listView' : 'postView'} ${panelChanged ? 'panelChanged' : ''}`}
@@ -24,23 +25,11 @@ const UiFixed = ({ panel, setPanel, panelChanged }) => {
           {panel ? 'Single Project view' : 'Projects list view'}
         </button>
 
-        <button
-          className={`cta2`}
-        >
-          DARK MODE
-        </button>
-
-        <button
-          className={`cta2`}
-        >
-          SICK MODE
-        </button>
-
-        <button
-          className={`cta2`}
-        >
-          login/logout
-        </button>
+        <GlobalMenu
+          customLayouts={customLayouts}
+          customLayout={customLayout}
+          setCustomLayout={setCustomLayout}
+        />
 
       </div>
 

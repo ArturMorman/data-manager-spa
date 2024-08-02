@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
-import ListContext from '../components/app/list/listContext'
+import AppContext from '../components/app/appContext'
 import Seo from "../components/seo"
 
 const IndexPage = () => {
@@ -40,7 +40,7 @@ const IndexPage = () => {
 
       </section> */}
 
-      <ListContext />
+      <AppContext />
 
     </Layout>
   )

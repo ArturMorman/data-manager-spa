@@ -1,4 +1,5 @@
 import React from 'react'
+// import SvgDisplayWrapper from '../../digitProcessor/svgDisplayWrapper'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const Pagination = ({ bottom, page, perPage, setPage, setPerPage, allPages, perPageOptions }) => {
@@ -17,11 +18,13 @@ const Pagination = ({ bottom, page, perPage, setPage, setPerPage, allPages, perP
         <h6>
           page:
           <span>{page}</span>
+          {/* <span><SvgDisplayWrapper value={page} symbNum={2} /></span> */}
         </h6>
 
         <h6>
           all pages:
           <span>{allPages}</span>
+          {/* <span><SvgDisplayWrapper value={allPages} symbNum={2} /></span> */}
         </h6>
 
         {page < allPages && <button
