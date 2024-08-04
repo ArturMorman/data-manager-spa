@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
-import categoryHandle from '../../../functions/categoryHandle';
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
-import { IoIosArrowDropdownCircle } from 'react-icons/io';
+import categoryHandle from '../../../functions/categoryHandle'
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
+import { IoIosArrowDropdownCircle } from 'react-icons/io'
 
 const ListFilters = ({ categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered }) => {
 

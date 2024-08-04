@@ -126,43 +126,47 @@ const ListContext = () => {
           panelChanged={panelChanged}
         />
 
-        {existingTaxIds.length > 0 ?
-          <ListController
-            api={api}
-            taxonomies={taxonomies}
-            existingTaxIds={existingTaxIds}
-            posts={posts}
-            page={page}
-            perPage={perPage}
-            setAllPages={setAllPages}
-          >
-            <ListUI
-              panel={panel}
-              setPanel={setPanel}
-              panelChanged={panelChanged}
-            />
-            <ListView
-              panel={panel}
-              setPanel={setPanel}
-              loading={loading}
+        <div className={`theList ${panel ? 'listView' : 'postView'}`}>
+
+          {existingTaxIds.length > 0 ?
+            <ListController
+              api={api}
+              taxonomies={taxonomies}
+              existingTaxIds={existingTaxIds}
+              posts={posts}
               page={page}
               perPage={perPage}
-              allPages={allPages}
-              setPage={setPage}
-              setPerPage={setPerPage}
-              perPageOptions={perPageOptions}
+              setAllPages={setAllPages}
             >
-              <PageContext
-                api={api}
-                route={route}
-                singlePostCustomEndpoint={singlePostCustomEndpoint}
+              <ListUI
                 panel={panel}
+                setPanel={setPanel}
+                panelChanged={panelChanged}
               />
-            </ListView>
-          </ListController>
-          :
-          <LoadingPlaceholder view={'listView'} text={'loading app...'} />
-        }
+              <ListView
+                panel={panel}
+                setPanel={setPanel}
+                loading={loading}
+                page={page}
+                perPage={perPage}
+                allPages={allPages}
+                setPage={setPage}
+                setPerPage={setPerPage}
+                perPageOptions={perPageOptions}
+              >
+                <PageContext
+                  api={api}
+                  route={route}
+                  singlePostCustomEndpoint={singlePostCustomEndpoint}
+                  panel={panel}
+                />
+              </ListView>
+            </ListController>
+            :
+            <LoadingPlaceholder view={'listView'} text={'loading app...'} />
+          }
+
+        </div>
 
       </div>
 

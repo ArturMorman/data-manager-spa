@@ -1,30 +1,3 @@
-// ////////////
-// //// COLORS
-// $font: black;
-// $fontContra: white;
-// $heading: black;
-
-// $shadow: #999999;
-
-// $button: white;
-// $buttonBorder: fuchsia;
-
-// $fontDominant: fuchsia;
-
-// $dominant: fuchsia;
-// $dominantDark: rgb(209, 10, 209);
-// $dominantUltra: #540D6E;
-
-// $dominantAccent: #3BCEAC;
-
-// $glow: #3BCEAC;
-
-// $glowUltra: #00d1cd;
-// $glowDark: #0c775c;
-
-// $inactive: grey;
-
-////////////
 //// COLORS
 $font: black;
 $fontContra: white;
@@ -37,7 +10,6 @@ $buttonBorder: #06D6A0;
 
 $fontDominant: #06D6A0;
 
-// $dominant: #0EAD69;
 $dominant: #06D6A0;
 $dominantDark: #04966f;
 $dominantUltra: #01533d;
@@ -48,7 +20,6 @@ $dominantAccent: #3BCEAC;
 
 $glow: #3BCEAC;
 
-// $glowUltra: #00d1cd;
 $glowUltra: #06D6A0;
 $glowDark: #0c775c;
 
@@ -619,7 +590,6 @@ button {
         box-sizing: border-box;
         position: relative;
         padding-left: 20px;
-        // padding-bottom: 8px;
         padding-bottom: 6px;
         margin-bottom: 6px;
         border-radius: 15px;
@@ -714,6 +684,7 @@ button {
           color: $fontContra;
           // pointer-events: none;
           cursor: not-allowed;
+          text-decoration: line-through;
 
           &::before {
             top: 18px;
@@ -796,15 +767,77 @@ button {
 
 }
 
+//  SWITCH
+.listViewSwitch {
+  transition: all 188ms ease-out;
+  background-color: $button;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 36px;
+  text-align: center;
+  padding: 6px 12px;
+  margin-right: 20px;
+
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span.switchIcon {
+
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 22px;
+    border-radius: 11px;
+
+    border: 2px solid $dominant;
+    margin: auto 10px;
+    transition: all 188ms ease-out;
+
+    .ball {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      background-color: $dominant;
+      margin: 2px;
+      transition: all 188ms ease-out;
+    }
+
+    &.post {
+      .ball {
+        margin-left: 35px;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba($glow, 77%);
+
+      span {
+        color: $fontContra;
+      }
+
+      span.switchIcon {
+        border: 2px solid $fontContra;
+
+        .ball {
+          background-color: $fontContra;
+        }
+      }
+    }
+  }
+}
+
 ////  PROJECTS LIST
 .appWrap {
   position: relative;
   padding-top: 128px;
 
-  // &.postView {
-  //   display: flex;
-  //   justify-content: center;
-  // }
+  @media (max-width: 550px) {
+    padding-top: 217px;
+  }
 
   .uiFixed {
     position: fixed;
@@ -815,7 +848,15 @@ button {
     max-width: 1420px;
     padding: 12px 0;
 
+    background-color: white;
     border-bottom: 4px solid $glow;
+
+    display: flex;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+    }
+
 
     @media (max-width: 1600px) {
       max-width: calc(100vw - 197px);
@@ -831,126 +872,116 @@ button {
     }
 
 
-    display: flex;
-    // justify-content: space-between;
 
-    background-color: white;
 
     .buttonsWrap {
-
-      margin-left: 120px;
+      width: 100%;
+      max-width: 460px;
 
       display: flex;
       align-items: flex-start;
+      justify-content: flex-end;
 
-      // width: 100%;
+      @media (max-width: 550px) {
+        margin-top: 20px;
+        margin-bottom: 28px;
+        // justify-content: space-between;
+      }
 
-      .listViewSwitch {
-        // width: 280px;
-        // min-width: 280px;
-        // max-width: 100%;
-        transition: all 222ms ease-out;
-        background-color: $button;
-        font-size: 15px;
-        text-transform: uppercase;
-        line-height: 36px;
-        text-align: center;
-        padding: 3px 12px 4px;
-        margin-right: 20px;
 
-        // @media(max-width: 420px) {
-        //   min-width: 100%;
-        // }
 
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: center;
+      position: relative;
 
-        span.symbol {
 
-          color: rgba($font, 55%);
+      .globalMenuSwitch {
+        padding: 6px 15px 7px;
+        border: 2px solid $glow;
 
-          &.active {
-            color: $dominantDark;
-          }
+        display: flex;
+        transition: all 199ms ease-out;
+
+        .arrow {
+          margin-left: 10px;
+          transform: rotate(180deg);
+          transition: transform 244ms ease-out, color 199ms ease;
         }
 
-        span.switchIcon {
-
-          display: flex;
-          align-items: center;
-          width: 60px;
-          height: 22px;
-          border-radius: 11px;
-
-          border: 2px solid $dominant;
-          margin: auto 10px;
-
-          .ball {
-            display: block;
-            width: 16px;
-            height: 16px;
-            border-radius: 8px;
-            background-color: $dominant;
-            margin: 2px;
-            transition: all 188ms ease-out;
-          }
-
-          &.list {
-            // justify-content: flex-start;
-          }
-
-          &.post {
-            // justify-content: flex-end !important;
-
-            .ball {
-              margin-left: 35px;
-            }
+        &.open {
+          .arrow {
+            transform: rotate(0deg);
           }
         }
 
         @media (hover: hover) {
           &:hover {
-            color: $fontContra;
             background-color: rgba($glow, 77%);
-            border: 1px solid rgba($shadow, 55%);
+            color: $fontContra;
 
-            // box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
-            span.active {
-              color: $fontContra;
+            .arrow {
+              fill: $fontContra;
             }
           }
         }
       }
 
-      .globalMenu {
 
+
+      .globalMenu {
         overflow: hidden;
+        position: absolute;
+        top: 55px;
+        right: 0;
+
+        width: 268px;
+
+        border-radius: 15px;
+
+        padding: 35px 10px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: column;
+
+        border: 2px solid $dominant;
+        background-color: $fontContra;
+
+        box-shadow: -1px 2px 23px 0 rgba($shadow, 44%);
+
+        transition: all 235ms ease;
 
         &.closed {
           height: 0;
+          padding: 0 10px;
+          box-shadow: 0px 0px 9px 0 rgba($shadow, 0%);
         }
       }
 
     }
 
     &.listView {
-      .listViewSwitch {
-        border: 1px solid rgba($glow, 66%);
-        // border-radius: 9px 9px 0 0;
 
-        // @media (hover: hover) {
-        //   &:hover {
-        //     color: $dominantDark;
-        //     border: 2px solid $dominant;
-        //     // box-shadow: 0 1px 11px 1px rgba($dominant, 12%) inset;
-        //   }
-        // }
+      .globalMenuSwitch,
+      .listViewSwitch {
+        border: 2px solid rgba($glow, 88%);
+        color: $glow;
+
+        span.switchIcon {
+          border: 2px solid $glow;
+
+          .ball {
+            background-color: $glow;
+          }
+        }
+
+        .arrow {
+          fill: $glow;
+        }
       }
     }
 
     &.postView {
       max-width: 660px;
+      border-bottom: 4px solid $dominant;
 
       @media(max-width: 840px) {
         max-width: calc(100vw - 197px);
@@ -968,28 +999,44 @@ button {
         }
       }
 
+      .globalMenuSwitch,
       .listViewSwitch {
-        border: 1px solid rgba($dominant, 66%);
-        // border-radius: 0 0 9px 9px;
+        border: 2px solid rgba($dominant, 88%);
+        color: $dominant;
 
-        // @media (hover: hover) {
-        //   &:hover {
-        //     color: $glowDark;
-        //     border: 2px solid $glow;
-        //     // box-shadow: 0 1px 11px 1px rgba($glow, 12%) inset;
-        //   }
-        // }
+        .arrow {
+          fill: $dominant;
+        }
       }
     }
 
-    // &.panelChanged {
-    //   .listViewSwitch {
-    //     color: rgb(100, 100, 100) !important;
-    //     border: 2px solid rgba($font, 100%) !important;
-    //     // box-shadow: 0 1px 4px 1px rgb(232, 232, 232) inset !important;
-    //   }
-    // }
+  }
 
+
+
+  // .theList {
+  //   &.listView {
+
+  //     @media(min-width: 1280px) {
+  //       display: flex;
+
+  //       >div:first-child {
+  //         min-width: 320px;
+  //         max-width: 320px;
+  //         // flex-basis: 30%;
+
+  //         .filtersWrapper {
+  //           flex-direction: column;
+  //         }
+  //       }
+  //     }
+
+  //   }
+  // }
+
+
+  .fixedList {
+    width: 100%;
   }
 
   .pagination {
@@ -1159,9 +1206,10 @@ button {
         }
 
         transition: all 144ms ease-out;
-        filter: grayscale(1);
 
         @media (hover: hover) {
+          filter: grayscale(1);
+
           &:hover {
             filter: grayscale(0);
           }
@@ -1539,32 +1587,32 @@ button {
 
 }
 
-footer {
-  &.postView {
-    .container {
-      width: 100%;
-      max-width: 660px;
-      padding: 0;
-      margin: 0 auto;
+// footer {
+//   &.postView {
+//     .container {
+//       width: 100%;
+//       max-width: 660px;
+//       padding: 0;
+//       margin: 0 auto;
 
-      @media(max-width: 840px) {
-        max-width: calc(100vw - 197px);
-      }
+//       @media(max-width: 840px) {
+//         max-width: calc(100vw - 197px);
+//       }
 
-      @media(max-width: 768px) {
-        max-width: 660px;
-      }
+//       @media(max-width: 768px) {
+//         max-width: 660px;
+//       }
 
-      @media(max-width: 708px) {
-        max-width: calc(100vw - 32px);
+//       @media(max-width: 708px) {
+//         max-width: calc(100vw - 32px);
 
-        @media (hover: hover) {
-          max-width: calc(100vw - 49px);
-        }
-      }
-    }
-  }
-}
+//         @media (hover: hover) {
+//           max-width: calc(100vw - 49px);
+//         }
+//       }
+//     }
+//   }
+// }
 
 @keyframes activateFilter {
   0% {

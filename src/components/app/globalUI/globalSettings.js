@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { GrUserSettings } from "react-icons/gr"
+import { IoIosArrowDropdownCircle } from 'react-icons/io'
 
 const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
 
@@ -9,10 +10,12 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
     <>
       <button
         title='Global Settings Menu'
+        className={`globalMenuSwitch ${showSettings ? 'open' : 'closed'}`}
         onClick={() => setShowSettings(!showSettings)}
         onKeyDown={(e) => e.key === 'Enter' && setShowSettings(!showSettings)}
       >
-        <GrUserSettings size="1.2em" />
+        <GrUserSettings size="1em" />
+        <IoIosArrowDropdownCircle size="1.08em" className={`arrow`} />
       </button>
 
       <div
