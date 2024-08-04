@@ -820,10 +820,10 @@ button {
       }
 
       span.switchIcon {
-        border: 2px solid $fontContra;
+        border: 2px solid $fontContra !important;
 
         .ball {
-          background-color: $fontContra;
+          background-color: $fontContra !important;
         }
       }
     }
