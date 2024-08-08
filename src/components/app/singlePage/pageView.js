@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import categoriesTagsFunction from '../../../functions/categoriesTags'
 import parse from 'html-react-parser'
 import PageTab from './pageTab'
-import PageFieldList from './pageFieldListEl'
+import PageFieldListEl from './pageFieldListEl'
 import SvgDisplayWrapper from '../digitProcessor/svgDisplayWrapper'
 import ProductIcon from '../common/productIcon'
 import LanguageIcon from '../common/languageIcon'
@@ -109,7 +109,7 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
                   </button>
                 ))}
               </div>
-              {activeTab && <PageTab activeTab={activeTab} data={filteredProps[activeTab]} tabChange={tabChange} PageFieldList={PageFieldList} />}
+              {activeTab && <PageTab activeTab={activeTab} data={filteredProps[activeTab]} tabChange={tabChange} PageFieldListEl={PageFieldListEl} />}
             </section>
           }
 
@@ -118,7 +118,7 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
               <h4>{post.customData.groups.common.group_title}:</h4>
               {post.customData.groups.common.fields.length > 0 && post.customData.groups.common.fields.map(field => {
                 return (
-                  <PageFieldList key={field.name} field={field} />
+                  <PageFieldListEl key={field.name} field={field} />
                 )
               })}
             </div>}

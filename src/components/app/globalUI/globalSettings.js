@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { GrUserSettings } from "react-icons/gr"
+import { GrUserSettings } from 'react-icons/gr'
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
+import Login from '../auth/login'
+import Doll from '../../../images/dv-doll'
 
-const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
+const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout, onLogin, wpSiteUrl, isAuthenticated, username }) => {
 
   const [showSettings, setShowSettings] = useState(false)
 
@@ -22,26 +24,41 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout }) => {
         className={`globalMenu ${showSettings ? 'open' : 'closed'}`}
       >
 
-        {customLayouts?.length > 0 && customLayouts.map(layout => {
-          return (
-            <button
-              key={layout}
-              className={`layoutSwitch ${customLayout === layout ? 'active' : ''}`}
-              onClick={() => setCustomLayout(customLayout !== layout ? layout : null)}
-              onKeyDown={(e) => e.key === 'Enter' && setCustomLayout(customLayout !== layout ? layout : null)}
-            >
-              {layout} mode
-            </button>
-          )
-        })}
 
-        <button
-          className={`cta2`}
-        >
-          login/logout
-        </button>
+
+        {/* <div>
+          <strong>Layouts:</strong>
+          {customLayouts?.length > 0 && customLayouts.map(layout => {
+            return (
+              <button
+                key={layout}
+                className={`layoutSwitch ${customLayout === layout ? 'active' : ''}`}
+                onClick={() => setCustomLayout(customLayout !== layout ? layout : null)}
+                onKeyDown={(e) => e.key === 'Enter' && setCustomLayout(customLayout !== layout ? layout : null)}
+              >
+                {layout} mode
+              </button>
+            )
+          })}
+        </div> */}
+
+
+
+        <div className={`loginWrapper`}>
+          {isAuthenticated ?
+            <>
+              <Doll />
+              <span>user: <strong>{username || ''}</strong></span>
+              <button onClick={onLogout}>Logout</button>
+            </>
+            :
+            <Login onLogin={onLogin} wpSiteUrl={wpSiteUrl} />
+          }
+        </div>
 
       </div>
+
+      {showSettings && <div className={`closeGlobalMenu`} onClick={() => setShowSettings(false)} ></div>}
     </>
   )
 }

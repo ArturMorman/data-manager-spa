@@ -1,11 +1,12 @@
 import React from 'react'
 import Logo from '../../../images/dv-logo'
-import GlobalMenu from './globalSettings'
-// import { GrNotes } from "react-icons/gr"
-import { GrDocumentText } from "react-icons/gr"
-import { GrTable } from "react-icons/gr"
+import GlobalSettings from './globalSettings'
+import { GrDocumentText } from 'react-icons/gr'
+// import { GrList } from 'react-icons/gr'
+import { GrApps } from 'react-icons/gr'
 
-const UiFixed = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel, panelChanged }) => {
+
+const GlobalUi = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel, panelChanged, onLogout, onLogin, wpSiteUrl, isAuthenticated, username }) => {
   return (
     <header
       className={`uiFixed ${panel ? 'listView' : 'postView'} ${panelChanged ? 'panelChanged' : ''}`}
@@ -27,19 +28,24 @@ const UiFixed = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel
           onKeyDown={(e) => e.key === 'Enter' && setPanel(!panel)}
         >
           <span className={`symbol ${panel ? 'active' : ''}`}>
-            <GrTable size="1.66em" />
+            {/* <GrList size="1.66em" /> */}
+            <GrApps size="1.66em" />
           </span>
           <span className={`switchIcon ${panel ? 'list' : 'post'}`}><span className={`ball`}></span></span>
           <span className={`symbol ${!panel ? 'active' : ''}`}>
-            {/* <GrNotes size="2.2em" /> */}
             <GrDocumentText size="1.66em" />
           </span>
         </button>
 
-        <GlobalMenu
+        <GlobalSettings
           customLayouts={customLayouts}
           customLayout={customLayout}
           setCustomLayout={setCustomLayout}
+          onLogout={onLogout}
+          onLogin={onLogin}
+          wpSiteUrl={wpSiteUrl}
+          isAuthenticated={isAuthenticated}
+          username={username}
         />
 
       </div>
@@ -47,4 +53,4 @@ const UiFixed = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel
     </header>
   )
 }
-export default UiFixed
+export default GlobalUi

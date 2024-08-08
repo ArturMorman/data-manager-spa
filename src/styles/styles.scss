@@ -931,21 +931,56 @@ button {
         position: absolute;
         top: 55px;
         right: 0;
+        z-index: 100;
 
         width: 268px;
 
-        border-radius: 15px;
+        border-radius: 0 0 15px 15px;
 
-        padding: 35px 10px;
+        padding: 25px 10px;
         box-sizing: border-box;
 
         display: flex;
         flex-direction: column;
 
+        text-align: center;
+
         border: 2px solid $dominant;
         background-color: $fontContra;
+        // background-color: rgba($glow, 33%);    // SICK MODE :-D
 
-        box-shadow: -1px 2px 23px 0 rgba($shadow, 44%);
+        box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 8%);
+
+        >div {
+          border-top: 2px solid $dominant;
+          margin: 10px 0;
+
+          &:first-child {
+            margin-top: 0;
+            border-top: none;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        &.open {
+          border: 2px solid $fontContra;
+          overflow: visible;
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 268px;
+            height: 16px;
+            top: -16px;
+            right: -2px;
+            background-color: $fontContra;
+            border-bottom: 3px solid rgba($dominant, 77%);
+          }
+        }
+
 
         transition: all 235ms ease;
 
@@ -954,6 +989,71 @@ button {
           padding: 0 10px;
           box-shadow: 0px 0px 9px 0 rgba($shadow, 0%);
         }
+
+
+        button {
+          display: block;
+          width: 100%;
+          margin: 16px 0;
+          border: 2px solid $dominant;
+          padding: 5px 10px;
+          background-color: $dominant;
+          color: $fontContra;
+          text-transform: capitalize;
+
+          transition: all 166ms ease;
+
+          @media (hover: hover) {
+            &:hover {
+              background-color: $fontContra;
+              color: $font;
+            }
+          }
+
+        }
+
+        .loginWrapper {
+          padding-top: 10px;
+
+          .dvDoll {
+            display: inline-block;
+            width: 60px;
+            margin-right: 8px;
+            margin-bottom: -22px;
+            fill: $dominant;
+          }
+
+          input {
+            width: 100%;
+            border: 1px solid $dominant;
+            padding: 5px 10px;
+            border-radius: 10px;
+            color: $dominantUltra;
+            font-size: 15px;
+            letter-spacing: 0.7px;
+          }
+        }
+
+        .error {
+          // padding: 12px;
+          text-align: left;
+          font-size: 16px;
+          line-height: 1.6rem;
+
+          strong {
+            color: adjust-hue($dominantRebel, 60deg);
+          }
+        }
+      }
+
+      .closeGlobalMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        cursor: pointer; ////    ??????????
+        background-color: transparent;
       }
 
     }
@@ -1502,6 +1602,41 @@ button {
         }
       }
 
+      position:relative;
+
+      svg.editAcf {
+        position: absolute;
+        right: 1px;
+        top: 0px;
+        padding: 6px;
+        // bottom: -20px;
+
+        cursor: pointer;
+
+        // color: rgba($dominant, 88%);
+        color: rgba($font, 55%);
+        border: 1px solid rgba($dominant, 0%);
+        border-radius: 9px;
+
+        transition: all 177ms ease-out;
+
+        @media(hover:hover) {
+          &:hover {
+            color: rgba($font, 100%);
+            border: 1px solid rgba($dominant, 88%);
+          }
+        }
+      }
+
+      &.contentRendered {
+        svg.editAcf {
+          top: 8px;
+          width: 2.5em;
+          height: 2.5em;
+          font-size: 20px;
+        }
+      }
+
       div {
         display: flex;
         justify-content: space-between;
@@ -1515,6 +1650,12 @@ button {
           margin: 0;
           padding-right: 10px;
         }
+
+        span {
+          margin-right: 36px;
+        }
+
+        position:relative;
 
         .bool {
           padding-top: 5px;
@@ -1537,7 +1678,7 @@ button {
           }
         }
 
-        @media(max-width:360px) {
+        @media(max-width:386px) {
           display: flex;
           flex-direction: column;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import ListController from './list/listController'
-import UiFixed from './globalUI/globalUi'
+import GlobalUi from './globalUI/globalUi'
 import ListUI from './list/listUI'
 import ListView from './list/listView'
 import PageContext from './singlePage/pageContext'
@@ -41,7 +41,6 @@ const ListContext = () => {
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
   const customLayouts = ['dark', 'sick']
-  // const [customLayout, setCustomLayout] = useState(null)
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [panel, setPanel] = usePersistState('showPanel', true)
@@ -60,6 +59,13 @@ const ListContext = () => {
 
   const [apiPage, setApiPage] = useState(1)
   const pageCtrl = '?page='
+
+  const [authToken, setAuthToken] = usePersistState('token', null)
+  const [username, setUsername] = usePersistState('user', null)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!authToken)
+
+  console.log('_ logged in: ', isAuthenticated, ' _')
+  console.log('_ username: ', username, ' _')
 
 
   const fetchPosts = useCallback(() => {
@@ -110,6 +116,22 @@ const ListContext = () => {
   }, [panel])
 
 
+
+
+
+  const handleLogin = (data) => {
+    console.log(data)
+    setAuthToken(data?.token)
+    setUsername(data.user_nicename)
+    setIsAuthenticated(true)
+  }
+
+  const handleLogout = () => {
+    setAuthToken(null)
+    setIsAuthenticated(false)
+  }
+
+
   // console.log(window.matchMedia('(prefers-color-scheme: dark)'))
 
 
@@ -117,13 +139,18 @@ const ListContext = () => {
     <>
       <div className={`${customLayout ? `${customLayout}Mode` : ''} container appWrap ${panel ? 'listView' : 'postView'} ${loading ? 'loading' : ''}`}>
 
-        <UiFixed
+        <GlobalUi
           customLayouts={customLayouts}
           customLayout={customLayout}
           setCustomLayout={setCustomLayout}
           panel={panel}
           setPanel={setPanel}
           panelChanged={panelChanged}
+          onLogout={handleLogout}
+          onLogin={handleLogin}
+          wpSiteUrl={wpSiteUrl}
+          isAuthenticated={isAuthenticated}
+          username={username}
         />
 
         <div className={`theList ${panel ? 'listView' : 'postView'}`}>
