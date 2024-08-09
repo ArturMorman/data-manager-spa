@@ -4,7 +4,7 @@ import LoadingPlaceholder from '../loadingPlaceholder'
 import { usePersistState } from '../../../hooks/usePersistState'
 
 
-const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoint, categories, panel }) => {
+const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoint, categories, panel, isAuthenticated, authToken }) => {
 
   const [currentPageID, setCurrentPageID] = usePersistState('currentPageId', (post && post.id) ? post.id : null)
   const [currentPage, setCurrentPage] = useState(null)
@@ -93,7 +93,7 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
     <>
       {!panel && <div className={`pageContext ${panel ? 'listView' : 'postView'}`}>
         {currentPage &&
-          <PageView post={currentPage} icons={icons} iconsMap={iconsMap} categories={categories} />
+          <PageView post={currentPage} icons={icons} iconsMap={iconsMap} categories={categories} isAuthenticated={isAuthenticated} authToken={authToken} />
         }
         {loading && <LoadingPlaceholder view={'pageView'} text={'loading single project...'} />}
       </div>}

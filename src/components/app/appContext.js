@@ -186,6 +186,8 @@ const ListContext = () => {
                   route={route}
                   singlePostCustomEndpoint={singlePostCustomEndpoint}
                   panel={panel}
+                  isAuthenticated={isAuthenticated}
+                  authToken={authToken}
                 />
               </ListView>
             </ListController>

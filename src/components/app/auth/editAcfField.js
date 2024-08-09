@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CiEdit } from 'react-icons/ci'
 
-const EditACFField = ({ postId, fieldKey, currentValue, token }) => {
+const EditACFField = ({ postId, fieldKey, currentValue, authToken, isAuthenticated }) => {
   const [showPopup, setShowPopup] = useState(false)
   const [value, setValue] = useState(currentValue)
   const [message, setMessage] = useState('')
@@ -17,7 +17,7 @@ const EditACFField = ({ postId, fieldKey, currentValue, token }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${authToken}`
       },
       body: JSON.stringify({
         post_id: postId,
@@ -36,20 +36,38 @@ const EditACFField = ({ postId, fieldKey, currentValue, token }) => {
     }
   }
 
+  // console.log(fieldKey)
+
   return (
     <>
       {showPopup ?
-        <form onSubmit={handleSubmit}>
-          <label>
-            Edit Field:
-            <input type="text" value={value} onChange={handleChange} />
-          </label>
-          <button type="submit">Update</button>
-          <p>{message}</p>
-        </form>
+        <>
+          {isAuthenticated ?
+            <form className={`edidAcfForm`} onSubmit={handleSubmit}>
+              <label>
+                <span>Current Value:</span>
+                <span><strong>{typeof currentValue === 'boolean' ? currentValue.toString() : currentValue}</strong></span>
+                <span>New Value:</span>
+                <input type="text" value={value} onChange={handleChange} />
+              </label>
+              <button type="submit">Update</button>
+              <p>{message}</p>
+            </form>
+            :
+            <div className={`edidAcfForm denied`}><h4>Only logged in users can change data value</h4></div>
+          }
+          <span onClick={() => setShowPopup(false)} className={`closePopup`}></span>
+        </>
         :
-        <CiEdit title='Edit property value' size='1.9em' className={`editAcf`} />
-        // ''
+        <button
+          className={`editAcf`}
+          title='Edit property value'
+          onClick={() => setShowPopup(true)}
+        >
+          <CiEdit
+            size='1.9em'
+          />
+        </button>
       }
     </>
   )

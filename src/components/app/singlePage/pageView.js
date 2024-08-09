@@ -9,7 +9,7 @@ import LanguageIcon from '../common/languageIcon'
 import TechnologyIcon from '../common/technologyIcon'
 
 
-const PageView = ({ post, icons, iconsMap, categories }) => {
+const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToken }) => {
 
   const categoriesTags = categoriesTagsFunction(categories)
 
@@ -109,7 +109,7 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
                   </button>
                 ))}
               </div>
-              {activeTab && <PageTab activeTab={activeTab} data={filteredProps[activeTab]} tabChange={tabChange} PageFieldListEl={PageFieldListEl} />}
+              {activeTab && <PageTab activeTab={activeTab} data={filteredProps[activeTab]} tabChange={tabChange} PageFieldListEl={PageFieldListEl} isAuthenticated={isAuthenticated} postId={post.id} authToken={authToken} />}
             </section>
           }
 
@@ -118,7 +118,7 @@ const PageView = ({ post, icons, iconsMap, categories }) => {
               <h4>{post.customData.groups.common.group_title}:</h4>
               {post.customData.groups.common.fields.length > 0 && post.customData.groups.common.fields.map(field => {
                 return (
-                  <PageFieldListEl key={field.name} field={field} />
+                  <PageFieldListEl key={field.name} field={field} isAuthenticated={isAuthenticated} postId={post.id} authToken={authToken} />
                 )
               })}
             </div>}
