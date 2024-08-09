@@ -19,6 +19,7 @@ const PageTab = ({ activeTab, data, tabChange, PageFieldListEl, isAuthenticated,
           {parse(data.content)}
           <EditAcfField
             postId={postId}
+            fieldLabel={'content'}
             fieldKey={'content'}
             currentValue={parse(data.content)}
             authToken={authToken}

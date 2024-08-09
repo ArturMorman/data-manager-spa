@@ -11,6 +11,7 @@ const PageFieldListEl = ({ field, isAuthenticated, postId, authToken }) => {
           <span>{field.value}</span>
           <EditAcfField
             postId={postId}
+            fieldLabel={field.label}
             fieldKey={field.name}
             currentValue={field.value}
             authToken={authToken}
@@ -32,6 +33,7 @@ const PageFieldListEl = ({ field, isAuthenticated, postId, authToken }) => {
           </span>
           <EditAcfField
             postId={postId}
+            fieldLabel={field.label}
             fieldKey={field.name}
             currentValue={field.value}
             authToken={authToken}

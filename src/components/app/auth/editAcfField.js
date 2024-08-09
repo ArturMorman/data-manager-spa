@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { CiEdit } from 'react-icons/ci'
+import { GrClose } from 'react-icons/gr'
 
-const EditACFField = ({ postId, fieldKey, currentValue, authToken, isAuthenticated }) => {
+const EditACFField = ({ postId, fieldLabel, fieldKey, currentValue, authToken, isAuthenticated }) => {
   const [showPopup, setShowPopup] = useState(false)
   const [value, setValue] = useState(currentValue)
   const [message, setMessage] = useState('')
@@ -42,21 +43,19 @@ const EditACFField = ({ postId, fieldKey, currentValue, authToken, isAuthenticat
     <>
       {showPopup ?
         <>
+          <button onClick={() => setShowPopup(false)} className={`closeEditor`}><GrClose size='1em' /></button>
           {isAuthenticated ?
             <form className={`edidAcfForm`} onSubmit={handleSubmit}>
               <label>
-                <span>Current Value:</span>
-                <span><strong>{typeof currentValue === 'boolean' ? currentValue.toString() : currentValue}</strong></span>
-                <span>New Value:</span>
+                <span><strong>New Value:</strong></span>
                 <input type="text" value={value} onChange={handleChange} />
               </label>
               <button type="submit">Update</button>
-              <p>{message}</p>
+              <span><strong>{message}</strong></span>
             </form>
             :
-            <div className={`edidAcfForm denied`}><h4>Only logged in users can change data value</h4></div>
+            <div className={`edidAcfForm denied error`}><strong>Only logged in users can change data value</strong></div>
           }
-          <span onClick={() => setShowPopup(false)} className={`closePopup`}></span>
         </>
         :
         <button

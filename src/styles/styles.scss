@@ -325,6 +325,7 @@ body {
   }
 }
 
+//// 
 .closeGlobalMenu,
 .closePopup {
   position: fixed;
@@ -337,7 +338,42 @@ body {
   background-color: transparent;
 }
 
+/////
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: 1px solid $dominant;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: $dominantUltra;
+  font-size: 15px;
+  letter-spacing: 0.7px;
+  margin-top: 15px;
+}
 
+////
+.error {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6rem;
+
+  strong {
+    color: adjust-hue($dominantRebel, 60deg);
+  }
+}
+
+////
+.flexButton {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+
+  >*:first-child {
+    margin-left: 15px;
+  }
+}
+
+/////
 .logoWrap,
 .dvDoll,
 .dvText,
@@ -1034,27 +1070,8 @@ button {
             margin-bottom: -22px;
             fill: $dominant;
           }
-
-          input {
-            width: 100%;
-            border: 1px solid $dominant;
-            padding: 5px 10px;
-            border-radius: 10px;
-            color: $dominantUltra;
-            font-size: 15px;
-            letter-spacing: 0.7px;
-          }
         }
 
-        .error {
-          text-align: left;
-          font-size: 16px;
-          line-height: 1.6rem;
-
-          strong {
-            color: adjust-hue($dominantRebel, 60deg);
-          }
-        }
       }
     }
 
@@ -1606,9 +1623,9 @@ button {
 
       button.editAcf {
         position: absolute;
-        right: 1px;
-        top: 0px;
-        padding: 6px;
+        right: 4px;
+        top: 4px;
+        padding: 4px;
 
         font-size: 13px;
         background-color: transparent;
@@ -1616,9 +1633,9 @@ button {
         // color: rgba($dominant, 88%);
         color: rgba($font, 55%);
         border: 1px solid rgba($dominant, 0%);
-        border-radius: 9px;
+        border-radius: 11px;
 
-        transition: all 177ms ease-out;
+        transition: all 155ms ease-out;
 
         @media(hover:hover) {
           &:hover {
@@ -1635,29 +1652,83 @@ button {
           height: 2.5em;
           font-size: 20px;
         }
+
+        .closeEditor {
+          width: 50px;
+          height: 50px;
+          top: 8px;
+        }
+      }
+
+      .closeEditor {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 36px;
+        height: 36px;
+        border: 2px solid $dominant;
+        color: $dominant;
+        border-radius: 11px;
+        padding: 0;
+        transition: all 155ms ease;
+        background-color: rgba($dominant, 0%);
+
+        svg {
+          margin: auto;
+        }
+
+        @media(hover:hover) {
+          &:hover {
+            background-color: $dominant;
+            color: $fontContra;
+          }
+        }
       }
 
       .edidAcfForm {
-        position: fixed;
-        z-index: 1000;
-        top: 100px;
-        left: 20vw;
-        width: 300px;
-        // height: 350px;
-        padding: 25px 15px;
-        background-color: $fontContra;
-        border: 2px solid $dominant;
-        border-radius: 13px;
-        box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 8%);
+        padding-top: 20px;
+        padding-bottom: 30px;
+        max-width: 440px;
+
+        // border-top: 1px solid rgba($dominant, 33%);
 
         span {
           display: block;
         }
+
+        button {
+          margin: 15px auto 30px auto;
+          width: 100%;
+          max-width: 220px;
+          font-size: 18px;
+          line-height: 20px;
+          border: 1px solid $dominant;
+          color: $dominant;
+
+          transition: all 155ms ease;
+
+          @media(hover:hover) {
+            &:hover {
+              background-color: $dominant;
+              color: $fontContra;
+            }
+          }
+        }
+
+      }
+
+      .denied {
+        margin-top: 20px;
       }
 
       div {
         display: flex;
         justify-content: space-between;
+        min-height: 44px;
+
+        &:has(.edidAcfForm) {
+          flex-direction: column;
+        }
 
         &:not(.commonData):not(:last-child) {
           border-bottom: rgba($shadow, 23%) 1px solid;

@@ -3,6 +3,7 @@ import { GrUserSettings } from 'react-icons/gr'
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 import Login from '../auth/login'
 import Doll from '../../../images/dv-doll'
+import { GrLogout } from 'react-icons/gr'
 
 const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout, onLogin, wpSiteUrl, isAuthenticated, username }) => {
 
@@ -49,7 +50,7 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout
             <>
               <Doll />
               <span>user: <strong>{username || ''}</strong></span>
-              <button onClick={onLogout}>Logout</button>
+              <button className={`flexButton`} onClick={onLogout}>Logout <GrLogout /></button>
             </>
             :
             <Login onLogin={onLogin} wpSiteUrl={wpSiteUrl} />

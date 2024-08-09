@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import parse from 'html-react-parser'
+import { GrLogin } from 'react-icons/gr'
 
 const Login = ({ onLogin, wpSiteUrl }) => {
   const [username, setUsername] = useState('')
@@ -49,7 +50,7 @@ const Login = ({ onLogin, wpSiteUrl }) => {
           placeholder="Password"
           required
         />
-        <button type="submit" className={`cta2`}>Login</button>
+        <button type="submit" className={`cta2 flexButton`}>Login <GrLogin /></button>
       </form>
     </>
   )
