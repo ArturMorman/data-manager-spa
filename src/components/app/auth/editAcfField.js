@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import parse from 'html-react-parser'
 import { CiEdit } from 'react-icons/ci'
 import { GrClose } from 'react-icons/gr'
 
@@ -18,18 +19,25 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const response = await fetch('https://morman.com.pl/data-manager-wp/wp-json/custom/v1/update-acf', {
-      method: 'POST',
+    const isTextArea = fieldType === 'textarea'
+
+    const requestBody = isTextArea
+      ? { content: value }
+      : { post_id: postId, fields: { [fieldKey]: value } }
+
+    const targetRoute = isTextArea
+      ? `https://morman.com.pl/data-manager-wp/wp-json/wp/v2/ProjectsData/${postId}`
+      : 'https://morman.com.pl/data-manager-wp/wp-json/custom/v1/update-acf'
+
+    const method = isTextArea ? 'PUT' : 'POST'
+
+    const response = await fetch(targetRoute, {
+      method: method,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${authToken}`
       },
-      body: JSON.stringify({
-        post_id: postId,
-        fields: {
-          [fieldKey]: value
-        }
-      })
+      body: JSON.stringify(requestBody)
     })
 
     const data = await response.json()
@@ -41,9 +49,6 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
       setMessage(`Error: ${data.message}`)
     }
   }
-
-  console.log(fieldType)
-  console.log(value)
 
   return (
     <>
@@ -67,8 +72,8 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
                 :
                 (fieldType === 'textarea') ?
                   <textarea
-                    rows="5"
-                    cols="33"
+                    rows="18"
+                    // cols="39"
                     value={value}
                     onChange={handleChange}
                   />

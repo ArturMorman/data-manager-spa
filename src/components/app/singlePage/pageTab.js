@@ -16,16 +16,16 @@ const PageTab = ({ activeTab, data, tabChange, PageFieldListEl, isAuthenticated,
 
       {data.content &&
         <>
-          {parse(data.content)}
           <EditAcfField
             postId={postId}
             fieldKey={'content'}
             fieldType={'textarea'}
-            currentValue={parse(data.content)}
+            currentValue={data.content}
             authToken={authToken}
             isAuthenticated={isAuthenticated}
             fetchPost={fetchPost}
           />
+          {parse(data.content)}
         </>
       }
     </div>
