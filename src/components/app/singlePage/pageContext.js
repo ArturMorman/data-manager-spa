@@ -93,7 +93,7 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
     <>
       {!panel && <div className={`pageContext ${panel ? 'listView' : 'postView'}`}>
         {currentPage &&
-          <PageView post={currentPage} icons={icons} iconsMap={iconsMap} categories={categories} isAuthenticated={isAuthenticated} authToken={authToken} />
+          <PageView post={currentPage} icons={icons} iconsMap={iconsMap} categories={categories} isAuthenticated={isAuthenticated} authToken={authToken} fetchPost={fetchPost} />
         }
         {loading && <LoadingPlaceholder view={'pageView'} text={'loading single project...'} />}
       </div>}

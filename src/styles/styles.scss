@@ -351,6 +351,22 @@ input[type="password"] {
   margin-top: 15px;
 }
 
+input[type="checkbox"] {
+  display: block;
+  margin: 15px 0 15px 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  transition: all 155ms ease-out;
+
+  @media(hover:hover) {
+    &:hover {
+      box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominant, 13%);
+    }
+  }
+}
+
 ////
 .error {
   text-align: left;

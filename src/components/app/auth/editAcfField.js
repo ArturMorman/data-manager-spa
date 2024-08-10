@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { CiEdit } from 'react-icons/ci'
 import { GrClose } from 'react-icons/gr'
 
-const EditACFField = ({ postId, fieldLabel, fieldKey, currentValue, authToken, isAuthenticated }) => {
+const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, isAuthenticated, fetchPost }) => {
   const [showPopup, setShowPopup] = useState(false)
   const [value, setValue] = useState(currentValue)
   const [message, setMessage] = useState('')
 
   const handleChange = (e) => {
-    setValue(e.target.value)
+    if (fieldType === 'true_false') {
+      setValue(e.target.checked)
+    } else {
+      setValue(e.target.value)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -32,12 +36,14 @@ const EditACFField = ({ postId, fieldLabel, fieldKey, currentValue, authToken, i
 
     if (response.ok) {
       setMessage('Field updated successfully!')
+      fetchPost()
     } else {
       setMessage(`Error: ${data.message}`)
     }
   }
 
-  // console.log(fieldKey)
+  console.log(fieldType)
+  console.log(value)
 
   return (
     <>
@@ -46,10 +52,36 @@ const EditACFField = ({ postId, fieldLabel, fieldKey, currentValue, authToken, i
           <button onClick={() => setShowPopup(false)} className={`closeEditor`}><GrClose size='1em' /></button>
           {isAuthenticated ?
             <form className={`edidAcfForm`} onSubmit={handleSubmit}>
-              <label>
-                <span><strong>New Value:</strong></span>
-                <input type="text" value={value} onChange={handleChange} />
-              </label>
+
+              {/* <label> */}
+
+              <span><strong>New Value:</strong></span>
+
+              {fieldType === 'true_false' ?
+                <input
+                  type="checkbox"
+                  value={!!value}
+                  checked={!!value}
+                  onChange={handleChange}
+                />
+                :
+                (fieldType === 'textarea') ?
+                  <textarea
+                    rows="5"
+                    cols="33"
+                    value={value}
+                    onChange={handleChange}
+                  />
+                  :
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={handleChange}
+                  />
+              }
+
+              {/* </label> */}
+
               <button type="submit">Update</button>
               <span><strong>{message}</strong></span>
             </form>

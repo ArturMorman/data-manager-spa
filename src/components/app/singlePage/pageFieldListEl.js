@@ -2,7 +2,7 @@ import React from 'react'
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import EditAcfField from '../auth/editAcfField'
 
-const PageFieldListEl = ({ field, isAuthenticated, postId, authToken }) => {
+const PageFieldListEl = ({ field, isAuthenticated, postId, authToken, fetchPost }) => {
   return (
     <>
       {field.type === "text" && field.value &&
@@ -11,11 +11,12 @@ const PageFieldListEl = ({ field, isAuthenticated, postId, authToken }) => {
           <span>{field.value}</span>
           <EditAcfField
             postId={postId}
-            fieldLabel={field.label}
             fieldKey={field.name}
+            fieldType={field.type}
             currentValue={field.value}
             authToken={authToken}
             isAuthenticated={isAuthenticated}
+            fetchPost={fetchPost}
           />
         </div>
       }
@@ -33,11 +34,12 @@ const PageFieldListEl = ({ field, isAuthenticated, postId, authToken }) => {
           </span>
           <EditAcfField
             postId={postId}
-            fieldLabel={field.label}
             fieldKey={field.name}
+            fieldType={field.type}
             currentValue={field.value}
             authToken={authToken}
             isAuthenticated={isAuthenticated}
+            fetchPost={fetchPost}
           />
         </div>
       }
