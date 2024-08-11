@@ -93,6 +93,7 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
                 <React.Fragment key={i} >
                   {post.parent !== 0 && <li
                     className={`listItem`}
+                    title={`Show Project: ${parse(post.title.rendered || '')}`}
                   >
                     <button
                       onClick={

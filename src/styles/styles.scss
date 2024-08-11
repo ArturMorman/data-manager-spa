@@ -369,6 +369,12 @@ input[type="checkbox"] {
 
 textarea {
   width: 100%;
+  margin-top: 15px;
+  border: 1px solid $dominant;
+  border-radius: 11px;
+  padding: 20px 10px;
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 ////
@@ -408,6 +414,13 @@ textarea {
   height: 100px;
   line-height: 0;
   position: relative;
+
+  @media(max-width:520px) {
+    width: 130px;
+    max-width: 130px;
+    min-width: 130px;
+    height: 65px;
+  }
 
   &:before {
     content: '';
@@ -903,8 +916,9 @@ button {
   position: relative;
   padding-top: 128px;
 
-  @media (max-width: 550px) {
-    padding-top: 217px;
+  @media (max-width: 520px) {
+    // padding-top: 217px;
+    padding-top: 168px;
   }
 
   .uiFixed {
@@ -921,8 +935,10 @@ button {
 
     display: flex;
 
-    @media (max-width: 550px) {
+    @media (max-width: 520px) {
       flex-direction: column;
+      align-items: flex-end;
+      padding: 12px 0 8px 0;
     }
 
 
@@ -950,8 +966,8 @@ button {
       align-items: flex-start;
       justify-content: flex-end;
 
-      @media (max-width: 550px) {
-        margin-top: 20px;
+      @media (max-width: 520px) {
+        margin-top: 10px;
         margin-bottom: 28px;
         // justify-content: space-between;
       }

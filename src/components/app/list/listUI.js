@@ -27,7 +27,9 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
                 (<span className={`desc`}>Start selecting categories, to find, what you're looking for</span>)
                 :
                 (<span className={`clearAllwrapp`}><button
+                  title="Clear Active Filters"
                   onClick={() => setActiveCategories([])}
+                  onKeyDown={(e) => e.key === 'Enter' && setActiveCategories([])}
                 >
                   Clear All
                 </button></span>)
@@ -40,6 +42,7 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
                     return (
                       <button
                         key={i}
+                        title={`Remove ${catObj['name']} from Active Filters`}
                         className={`selectedCatName ${i === 0 ? 'firstChild' : ''}`}
                         onClick={() => categoryHandle(cat, catObj['parent'], catObj['choice'], activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy)}
                         onKeyDown={(e) => e.key === 'Enter' && categoryHandle(cat, catObj['parent'], catObj['choice'], activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy)}

@@ -65,7 +65,7 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
               {categoriesTags.clientsTags(post).length > 0 &&
                 <div>
                   <h5>Client: <span>{categoriesTags.clientsTags(post)[0].name}</span></h5>
-                  <img title={`Client: ${post.clients[0]}`} className={`client`} alt="" src={icons[post.clients[0]]} />
+                  <img title={`Client: ${iconsMap[post.clients[0]]}`} className={`client`} alt="" src={icons[post.clients[0]]} />
                 </div>
               }
 
@@ -103,7 +103,9 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
                   <button
                     className={`tabButton ${key === activeTab ? 'active' : ''}`}
                     key={key}
+                    title={`Project Data Tab: ${key}`}
                     onClick={() => setActiveTab(key)}
+                    onKeyDown={(e) => e.key === 'Enter' && setActiveTab(key)}
                   >
                     {key}
                   </button>

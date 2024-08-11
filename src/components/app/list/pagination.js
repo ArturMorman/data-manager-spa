@@ -46,7 +46,9 @@ const Pagination = ({ bottom, page, perPage, setPage, setPerPage, allPages, perP
             <button
               className={`${el === perPage ? 'active' : ''}`}
               key={el}
+              title={`Display ${el} Posts per page`}
               onClick={() => setPerPage(el)}
+              onKeyDown={(e) => e.key === 'Enter' && setPerPage(el)}
             >
               {el}
             </button>

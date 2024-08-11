@@ -54,11 +54,16 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
     <>
       {showPopup ?
         <>
-          <button onClick={() => setShowPopup(false)} className={`closeEditor`}><GrClose size='1em' /></button>
+          <button
+            onClick={() => setShowPopup(false)}
+            onKeyDown={(e) => e.key === 'Enter' && setShowPopup(false)}
+            className={`closeEditor`}
+            title="Close Date Edit Section"
+          >
+            <GrClose size='1em' />
+          </button>
           {isAuthenticated ?
             <form className={`edidAcfForm`} onSubmit={handleSubmit}>
-
-              {/* <label> */}
 
               <span><strong>New Value:</strong></span>
 
@@ -73,7 +78,6 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
                 (fieldType === 'textarea') ?
                   <textarea
                     rows="18"
-                    // cols="39"
                     value={value}
                     onChange={handleChange}
                   />
@@ -85,9 +89,7 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
                   />
               }
 
-              {/* </label> */}
-
-              <button type="submit">Update</button>
+              <button title="Update Data Value" type="submit">Update</button>
               <span><strong>{message}</strong></span>
             </form>
             :
