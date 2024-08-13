@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import parse from 'html-react-parser'
+import DOMPurify from 'dompurify'
 import { CiEdit } from 'react-icons/ci'
 import { GrClose } from 'react-icons/gr'
 
@@ -19,11 +19,13 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const sanitizedValue = DOMPurify.sanitize(value, { ALLOWED_ATTR: ['href', 'src', 'title'] })
+
     const isTextArea = fieldType === 'textarea'
 
     const requestBody = isTextArea
-      ? { content: value }
-      : { post_id: postId, fields: { [fieldKey]: value } }
+      ? { content: sanitizedValue }
+      : { post_id: postId, fields: { [fieldKey]: sanitizedValue } }
 
     const targetRoute = isTextArea
       ? `https://morman.com.pl/data-manager-wp/wp-json/wp/v2/ProjectsData/${postId}`
