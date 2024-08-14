@@ -4,7 +4,7 @@ import './../styles/styles.scss'
 
 const Layout = ({ children }) => {
   return (
-    <main>{children}</main>
+    <>{children}</>
   )
 }
 export default Layout

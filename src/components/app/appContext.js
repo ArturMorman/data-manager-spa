@@ -40,7 +40,8 @@ const ListContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
-  const customLayouts = ['dark', 'sick']
+  // const customLayouts = ['dark', 'sick']
+  const customLayouts = ['dark']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [panel, setPanel] = usePersistState('showPanel', true)
@@ -199,7 +200,7 @@ const ListContext = () => {
 
       </div>
 
-      <footer className={`${panel ? 'listView' : 'postView'}`}>
+      <footer className={`${customLayout ? `${customLayout}Mode` : ''} ${panel ? 'listView' : 'postView'}`}>
         <div className={`container`}>
           <h5>Digital VooDoo</h5>
         </div>

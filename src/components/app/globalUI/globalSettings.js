@@ -25,10 +25,8 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout
         className={`globalMenu ${showSettings ? 'open' : 'closed'}`}
       >
 
-
-
-        {/* <div>
-          <strong>Layouts:</strong>
+        <div>
+          {/* <strong>Layouts:</strong> */}
           {customLayouts?.length > 0 && customLayouts.map(layout => {
             return (
               <button
@@ -37,13 +35,11 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout
                 onClick={() => setCustomLayout(customLayout !== layout ? layout : null)}
                 onKeyDown={(e) => e.key === 'Enter' && setCustomLayout(customLayout !== layout ? layout : null)}
               >
-                {layout} mode
+                {layout} mode {customLayout === layout ? 'off' : 'on'}
               </button>
             )
           })}
-        </div> */}
-
-
+        </div>
 
         <div className={`loginWrapper`}>
           {isAuthenticated ?

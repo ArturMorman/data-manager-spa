@@ -73,6 +73,12 @@ html {
   * {
     outline-style: none !important;
   }
+
+  transition: filter 555ms ease-in;
+
+  &:has(.darkMode) {
+    filter: invert(100%) hue-rotate(180deg);
+  }
 }
 
 body {
@@ -1033,7 +1039,7 @@ button {
         background-color: $fontContra;
         // background-color: rgba($glow, 33%);    // SICK MODE :-D
 
-        box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 8%);
+        box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 11%);
 
         >div {
           border-top: 2px solid $dominant;
@@ -1851,34 +1857,27 @@ button {
 
   }
 
+
+  &.darkMode {
+
+    .uiFixed {
+      .buttonsWrap {
+        .globalMenu {
+          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 24%);
+        }
+      }
+    }
+
+    // img.client,
+    // svg.technology,
+    img.language {
+      filter: invert(100%) hue-rotate(180deg);
+    }
+
+  }
+
 }
 
-// footer {
-//   &.postView {
-//     .container {
-//       width: 100%;
-//       max-width: 660px;
-//       padding: 0;
-//       margin: 0 auto;
-
-//       @media(max-width: 840px) {
-//         max-width: calc(100vw - 197px);
-//       }
-
-//       @media(max-width: 768px) {
-//         max-width: 660px;
-//       }
-
-//       @media(max-width: 708px) {
-//         max-width: calc(100vw - 32px);
-
-//         @media (hover: hover) {
-//           max-width: calc(100vw - 49px);
-//         }
-//       }
-//     }
-//   }
-// }
 
 @keyframes activateFilter {
   0% {
@@ -2134,3 +2133,7 @@ button {
   fill: $fontContra;
   transition: opacity 266ms ease, fill 303ms ease-out;
 }
+
+// html {
+//   filter: invert(100%) hue-rotate(180deg);
+// }
