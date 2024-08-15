@@ -59,13 +59,11 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
   }, [page, allPages])
 
 
-  ////  TEST, IF THIS NOT MAKING PROBLEMS:
   useEffect(() => {
     if (selectedObj === null && posts?.length > 0) {
       setSelectedObj(posts[0])
     }
   }, [posts, selectedObj])
-  ////
 
 
   const childrenWithProps = React.Children.map(children, child =>

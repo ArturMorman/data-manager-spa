@@ -65,9 +65,6 @@ const ListContext = () => {
   const [username, setUsername] = usePersistState('user', null)
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!authToken)
 
-  console.log('_ logged in: ', isAuthenticated, ' _')
-  console.log('_ username: ', username, ' _')
-
 
   const fetchPosts = useCallback(() => {
     setLoading(true);
@@ -118,10 +115,7 @@ const ListContext = () => {
 
 
 
-
-
   const handleLogin = (data) => {
-    console.log(data)
     setAuthToken(data?.token)
     setUsername(data.user_nicename)
     setIsAuthenticated(true)

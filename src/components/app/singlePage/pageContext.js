@@ -82,13 +82,6 @@ const PageContext = ({ post, icons, iconsMap, api, route, singlePostCustomEndpoi
   }, [currentPageID])
 
 
-
-  // useEffect(() => {
-  //   console.log('loading...')
-  // }, [currentPage])
-
-
-
   return (
     <>
       {!panel && <div className={`pageContext ${panel ? 'listView' : 'postView'}`}>

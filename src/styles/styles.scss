@@ -1,31 +1,61 @@
+// //// COLORS
+// $font: black;
+// $fontContra: white;
+
+// $shadow: #999999;
+
+// $fontDominant: #06D6A0;
+
+// $dominant: #06D6A0;
+// $dominantDark: #04966f;
+// $dominantUltra: #01533d;
+
+// $dominantRebel: fuchsia;
+
+// $dominantAccent: #3BCEAC;
+
+// $glow: #3BCEAC;
+
+// $glowUltra: #06D6A0;
+// $glowDark: #0c775c;
+
+// $inactive: grey;
+
+
 //// COLORS
 $font: black;
 $fontContra: white;
-$heading: black;
 
 $shadow: #999999;
 
-$button: white;
-$buttonBorder: #06D6A0;
+$fontDominant: rgb(40, 202, 187);
 
-$fontDominant: #06D6A0;
+$dominant: rgb(40, 202, 187);
+$dominantDark: rgb(22, 124, 138);
+$dominantUltra: rgb(46, 49, 120);
 
-$dominant: #06D6A0;
-$dominantDark: #04966f;
-$dominantUltra: #01533d;
+// $dominantRebel: fuchsia;
+$dominantRebel: rgb(221, 80, 234);
 
-$dominantRebel: fuchsia;
+// $dominantAccent: #3BCEAC;
+$dominantAccent: rgb(201, 92, 211);
 
-$dominantAccent: #3BCEAC;
+// $glow: #3BCEAC;
+$glow: rgb(45, 171, 209);
 
-$glow: #3BCEAC;
-
-$glowUltra: #06D6A0;
-$glowDark: #0c775c;
+// $glowUltra: #06D6A0;
+$glowUltra: rgb(15, 74, 133);
+$glowDark: rgb(13, 28, 59);
 
 $inactive: grey;
 
 
+
+
+//////////////////////////
+//////////////////////////
+// $heading: black;
+$heading: darken($dominant, 23%);
 
 //// FONTS
 @font-face {
@@ -78,6 +108,23 @@ html {
 
   &:has(.darkMode) {
     filter: invert(100%) hue-rotate(180deg);
+  }
+
+  &:has(.listView) {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: darken($glow, 33%) !important;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      border: 1px solid $glow;
+    }
   }
 }
 
@@ -435,7 +482,7 @@ textarea {
     left: -50%;
     height: 7px;
     width: 200%;
-    background-color: rgba(white, 0);
+    background-color: rgba($fontContra, 0);
     z-index: -1;
     border-radius: 50%;
     transition: 300ms ease;
@@ -450,7 +497,7 @@ textarea {
     &:before {
       // box-shadow: 0 0 23px 1px rgba($dominant, 22%);
       box-shadow: 0 0 23px 1px rgba($dominantRebel, 22%);
-      background-color: rgba(white, 1);
+      background-color: rgba($fontContra, 1);
     }
 
     // .dvText {
@@ -468,7 +515,7 @@ textarea {
 
     &:before {
       box-shadow: 0 0 23px 1px rgba($glow, 33%);
-      background-color: rgba(white, 1);
+      background-color: rgba($fontContra, 1);
     }
 
     .dvText {
@@ -534,7 +581,7 @@ button,
 }
 
 button {
-  background-color: $button;
+  background-color: $fontContra;
   border-radius: 15px;
   padding: 10px;
 }
@@ -857,7 +904,7 @@ button {
 //  SWITCH
 .listViewSwitch {
   transition: all 188ms ease-out;
-  background-color: $button;
+  background-color: $fontContra;
   font-size: 15px;
   text-transform: uppercase;
   line-height: 36px;
@@ -936,7 +983,7 @@ button {
     max-width: 1420px;
     padding: 12px 0;
 
-    background-color: white;
+    background-color: $fontContra;
     border-bottom: 4px solid $glow;
 
     display: flex;
@@ -1001,19 +1048,7 @@ button {
             transform: rotate(0deg);
           }
         }
-
-        @media (hover: hover) {
-          &:hover {
-            background-color: rgba($glow, 77%);
-            color: $fontContra;
-
-            .arrow {
-              fill: $fontContra;
-            }
-          }
-        }
       }
-
 
 
       .globalMenu {
@@ -1095,7 +1130,7 @@ button {
 
           @media (hover: hover) {
             &:hover {
-              background-color: $fontContra;
+              background-color: $fontContra !important;
               color: $font;
             }
           }
@@ -1118,6 +1153,50 @@ button {
     }
 
     &.listView {
+
+      .buttonsWrap {
+        .globalMenu {
+          border: 2px solid $glow;
+
+          &.open {
+            &:before {
+              border-bottom: 3px solid rgba($glow, 77%);
+            }
+          }
+
+          >div {
+            border-top: 2px solid $glow;
+
+            &:first-child {
+              border-top: none;
+            }
+          }
+
+          button {
+            border: 2px solid $glow;
+            background-color: $glow;
+          }
+
+          .loginWrapper {
+            .dvDoll {
+              fill: $glow;
+            }
+          }
+        }
+      }
+
+      .globalMenuSwitch {
+        @media (hover: hover) {
+          &:hover {
+            background-color: rgba($glow, 77%);
+            color: $fontContra;
+
+            .arrow {
+              fill: $fontContra;
+            }
+          }
+        }
+      }
 
       .globalMenuSwitch,
       .listViewSwitch {
@@ -1155,6 +1234,27 @@ button {
 
         @media (hover: hover) {
           max-width: calc(100vw - 49px);
+        }
+      }
+
+      .globalMenuSwitch {
+        @media (hover: hover) {
+          &:hover {
+            background-color: rgba($dominant, 77%);
+            color: $fontContra;
+
+            .arrow {
+              fill: $fontContra;
+            }
+          }
+        }
+      }
+
+      .listViewSwitch {
+        @media (hover: hover) {
+          &:hover {
+            background-color: rgba($dominant, 77%);
+          }
         }
       }
 
@@ -1418,20 +1518,20 @@ button {
       background-image: linear-gradient(to bottom right, rgba($dominantDark, 0%), rgba($dominantDark, 0%), rgba($dominantDark, 4%), rgba($dominant, 23%));
     }
 
-    box-shadow: 66px 99px 88px 13px rgba(white, 100%) inset,
-    188px 111px 166px 1px rgba(white, 66%) inset;
+    box-shadow: 66px 99px 88px 13px rgba($fontContra, 100%) inset,
+    188px 111px 166px 1px rgba($fontContra, 66%) inset;
 
 
     ////      !! REVERSE LIST VIEW COLORS !!
     &.listView {
-      box-shadow: 188px 166px 99px 33px rgba(white, 100%) inset,
-        488px 366px 166px 3px rgba(white, 77%) inset;
+      box-shadow: 188px 166px 99px 33px rgba($fontContra, 100%) inset,
+        488px 366px 166px 3px rgba($fontContra, 77%) inset;
 
       background-image: linear-gradient(to bottom right, rgba($glow, 0%), rgba($glow, 3%), rgba($dominantDark, 6%), rgba($glow, 23%));
 
       @media(max-width: 500px) {
-        box-shadow: 113px 188px 88px 13px rgba(white, 100%) inset,
-          333px 288px 166px 1px rgba(white, 77%) inset;
+        box-shadow: 113px 188px 88px 13px rgba($fontContra, 100%) inset,
+          333px 288px 166px 1px rgba($fontContra, 77%) inset;
 
         background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 3%), rgba($dominantDark, 9%), rgba($glow, 44%));
       }
@@ -2052,7 +2152,7 @@ button {
 
     @media(hover:hover) {
       &:hover {
-        background-color: white;
+        background-color: $fontContra;
         color: $glow;
 
         .remove {

@@ -5,7 +5,6 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
   const [errorStatus, setErrorStatus] = useState(null)
   const [response, setResponse] = useState(null)
-  // const [loadingTaxonomies, setloadingTaxonomies] = useState(false)
   const [loadingTaxonomies, setloadingTaxonomies] = useState(true)
   const [loadingTaxonomiesDone, setLoadingTaxonomiesDone] = useState(false)
 

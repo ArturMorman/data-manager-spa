@@ -7,8 +7,6 @@ const Login = ({ onLogin, wpSiteUrl }) => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
-  console.log(`${wpSiteUrl}/wp-json/jwt-auth/v1/token`)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
