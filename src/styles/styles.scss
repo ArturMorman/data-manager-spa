@@ -1,4 +1,4 @@
-// //// COLORS
+// // //// COLORS
 // $font: black;
 // $fontContra: white;
 
@@ -15,6 +15,32 @@
 // $dominantAccent: #3BCEAC;
 
 // $glow: #3BCEAC;
+
+// $glowUltra: #06D6A0;
+// $glowDark: #0c775c;
+
+// $inactive: grey;
+
+
+// //// COLORS
+// $font: black;
+// $fontContra: white;
+
+// $shadow: #999999;
+
+// $fontDominant: #06D6A0;
+
+// $dominant: #06D6A0;
+// $dominantDark: #04966f;
+// $dominantUltra: #01533d;
+
+// // $dominantRebel: fuchsia;
+// // $dominantRebel: rgb(45, 171, 209);
+// $dominantRebel: rgb(221, 80, 234);
+
+// $dominantAccent: #3BCEAC;
+
+// $glow: #06D6A0;
 
 // $glowUltra: #06D6A0;
 // $glowDark: #0c775c;
@@ -1070,7 +1096,7 @@ button {
 
         text-align: center;
 
-        border: 2px solid $dominant;
+        // border: 2px solid $dominant;
         background-color: $fontContra;
         // background-color: rgba($glow, 33%);    // SICK MODE :-D
 
@@ -1156,7 +1182,7 @@ button {
 
       .buttonsWrap {
         .globalMenu {
-          border: 2px solid $glow;
+          // border: 2px solid $glow;
 
           &.open {
             &:before {
@@ -1520,6 +1546,28 @@ button {
 
     box-shadow: 66px 99px 88px 13px rgba($fontContra, 100%) inset,
     188px 111px 166px 1px rgba($fontContra, 66%) inset;
+
+
+
+
+    /////////////////////////////////
+    /////////////////////////////////
+    /////////////////////////////////
+    position:relative;
+
+    &::before {
+      content: '';
+      background-image: linear-gradient(to bottom right, rgba($fontContra, 100%), rgba($fontContra, 77%), rgba($dominantDark, 0%), rgba($dominant, 0%));
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    //////////////////////////////////
+    //////////////////////////////////
+    //////////////////////////////////
 
 
     ////      !! REVERSE LIST VIEW COLORS !!
