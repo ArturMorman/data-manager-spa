@@ -40,8 +40,7 @@ const ListContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
-  // const customLayouts = ['dark', 'sick']
-  const customLayouts = ['dark']
+  const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [panel, setPanel] = usePersistState('showPanel', true)

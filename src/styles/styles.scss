@@ -130,10 +130,26 @@ html {
     outline-style: none !important;
   }
 
-  transition: filter 555ms ease-in;
+  transition: filter 532ms ease-in;
 
   &:has(.darkMode) {
-    filter: invert(100%) hue-rotate(180deg);
+
+    // filter: invert(100%) hue-rotate(180deg);
+    filter: invert(100%) hue-rotate(180deg) contrast(95%);
+    // filter: sepia(0.9) invert(100%) hue-rotate(180deg) contrast(90%);
+
+    // filter: contrast(200%);
+    // filter: blur(1px);
+  }
+
+  &:has(.night-huntMode) {
+    filter: invert(100%) hue-rotate(110deg) contrast(95%);
+  }
+
+  &:has(.salty-pistachioMode) {
+    // filter: invert(100%) grayscale(66%) sepia(100%) hue-rotate(290deg) contrast(120%);
+    // filter: sepia(33%) hue-rotate(285deg) contrast(95%);
+    filter: hue-rotate(290deg) contrast(105%);
   }
 
   &:has(.listView) {
@@ -1161,6 +1177,17 @@ button {
             }
           }
 
+          &.layoutSwitch {
+            font-size: 15px;
+            line-height: 18px;
+            padding: 4px;
+            margin: 12px 0;
+
+            &.active {
+              border: 2px solid $dominantRebel;
+            }
+          }
+
         }
 
         .loginWrapper {
@@ -1589,14 +1616,14 @@ button {
     transition: background-color 4333ms ease-out;
 
     &.backgroundChange {
-      background-color: rgba($dominantRebel, 23%);
+      background-color: rgba($dominantRebel, 33%);
 
       ////      !! REVERSE LIST VIEW COLORS !!
       &.listView {
-        background-color: rgba($dominantRebel, 22%);
+        background-color: rgba($dominantRebel, 32%);
 
         @media(max-width: 500px) {
-          background-color: rgba($dominantRebel, 34%);
+          background-color: rgba($dominantRebel, 44%);
         }
       }
     }
@@ -2011,7 +2038,7 @@ button {
     .uiFixed {
       .buttonsWrap {
         .globalMenu {
-          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 24%);
+          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 28%);
         }
       }
     }
@@ -2020,6 +2047,42 @@ button {
     // svg.technology,
     img.language {
       filter: invert(100%) hue-rotate(180deg);
+    }
+
+  }
+
+  &.night-huntMode {
+
+    .uiFixed {
+      .buttonsWrap {
+        .globalMenu {
+          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 33%);
+        }
+      }
+    }
+
+    // img.client,
+    // svg.technology,
+    img.language {
+      filter: invert(100%) hue-rotate(250deg) contrast(105%);
+    }
+
+  }
+
+  &.salty-pistachioMode {
+
+    .uiFixed {
+      .buttonsWrap {
+        .globalMenu {
+          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 33%);
+        }
+      }
+    }
+
+    // img.client,
+    // svg.technology,
+    img.language {
+      filter: hue-rotate(70deg);
     }
 
   }
@@ -2281,7 +2344,3 @@ button {
   fill: $fontContra;
   transition: opacity 266ms ease, fill 303ms ease-out;
 }
-
-// html {
-//   filter: invert(100%) hue-rotate(180deg);
-// }
