@@ -40,7 +40,8 @@ const ListContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
-  const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
+  // const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
+  const customLayouts = ['salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [showSidebar, setShowSidebar] = usePersistState('sidebar', true)
