@@ -56,14 +56,14 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
     if (page > allPages) {
       setPage(allPages)
     }
-  }, [page, allPages])
+  }, [allPages])
 
 
   useEffect(() => {
     if (selectedObj === null && posts?.length > 0) {
       setSelectedObj(posts[0])
     }
-  }, [posts, selectedObj])
+  }, [posts])
 
 
   const childrenWithProps = React.Children.map(children, child =>
@@ -75,6 +75,7 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
     }),
   )
 
+  console.log('--- - - LIST VIEW - - ---')
 
   return (
     <>

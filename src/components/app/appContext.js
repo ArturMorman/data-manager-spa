@@ -43,6 +43,8 @@ const ListContext = () => {
   const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
+  const [showSidebar, setShowSidebar] = usePersistState('sidebar', true)
+
   const [panel, setPanel] = usePersistState('showPanel', true)
   const [panelChanged, setPanelChanged] = useState(false)
   const [page, setPage] = useState(1)
@@ -93,6 +95,17 @@ const ListContext = () => {
     fetchPosts()
   }, [])
 
+  const handleLogin = (data) => {
+    setAuthToken(data?.token)
+    setUsername(data.user_nicename)
+    setIsAuthenticated(true)
+  }
+
+  const handleLogout = () => {
+    setAuthToken(null)
+    setIsAuthenticated(false)
+  }
+
 
   useEffect(() => {
     if (!response) return
@@ -113,17 +126,11 @@ const ListContext = () => {
   }, [panel])
 
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [showSidebar])
 
-  const handleLogin = (data) => {
-    setAuthToken(data?.token)
-    setUsername(data.user_nicename)
-    setIsAuthenticated(true)
-  }
 
-  const handleLogout = () => {
-    setAuthToken(null)
-    setIsAuthenticated(false)
-  }
 
 
   // console.log(window.matchMedia('(prefers-color-scheme: dark)'))
@@ -147,7 +154,7 @@ const ListContext = () => {
           username={username}
         />
 
-        <div className={`theList ${panel ? 'listView' : 'postView'}`}>
+        <div className={`${showSidebar ? 'theList' : ''} ${panel ? 'listView' : 'postView'}`}>
 
           {existingTaxIds.length > 0 ?
             <ListController
@@ -163,6 +170,8 @@ const ListContext = () => {
                 panel={panel}
                 setPanel={setPanel}
                 panelChanged={panelChanged}
+                showSidebar={showSidebar}
+                setShowSidebar={setShowSidebar}
               />
               <ListView
                 panel={panel}

@@ -4,15 +4,36 @@ import categoryHandle from '../../../functions/categoryHandle'
 import ListFilters from './listFilters'
 import LoadingPlaceholder from '../loadingPlaceholder'
 import SvgDisplayWrapper from '../digitProcessor/svgDisplayWrapper'
+import { GrSidebar } from 'react-icons/gr'
 
-const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged }) => {
+
+const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, activeCategories, setActiveCategories, activeTaxonomy, setActiveTaxonomy, taxIdsFiltered, listState, somethingSelected, panelChanged, showSidebar, setShowSidebar }) => {
 
   const categoriesTags = categoriesTagsFunction(categories)
 
   return (
     <>
       {panel &&
-        <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''}`} >
+        <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''} ${showSidebar ? 'showSidebar' : ''}`} >
+
+
+
+          {/* {(loadingTaxonomies || loadingTaxonomiesDone) &&
+            <LoadingPlaceholder
+              view={`listView listUi ${loadingTaxonomiesDone ? 'loadingDone' : ''}`}
+              text={
+                loadingTaxonomies ?
+                  // 'loading categories...'
+                  'loading...'
+                  :
+                  // 'categories loaded, have fun'
+                  'categories loaded'
+              }
+            />
+          } */}
+
+
+
           {(listState.count || listState.count === 0) ?
             <div className={`count ${listState.postsFilteredOut === 0 ? 'infinity' : ''}`}>
               <SvgDisplayWrapper value={listState.count} />
@@ -22,6 +43,17 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
                   <span>Projects total</span> :
                   <span>Projects matches criteria</span>
               }
+
+
+              <div className={`sidebarSwitchWrap`}>
+                <button
+                  className={`sidebarSwitch ${showSidebar ? 'show' : 'hide'}`}
+                  onClick={() => setShowSidebar(!showSidebar)}
+                >
+                  <GrSidebar size=".85em" />
+                </button>
+              </div>
+
 
               {listState.postsFilteredOut === 0 ?
                 (<span className={`desc`}>Start selecting categories, to find, what you're looking for</span>)
@@ -62,7 +94,9 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
             </div>
           }
 
-          {(loadingTaxonomies || loadingTaxonomiesDone) &&
+
+
+          {/* {(loadingTaxonomies || loadingTaxonomiesDone) &&
             <LoadingPlaceholder
               view={`listView listUi ${loadingTaxonomiesDone ? 'loadingDone' : ''}`}
               text={
@@ -72,7 +106,9 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
                   'categories loaded, have fun'
               }
             />
-          }
+          } */}
+
+
 
           <ListFilters
             categories={categories}
@@ -81,6 +117,7 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
             activeCategories={activeCategories}
             setActiveCategories={setActiveCategories}
             taxIdsFiltered={taxIdsFiltered}
+            showSidebar={showSidebar}
           />
 
         </div>

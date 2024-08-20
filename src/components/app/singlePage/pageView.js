@@ -3,7 +3,7 @@ import categoriesTagsFunction from '../../../functions/categoriesTags'
 import parse from 'html-react-parser'
 import PageTab from './pageTab'
 import PageFieldListEl from './pageFieldListEl'
-import SvgDisplayWrapper from '../digitProcessor/svgDisplayWrapper'
+import SvgDisplayWrapper from '../digitProcessor/svgDisplay'
 import ProductIcon from '../common/productIcon'
 import LanguageIcon from '../common/languageIcon'
 import TechnologyIcon from '../common/technologyIcon'
@@ -18,6 +18,16 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
   const monthAndDay = date.slice(post.date.indexOf('-') + 1)
   const month = monthAndDay.slice(0, monthAndDay.indexOf('-'))
   const day = monthAndDay.slice(monthAndDay.indexOf('-') + 1)
+
+
+  // const dateMod = post.modified.slice(0, post.modified.indexOf('T'))
+  // const yearMod = dateMod.slice(0, post.modified.indexOf('-'))
+  // const monthAndDayMod = dateMod.slice(post.modified.indexOf('-') + 1)
+  // const monthMod = monthAndDayMod.slice(0, monthAndDayMod.indexOf('-'))
+  // const dayMod = monthAndDayMod.slice(monthAndDayMod.indexOf('-') + 1)
+
+  const [modified, setModified] = useState(null)
+
 
   const [activeTab, setActiveTab] = useState(null)
   const [tabChange, setTabChange] = useState(false)
@@ -37,7 +47,8 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
     if (tabKeys.length > 0 && !activeTab) {
       setActiveTab(tabKeys[0])
     }
-  }, [tabKeys, activeTab])
+  }, [tabKeys])
+
 
   useEffect(() => {
     setTabChange(true)
@@ -46,6 +57,21 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
     }, 999)
     return () => clearTimeout(timeout)
   }, [activeTab])
+
+
+  useEffect(() => {
+
+    // console.log('_ SET MODIFIED _')
+    // console.log(post)
+
+    post?.modified && setModified({
+      year: post.modified.slice(0, post.modified.indexOf('T')).slice(0, post.modified.indexOf('-')),
+
+      month: post.modified.slice(0, post.modified.indexOf('T')).slice(post.modified.indexOf('-') + 1).slice(0, post.modified.slice(0, post.modified.indexOf('T')).slice(post.modified.indexOf('-') + 1).indexOf('-')),
+
+      day: post.modified.slice(0, post.modified.indexOf('T')).slice(post.modified.indexOf('-') + 1).slice(post.modified.slice(0, post.modified.indexOf('T')).slice(post.modified.indexOf('-') + 1).indexOf('-') + 1)
+    })
+  }, [post])
 
 
   return (
@@ -138,8 +164,15 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
           </section>
 
           <section>
-            <div className={'date'} style={{ fontSize: '13px' }}>
-              Record created: <SvgDisplayWrapper value={year} /><SvgDisplayWrapper value={month} symbNum={2} /><SvgDisplayWrapper value={day} symbNum={2} />
+            <div className={'date'}>
+              <div>
+                Record created: <SvgDisplayWrapper value={year} /><SvgDisplayWrapper value={month} symbNum={2} /><SvgDisplayWrapper value={day} symbNum={2} />
+              </div>
+            </div>
+            <div className={'date'}>
+              {modified && <div>
+                Last modified: <SvgDisplayWrapper value={modified.year} /><SvgDisplayWrapper value={modified.month} symbNum={2} /><SvgDisplayWrapper value={modified.day} symbNum={2} />
+              </div>}
             </div>
           </section>
 

@@ -26,7 +26,6 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout
       >
 
         <div>
-          {/* <strong>Layouts:</strong> */}
           {customLayouts?.length > 0 && customLayouts.map(layout => {
             return (
               <button
@@ -35,7 +34,7 @@ const GlobalSettings = ({ customLayouts, customLayout, setCustomLayout, onLogout
                 onClick={() => setCustomLayout(customLayout !== layout ? layout : null)}
                 onKeyDown={(e) => e.key === 'Enter' && setCustomLayout(customLayout !== layout ? layout : null)}
               >
-                {layout} mode {customLayout === layout ? 'off' : 'on'}
+                {layout} mode {customLayout === layout ? 'on' : 'off'}
               </button>
             )
           })}

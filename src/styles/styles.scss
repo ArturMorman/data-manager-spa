@@ -408,7 +408,9 @@ body {
   padding-left: 16px;
   padding-right: 16px;
 
-  overflow-x: hidden;
+
+  // overflow-x: hidden;              ///////////////       ! ! ! ! ! !
+
 
   @media screen and (min-width: 769px) {
     width: 100%;
@@ -417,6 +419,18 @@ body {
     padding-right: 90px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  &.listView {
+    @media screen and (min-width: 961px) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    @media screen and (min-width: 1281px) {
+      padding-left: 90px;
+      padding-right: 90px;
+    }
   }
 }
 
@@ -604,12 +618,16 @@ textarea {
 
 .panel {
   .loadingPlaceholder {
-    min-height: 80px;
+    // min-height: 80px;
+    min-height: 50px;
     flex-direction: row;
-    overflow: hidden;
+    // overflow: hidden;
+
+    position: relative;
+    z-index: 1000;
 
     &.loadingDone {
-      animation: hidePlaceholder 5555ms linear forwards;
+      animation: hidePlaceholder 5320ms linear forwards;
     }
   }
 }
@@ -893,7 +911,8 @@ button {
           color: $inactive;
 
           &:not(.active) {
-            transform: translateX(-400px);
+            // transform: translateX(-400px);
+            transform: translateX(-600px);
             opacity: 0.33;
           }
 
@@ -1041,6 +1060,14 @@ button {
       max-width: calc(100vw - 197px);
     }
 
+    @media (max-width: 1280px) {
+      max-width: calc(100vw - 77px);
+    }
+
+    @media (max-width: 960px) {
+      max-width: calc(100vw - 197px);
+    }
+
     @media (max-width: 768px) {
       max-width: calc(100vw - 32px);
 
@@ -1183,8 +1210,11 @@ button {
             padding: 4px;
             margin: 12px 0;
 
+            transition: all 235ms ease;
+
             &.active {
               border: 2px solid $dominantRebel;
+              background-color: $dominantRebel;
             }
           }
 
@@ -1272,6 +1302,7 @@ button {
 
     &.postView {
       max-width: 660px;
+      // max-width: 760px;
       border-bottom: 4px solid $dominant;
 
       @media(max-width: 840px) {
@@ -1280,6 +1311,7 @@ button {
 
       @media(max-width: 768px) {
         max-width: 660px;
+        // max-width: 760px;
       }
 
       @media(max-width: 708px) {
@@ -1326,25 +1358,59 @@ button {
 
 
 
-  // .theList {
-  //   &.listView {
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  //// TURNS THE LIST VIEW IN SIDEBAR + LIST ! ////
 
-  //     @media(min-width: 1280px) {
-  //       display: flex;
 
-  //       >div:first-child {
-  //         min-width: 320px;
-  //         max-width: 320px;
-  //         // flex-basis: 30%;
+  .theList {
+    &.listView {
 
-  //         .filtersWrapper {
-  //           flex-direction: column;
-  //         }
-  //       }
-  //     }
+      @media(min-width: 980px) {
+        display: flex;
 
-  //   }
-  // }
+        .count {
+          position: sticky;
+          top: 128px;
+
+          font-size: 18px;
+
+          .desc {
+            font-size: 18px;
+          }
+
+          .svgDisplay {
+            .xDigits {
+              .digit {
+                width: 15px;
+              }
+            }
+          }
+        }
+
+        >div:first-child {
+          min-width: 300px;
+          max-width: 300px;
+          flex-basis: 30%;
+
+          .filtersWrapper {
+            flex-direction: column;
+          }
+        }
+      }
+
+    }
+  }
+
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+
 
 
   .fixedList {
@@ -1457,6 +1523,7 @@ button {
     margin: 20px 0;
     padding-top: 20px;
     padding-bottom: 20px;
+    padding-left: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -1580,17 +1647,17 @@ button {
     /////////////////////////////////
     /////////////////////////////////
     /////////////////////////////////
-    position:relative;
+    // position:relative;
 
-    &::before {
-      content: '';
-      background-image: linear-gradient(to bottom right, rgba($fontContra, 100%), rgba($fontContra, 77%), rgba($dominantDark, 0%), rgba($dominant, 0%));
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
+    // &::before {
+    //   content: '';
+    //   background-image: linear-gradient(to bottom right, rgba($fontContra, 100%), rgba($fontContra, 77%), rgba($dominantDark, 0%), rgba($dominant, 0%));
+    //   position: absolute;
+    //   top: 10px;
+    //   width: 130%;
+    //   height: 100%;
+    //   border-radius: 50%;
+    // }
 
     //////////////////////////////////
     //////////////////////////////////
@@ -1633,10 +1700,28 @@ button {
     animation: changable 366ms ease-out;
   }
 
+
+
+  .animatedBackground.listView.showSidebar {
+    height: min-content;
+
+    .filtersWrapper {
+      @media(min-width: 961px) {
+        box-shadow: 113px 188px 88px 13px rgba($fontContra, 100%) inset,
+          333px 288px 166px 1px rgba($fontContra, 77%) inset;
+
+        background-image: linear-gradient(101deg, rgba($dominantDark, 0%), rgba($glow, 3%), rgba($dominantDark, 9%), rgba($glow, 55%));
+      }
+    }
+  }
+
+
+
   // SINGLE PROJECT VIEW:
   .pageContext {
     width: 100%;
     max-width: 660px;
+    // max-width: 760px;
     min-height: 400px;
 
     section {
@@ -2001,22 +2086,33 @@ button {
     }
 
     .date {
-      display: flex;
       background-color: rgba($dominant, 23%);
-      padding: 5px 10px;
-      border-radius: 0 0 9px 9px;
-      margin-bottom: 30px;
 
-      .svgDisplay {
-        transform: scale(0.66);
-        margin-left: -10px;
+      &:last-child {
+        border-radius: 0 0 9px 9px;
+        margin-bottom: 30px;
+      }
 
-        &.twoDigits {
-          margin-left: -18px;
-        }
+      >div {
+        font-size: 14px;
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 10px;
 
-        .xDigits {
-          min-width: unset;
+        width: 100%;
+        max-width: 260px;
+
+        .svgDisplay {
+          transform: scale(0.66);
+          margin-left: -10px;
+
+          &.twoDigits {
+            margin-left: -18px;
+          }
+
+          .xDigits {
+            min-width: unset;
+          }
         }
       }
     }
@@ -2187,7 +2283,8 @@ button {
 
   77% {
     color: rgba($glowDark, 23%);
-    min-height: 80px;
+    // min-height: 80px;
+    min-height: 50px;
   }
 
   100% {
@@ -2214,11 +2311,15 @@ button {
   font-weight: bold;
   // border-radius: 0 9px 0 9px;
   border-radius: 0 0 9px 9px;
-  padding: 9px 6px;
+
+  // padding: 9px 6px;
+  padding: 9px 10px;
+
   position: relative;
   z-index: 100;
   margin-bottom: 20px;
-  min-height: 158px;
+  // min-height: 158px;
+  min-height: 208px;
   flex-wrap: wrap;
 
   span.clearAllwrapp,
@@ -2250,16 +2351,25 @@ button {
     font-size: 18px;
     line-height: 30px;
     padding: 0 13px;
-    margin: 5px;
+
+
+
+    // margin: 5px;
+
+    // &.firstChild {
+    //   margin-left: 0px;
+    // }
+
+    margin: 4px 8px 4px 0;
+
+
+
     border-radius: 15px;
     border: 1px solid rgba($fontContra, 66%);
     background-color: transparent;
     transition: all 123ms ease;
     color: $fontContra;
 
-    &.firstChild {
-      margin-left: 0px;
-    }
 
     @media(hover:hover) {
       &:hover {
@@ -2343,4 +2453,40 @@ button {
 .digitSvg g {
   fill: $fontContra;
   transition: opacity 266ms ease, fill 303ms ease-out;
+}
+
+
+.sidebarSwitchWrap {
+  margin-top: 10px;
+  width: 100%;
+
+  .sidebarSwitch {
+    background-color: $glow;
+    color: $fontContra;
+    border: 1px solid $fontContra;
+    transition: all 199ms ease;
+
+    svg {
+      transition: all 358ms ease;
+    }
+
+    &.show {
+      svg {
+        transform: rotate(180deg) scaleY(0.8);
+      }
+    }
+
+    &.hide {
+      svg {
+        transform: rotate(270deg) scaleX(0.8);
+      }
+    }
+
+    @media(hover:hover) {
+      &:hover {
+        background-color: $fontContra;
+        color: $glow;
+      }
+    }
+  }
 }
