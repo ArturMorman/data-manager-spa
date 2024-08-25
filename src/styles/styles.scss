@@ -132,7 +132,12 @@ html {
 
   transition: filter 532ms ease-in;
 
+
+
+  background-color: $fontContra;
+
   &:has(.darkMode) {
+
 
     // filter: invert(100%) hue-rotate(180deg);
     filter: invert(100%) hue-rotate(180deg) contrast(95%);
@@ -2489,4 +2494,8 @@ button {
       }
     }
   }
+}
+
+footer {
+  padding-bottom: 20px;
 }

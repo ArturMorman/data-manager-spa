@@ -9,7 +9,7 @@ import { usePersistState } from '../../hooks/usePersistState'
 import { useStaticQuery, graphql } from "gatsby"
 
 
-const ListContext = () => {
+const AppContext = () => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -40,8 +40,8 @@ const ListContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
-  // const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
-  const customLayouts = ['salty-pistachio']
+  const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
+  // const customLayouts = ['salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [showSidebar, setShowSidebar] = usePersistState('sidebar', true)
@@ -211,4 +211,4 @@ const ListContext = () => {
     </>
   )
 }
-export default ListContext
+export default AppContext
