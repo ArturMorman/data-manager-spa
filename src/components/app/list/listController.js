@@ -204,7 +204,6 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
     }),
   )
 
-  console.log('--- LIST CONTROLLER ---')
 
   return (
     <>

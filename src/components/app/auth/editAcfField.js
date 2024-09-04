@@ -46,7 +46,8 @@ const EditACFField = ({ postId, fieldKey, fieldType, currentValue, authToken, is
 
     if (response.ok) {
       setMessage('Field updated successfully!')
-      setTimeout(() => fetchPost(), 1000)
+      // setTimeout(() => fetchPost(), 1000)
+      fetchPost()
     } else {
       setMessage(`Error: ${data.message}`)
     }

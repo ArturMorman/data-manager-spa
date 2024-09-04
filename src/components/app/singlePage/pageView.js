@@ -97,8 +97,31 @@ const PageView = ({ post, icons, iconsMap, categories, isAuthenticated, authToke
 
               {categoriesTags.languagesTags(post).length > 0 &&
                 <div>
-                  <h5>Project language: <span>{categoriesTags.languagesTags(post)[0].name}</span></h5>
-                  <LanguageIcon language={iconsMap[post.languages[0]]} />
+
+                  <h5>Project language: <span>
+                    {categoriesTags.languagesTags(post).map((el, i) => {
+                      return (
+                        <React.Fragment
+                          key={i}
+                        >
+                          {categoriesTags.languagesTags(post).length - 1 === i ? el.name : `${el.name}, `}
+                        </React.Fragment>
+                      )
+                    })}
+                  </span></h5>
+
+                  <span className={`languageIcons`}>
+                    {post.languages?.map(el => {
+                      return (
+                        <LanguageIcon
+                          key={el}
+                          language={iconsMap[el]}
+                        />
+                      )
+                    })}
+                  </span>
+
+
                 </div>
               }
 

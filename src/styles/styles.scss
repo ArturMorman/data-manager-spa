@@ -1093,9 +1093,13 @@ button {
       align-items: flex-start;
       justify-content: flex-end;
 
+      flex-wrap: wrap;
+      align-content: space-between;
+
       @media (max-width: 520px) {
         margin-top: 10px;
-        margin-bottom: 28px;
+        // margin-bottom: 28px;
+        margin-bottom: 4px;
         // justify-content: space-between;
       }
 
@@ -1144,7 +1148,7 @@ button {
 
         text-align: center;
 
-        // border: 2px solid $dominant;
+        border: 2px solid $dominant;
         background-color: $fontContra;
         // background-color: rgba($glow, 33%);    // SICK MODE :-D
 
@@ -1238,15 +1242,144 @@ button {
         }
 
       }
+
+      .lastVisited {
+        width: 268px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 14px;
+        margin-top: 22px;
+        border-radius: 12px;
+        border: 2px solid $dominant;
+        color: $dominant;
+        transition: all 244ms ease-out, color 199ms ease;
+
+        button.lastVisitedDropdown {
+          width: 264px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          font-size: 18px;
+          color: $dominant;
+          padding: 0 8px;
+          background-color: transparent;
+
+          span {
+            line-height: 22px;
+            margin-right: 8px;
+          }
+
+          .arrow {
+            color: $dominant;
+            transform: rotate(180deg);
+            transition: transform 244ms ease-out, color 199ms ease;
+          }
+        }
+
+        @media (hover:hover) {
+          &:hover {
+            background-color: $dominant;
+
+            button.lastVisitedDropdown {
+              color: $fontContra;
+
+              .arrow {
+                color: $fontContra;
+              }
+            }
+          }
+        }
+
+        position: relative;
+
+        ul.lastVisitedList {
+          overflow: hidden;
+          position: absolute;
+          top: 29px;
+          right: -2px;
+          z-index: 700;
+          width: 268px;
+          border-radius: 0 0 15px 15px;
+          padding: 0 10px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column-reverse;
+          text-align: center;
+          height: 0;
+          border: 0px solid $dominant;
+          background-color: $fontContra;
+          // background-color: rgba($glow, 33%);    // SICK MODE :-D
+
+          box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 11%);
+          transition: all 244ms ease;
+
+          li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            color: $font;
+
+            button {
+              text-align: left;
+              font-size: 16px;
+              width: 100%;
+              margin-top: 5px;
+
+              span.title {
+                // text-decoration: underline 2px rgba($font, 33%);
+                border-bottom: solid 2px rgba($font, 23%);
+              }
+
+              transition: all 199ms ease;
+
+              @media(hover:hover) {
+                &:hover {
+                  color: $dominant;
+
+                  span.title {
+                    border-bottom: solid 2px rgba($dominant, 34%);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &.open {
+          border-radius: 12px 12px 0 0;
+
+          button.lastVisitedDropdown {
+            .arrow {
+              transform: rotate(0deg);
+            }
+          }
+
+          ul.lastVisitedList {
+            height: auto;
+            border-top: 3px solid $dominant;
+            padding: 25px 10px;
+            box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 11%);
+          }
+        }
+
+        @media(max-width:520px) {
+          margin-top: 32px;
+        }
+
+      }
     }
 
     &.listView {
 
       .buttonsWrap {
         .globalMenu {
-          // border: 2px solid $glow;
+          border: 2px solid $glow;
 
           &.open {
+            border: none;
+            border-top: 2px solid $glow;
+
             &:before {
               border-bottom: 3px solid rgba($glow, 77%);
             }
@@ -1268,6 +1401,54 @@ button {
           .loginWrapper {
             .dvDoll {
               fill: $glow;
+            }
+          }
+        }
+
+        .lastVisited {
+          border: 2px solid $glow;
+
+          button.lastVisitedDropdown {
+            color: $glow;
+
+            .arrow {
+              color: $glow;
+            }
+          }
+
+          @media (hover:hover) {
+            &:hover {
+              background-color: $glow;
+
+              button.lastVisitedDropdown {
+                color: $fontContra;
+
+                .arrow {
+                  color: $fontContra;
+                }
+              }
+            }
+          }
+
+          ul.lastVisitedList {
+            li {
+              button {
+                @media(hover:hover) {
+                  &:hover {
+                    color: $glow;
+
+                    span.title {
+                      border-bottom: solid 2px rgba($glow, 34%);
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &.open {
+            ul.lastVisitedList {
+              border-top: 3px solid $glow;
             }
           }
         }
@@ -1782,7 +1963,17 @@ button {
         padding-bottom: 20px;
         margin-bottom: 20px;
 
+        .languageIcons {
+          display: flex;
+
+          @media(max-width: 500px) {
+            display: none;
+          }
+        }
+
         &:not(.technologies) {
+          justify-content: space-between;
+          min-height: 52px;
           max-height: 52px;
         }
 
@@ -2141,6 +2332,12 @@ button {
         .globalMenu {
           box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 28%);
         }
+
+        .lastVisited {
+          ul.lastVisitedList {
+            box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 30%);
+          }
+        }
       }
     }
 
@@ -2159,6 +2356,12 @@ button {
         .globalMenu {
           box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 33%);
         }
+
+        .lastVisited {
+          ul.lastVisitedList {
+            box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 34%);
+          }
+        }
       }
     }
 
@@ -2176,6 +2379,12 @@ button {
       .buttonsWrap {
         .globalMenu {
           box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 33px 1px rgba($dominantRebel, 33%);
+        }
+
+        .lastVisited {
+          ul.lastVisitedList {
+            box-shadow: -1px 2px 13px 1px rgba($shadow, 13%), -1px 8px 23px 0 rgba($dominantRebel, 34%);
+          }
         }
       }
     }

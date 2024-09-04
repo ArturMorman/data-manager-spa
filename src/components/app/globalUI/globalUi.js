@@ -2,11 +2,11 @@ import React from 'react'
 import Logo from '../../../images/dv-logo'
 import GlobalSettings from './globalSettings'
 import { GrDocumentText } from 'react-icons/gr'
-// import { GrList } from 'react-icons/gr'
 import { GrApps } from 'react-icons/gr'
+import LastVisited from './lastVisited'
 
 
-const GlobalUi = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel, panelChanged, onLogout, onLogin, wpSiteUrl, isAuthenticated, username }) => {
+const GlobalUi = ({ customLayouts, customLayout, setCustomLayout, panel, setPanel, panelChanged, onLogout, onLogin, wpSiteUrl, isAuthenticated, username, lastVisited, handleLastVisited, selectedObj, setSelectedObj }) => {
   return (
     <header
       className={`uiFixed ${panel ? 'listView' : 'postView'} ${panelChanged ? 'panelChanged' : ''}`}
@@ -28,7 +28,6 @@ const GlobalUi = ({ customLayouts, customLayout, setCustomLayout, panel, setPane
           onKeyDown={(e) => e.key === 'Enter' && setPanel(!panel)}
         >
           <span className={`symbol ${panel ? 'active' : ''}`}>
-            {/* <GrList size="1.66em" /> */}
             <GrApps size="1.66em" />
           </span>
           <span className={`switchIcon ${panel ? 'list' : 'post'}`}><span className={`ball`}></span></span>
@@ -47,6 +46,14 @@ const GlobalUi = ({ customLayouts, customLayout, setCustomLayout, panel, setPane
           isAuthenticated={isAuthenticated}
           username={username}
         />
+
+        {lastVisited?.length > 0 && <LastVisited
+          lastVisited={lastVisited}
+          handleLastVisited={handleLastVisited}
+          setPanel={setPanel}
+          selectedObj={selectedObj}
+          setSelectedObj={setSelectedObj}
+        />}
 
       </div>
 

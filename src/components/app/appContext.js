@@ -40,18 +40,22 @@ const AppContext = () => {
   const apiUrl = `${api}${route}`
   const taxonomies = site.siteMetadata.wpContentTypes.taxonomies
 
+  const [lastVisited, setLastVisited] = usePersistState('lastVisited', [])
+  const lastVisitedLimit = 8
+
   const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
   // const customLayouts = ['salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [showSidebar, setShowSidebar] = usePersistState('sidebar', true)
-
   const [panel, setPanel] = usePersistState('showPanel', true)
   const [panelChanged, setPanelChanged] = useState(false)
   const [page, setPage] = useState(1)
   const [perPage, setPerPage] = useState(18)
   const [allPages, setAllPages] = useState(1)
   const perPageOptions = [6, 12, 18, 24, 30]
+
+  const [selectedObj, setSelectedObj] = useState(null)
 
   const [errorStatus, setErrorStatus] = useState(null)
   const [response, setResponse] = useState(null)
@@ -108,6 +112,49 @@ const AppContext = () => {
   }
 
 
+  // const handleLastVisited = (postId, postTitle) => {
+  //   setLastVisited(prev => [...prev?.length > 0 ? (prev?.length >= lastVisitedLimit ? prev.slice(prev.length - lastVisitedLimit + 1, lastVisitedLimit - 1).filter(el => {
+  //     return el.id !== postId
+  //   }) : prev.filter(el => {
+  //     return el.id !== postId
+  //   })) : [], {
+  //     id: postId,
+  //     name: postTitle
+  //   }])
+  // }
+
+
+  const handleLastVisited = (postId, postTitle) => {
+
+    let temp = []
+
+    if (lastVisited?.length > 0) {
+      if (lastVisited?.length >= lastVisitedLimit) {
+        temp = lastVisited.slice(lastVisited.length - lastVisitedLimit + 1, lastVisitedLimit - 1).filter(el => {
+          return el.id !== postId
+        })
+      }
+      else {
+        temp = lastVisited.filter(el => {
+          return el.id !== postId
+        })
+      }
+    }
+
+    setLastVisited([...temp, {
+      id: postId,
+      name: postTitle
+    }])
+
+  }
+
+
+  // console.log(lastVisited)
+  // console.log(lastVisited[lastVisited.length - lastVisitedLimit + 1])
+  // console.log(lastVisited[lastVisitedLimit - 1])
+
+
+
   useEffect(() => {
     if (!response) return
     const temp = response.flatMap(post =>
@@ -132,11 +179,6 @@ const AppContext = () => {
   }, [showSidebar])
 
 
-
-
-  // console.log(window.matchMedia('(prefers-color-scheme: dark)'))
-
-
   return (
     <>
       <div className={`${customLayout ? `${customLayout}Mode` : ''} container appWrap ${panel ? 'listView' : 'postView'} ${loading ? 'loading' : ''}`}>
@@ -153,6 +195,10 @@ const AppContext = () => {
           wpSiteUrl={wpSiteUrl}
           isAuthenticated={isAuthenticated}
           username={username}
+          lastVisited={lastVisited}
+          handleLastVisited={handleLastVisited}
+          selectedObj={selectedObj}
+          setSelectedObj={setSelectedObj}
         />
 
         <div className={`${showSidebar ? 'theList' : ''} ${panel ? 'listView' : 'postView'}`}>
@@ -184,6 +230,9 @@ const AppContext = () => {
                 setPage={setPage}
                 setPerPage={setPerPage}
                 perPageOptions={perPageOptions}
+                handleLastVisited={handleLastVisited}
+                selectedObj={selectedObj}
+                setSelectedObj={setSelectedObj}
               >
                 <PageContext
                   api={api}

@@ -19,9 +19,9 @@ import Img78 from '../../../images/taxoomyImages/78.png'
 import Img123 from '../../../images/taxoomyImages/123.png'
 
 
-const ListView = ({ children, posts, loading, panel, setPanel, categories, page, perPage, setPage, setPerPage, allPages, perPageOptions }) => {
+const ListView = ({ children, posts, loading, panel, setPanel, categories, page, perPage, setPage, setPerPage, allPages, perPageOptions, handleLastVisited, selectedObj, setSelectedObj }) => {
 
-  const [selectedObj, setSelectedObj] = useState(posts?.length > 0 ? posts[0] : null)
+  // const [selectedObj, setSelectedObj] = useState(posts?.length > 0 ? posts[0] : null)
 
   const [iconsMap, setIconsMaps] = useState(null)
 
@@ -39,6 +39,12 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
     78: Img78,
     123: Img123,
   }
+
+  console.log('SEL OB      ', selectedObj)
+
+  useEffect(() => {
+    !selectedObj && setSelectedObj(posts?.length > 0 ? posts[0] : null)
+  }, [])
 
   useEffect(() => {
     const taxonomies = Object.keys(categories)
@@ -75,7 +81,6 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
     }),
   )
 
-  console.log('--- - - LIST VIEW - - ---')
 
   return (
     <>
@@ -99,6 +104,7 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
                         () => {
                           setSelectedObj(posts[i])
                           setPanel(false)
+                          handleLastVisited(post.id, post.title)
                         }
                       }
                       onKeyDown={
@@ -106,6 +112,7 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
                           if (e.key === 'Enter') {
                             setSelectedObj(posts[i])
                             setPanel(false)
+                            handleLastVisited(post.id, post.title)
                           }
                         }
                       }
@@ -114,7 +121,14 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
 
                       <img className={`client`} alt="" src={icons[post.clients[0]]} />
                       <div>
-                        <LanguageIcon language={iconsMap[post.languages[0]]} />
+                        {post.languages.map(el => {
+                          return (
+                            <LanguageIcon
+                              key={el}
+                              language={iconsMap[el]}
+                            />
+                          )
+                        })}
                         <ProductIcon product={iconsMap[post.productTypes[0]]} />
                       </div>
                       <div className={`technologies`}>
