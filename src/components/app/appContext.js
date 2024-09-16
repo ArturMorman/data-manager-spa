@@ -201,7 +201,7 @@ const AppContext = () => {
           setSelectedObj={setSelectedObj}
         />
 
-        <div className={`${showSidebar ? 'theList' : ''} ${panel ? 'listView' : 'postView'}`}>
+        <div className={`${!showSidebar ? '' : 'theList'} ${panel ? 'listView' : 'postView'}`}>
 
           {existingTaxIds.length > 0 ?
             <ListController
