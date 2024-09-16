@@ -21,8 +21,6 @@ import Img123 from '../../../images/taxoomyImages/123.png'
 
 const ListView = ({ children, posts, loading, panel, setPanel, categories, page, perPage, setPage, setPerPage, allPages, perPageOptions, handleLastVisited, selectedObj, setSelectedObj }) => {
 
-  // const [selectedObj, setSelectedObj] = useState(posts?.length > 0 ? posts[0] : null)
-
   const [iconsMap, setIconsMaps] = useState(null)
 
   const icons = {
@@ -39,8 +37,6 @@ const ListView = ({ children, posts, loading, panel, setPanel, categories, page,
     78: Img78,
     123: Img123,
   }
-
-  console.log('SEL OB      ', selectedObj)
 
   useEffect(() => {
     !selectedObj && setSelectedObj(posts?.length > 0 ? posts[0] : null)

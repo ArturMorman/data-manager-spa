@@ -44,7 +44,6 @@ const AppContext = () => {
   const lastVisitedLimit = 8
 
   const customLayouts = ['dark', 'night-hunt', 'salty-pistachio']
-  // const customLayouts = ['salty-pistachio']
   const [customLayout, setCustomLayout] = usePersistState('layout', true)
 
   const [showSidebar, setShowSidebar] = usePersistState('sidebar', true)
@@ -112,18 +111,6 @@ const AppContext = () => {
   }
 
 
-  // const handleLastVisited = (postId, postTitle) => {
-  //   setLastVisited(prev => [...prev?.length > 0 ? (prev?.length >= lastVisitedLimit ? prev.slice(prev.length - lastVisitedLimit + 1, lastVisitedLimit - 1).filter(el => {
-  //     return el.id !== postId
-  //   }) : prev.filter(el => {
-  //     return el.id !== postId
-  //   })) : [], {
-  //     id: postId,
-  //     name: postTitle
-  //   }])
-  // }
-
-
   const handleLastVisited = (postId, postTitle) => {
 
     let temp = []
@@ -147,12 +134,6 @@ const AppContext = () => {
     }])
 
   }
-
-
-  // console.log(lastVisited)
-  // console.log(lastVisited[lastVisited.length - lastVisitedLimit + 1])
-  // console.log(lastVisited[lastVisitedLimit - 1])
-
 
 
   useEffect(() => {
@@ -179,6 +160,9 @@ const AppContext = () => {
   }, [showSidebar])
 
 
+  console.log('__SIDEBAR    ', showSidebar)
+
+
   return (
     <>
       <div className={`${customLayout ? `${customLayout}Mode` : ''} container appWrap ${panel ? 'listView' : 'postView'} ${loading ? 'loading' : ''}`}>
@@ -201,54 +185,56 @@ const AppContext = () => {
           setSelectedObj={setSelectedObj}
         />
 
-        <div className={`${!showSidebar ? '' : 'theList'} ${panel ? 'listView' : 'postView'}`}>
+        {/* <div className={`${!showSidebar ? '' : 'theList'} ${panel ? 'listView' : 'postView'}`}> */}
 
-          {existingTaxIds.length > 0 ?
-            <ListController
-              api={api}
-              taxonomies={taxonomies}
-              existingTaxIds={existingTaxIds}
-              posts={posts}
+        {existingTaxIds.length > 0 ?
+          <ListController
+            api={api}
+            taxonomies={taxonomies}
+            existingTaxIds={existingTaxIds}
+            posts={posts}
+            page={page}
+            perPage={perPage}
+            setAllPages={setAllPages}
+            panel={panel}
+            showSidebar={showSidebar}
+          >
+            <ListUI
+              panel={panel}
+              setPanel={setPanel}
+              panelChanged={panelChanged}
+              showSidebar={showSidebar}
+              setShowSidebar={setShowSidebar}
+            />
+            <ListView
+              panel={panel}
+              setPanel={setPanel}
+              loading={loading}
               page={page}
               perPage={perPage}
-              setAllPages={setAllPages}
+              allPages={allPages}
+              setPage={setPage}
+              setPerPage={setPerPage}
+              perPageOptions={perPageOptions}
+              handleLastVisited={handleLastVisited}
+              selectedObj={selectedObj}
+              setSelectedObj={setSelectedObj}
             >
-              <ListUI
+              <PageContext
+                api={api}
+                route={route}
+                singlePostCustomEndpoint={singlePostCustomEndpoint}
                 panel={panel}
-                setPanel={setPanel}
-                panelChanged={panelChanged}
-                showSidebar={showSidebar}
-                setShowSidebar={setShowSidebar}
+                isAuthenticated={isAuthenticated}
+                authToken={authToken}
               />
-              <ListView
-                panel={panel}
-                setPanel={setPanel}
-                loading={loading}
-                page={page}
-                perPage={perPage}
-                allPages={allPages}
-                setPage={setPage}
-                setPerPage={setPerPage}
-                perPageOptions={perPageOptions}
-                handleLastVisited={handleLastVisited}
-                selectedObj={selectedObj}
-                setSelectedObj={setSelectedObj}
-              >
-                <PageContext
-                  api={api}
-                  route={route}
-                  singlePostCustomEndpoint={singlePostCustomEndpoint}
-                  panel={panel}
-                  isAuthenticated={isAuthenticated}
-                  authToken={authToken}
-                />
-              </ListView>
-            </ListController>
-            :
-            <LoadingPlaceholder view={'listView'} text={'loading app...'} />
-          }
+            </ListView>
+          </ListController>
+          :
+          <LoadingPlaceholder view={'listView'} text={'loading app...'} />
+        }
 
-        </div>
+        {/* </div> */}
 
       </div>
 

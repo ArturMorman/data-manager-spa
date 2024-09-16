@@ -14,7 +14,7 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
   return (
     <>
       {panel &&
-        <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''} ${showSidebar ? 'showSidebar' : ''}`} >
+        <div className={`panel animatedBackground headTop listView ${somethingSelected ? 'backgroundChange' : ''} ${panelChanged ? 'panelChanged' : ''} ${!showSidebar ? '' : 'showSidebar'}`} >
 
 
 
@@ -47,7 +47,7 @@ const ListUI = ({ panel, loadingTaxonomies, loadingTaxonomiesDone, categories, a
 
               <div className={`sidebarSwitchWrap`}>
                 <button
-                  className={`sidebarSwitch ${showSidebar ? 'show' : 'hide'}`}
+                  className={`sidebarSwitch ${!showSidebar ? 'hide' : 'show'}`}
                   onClick={() => setShowSidebar(!showSidebar)}
                 >
                   <GrSidebar size=".85em" />

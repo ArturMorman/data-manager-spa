@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 
-const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page, perPage, setAllPages }) => {
+const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page, perPage, setAllPages, panel, showSidebar }) => {
 
   const [errorStatus, setErrorStatus] = useState(null)
   const [response, setResponse] = useState(null)
@@ -206,9 +206,9 @@ const ListController = ({ children, api, taxonomies, existingTaxIds, posts, page
 
 
   return (
-    <>
+    <div className={`${!showSidebar ? '' : 'theList'} ${panel ? 'listView' : 'postView'}`}>
       {childrenWithProps}
-    </>
+    </div>
   )
 }
 export default ListController
